@@ -6,6 +6,9 @@ namespace DebateApp.Domain
 {
     public class Casual : Debate
     {
-        
+        public Casual(int CreatedBy)
+        {
+            //set the default debate state
+        }
     }
 }
