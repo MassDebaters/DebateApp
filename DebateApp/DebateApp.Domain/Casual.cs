@@ -6,5 +6,6 @@ namespace DebateApp.Domain
 {
     public class Casual : Debate
     {
+        
     }
 }

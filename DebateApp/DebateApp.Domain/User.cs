@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DebateApp.Domain
 {
@@ -8,6 +9,7 @@ namespace DebateApp.Domain
         public string UserPwd { get; set; }
         public string UserName { get; set; }
         public int UserAstros { get; set; }
-        
+        public List<Debate> YourDebates { get; set; }
+        public List<Notification> Notifications { get; set; }
     }
 }
