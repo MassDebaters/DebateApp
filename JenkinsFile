@@ -1,6 +1,6 @@
 
 node {
-    slackSend("Started build $currentbuild.Number")
+    slackSend("Started build $currentBuild.Number")
     stage('Import'){
     git 'https://github.com/glonsdale/DebateApp.git'
     }
@@ -25,7 +25,7 @@ node {
             bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\DebateApp\\DebateApp\\DebateApp.Client\\obj\\Debug\\netcoreapp2.0\\PubTmp\\Out" -dest:iisApp="Default Web Site/DebateApp",computerName="https://ec2-18-221-110-13.us-east-2.compute.amazonaws.com:8172/msdeploy.axd",userName="Administrator",password=Ybwo4.HWnpLnGnH.;CFkG*@I7ZWLKQOt,authType="Basic"  -enableRule:AppOffline -allowUntrusted'
         }      
     }
-    slackSend("Build finished. Result: $currentbuild.Result")
+    slackSend("Build finished. Result: $currentBuild.Result")
     
 }
     
