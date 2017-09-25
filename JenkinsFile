@@ -33,7 +33,7 @@ node {
 		}
 		slackSend('Code analysis stage complete.')
 		}
-		catch(Exception e) {slackSend('Code analysis stage failed:' + e)}
+		catch(Exception e) {slackSend('Code analysis stage failed:')}
     }
 
 
@@ -52,7 +52,7 @@ node {
     catch(Exception e)
     {
         currentBuild.result = 'FAILURE'
-        slackSend('Deploy Stage:' + $currentBuild.result + e)
+        slackSend('Deploy Stage:' + $currentBuild.result)
     }
     
 }
