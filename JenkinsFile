@@ -5,7 +5,6 @@ node {
     git 'https://github.com/glonsdale/DebateApp.git'
     }
     
-    try{
     stage('Analyze'){
         dir('DebateApp/DebateApp.Client'){
         bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
@@ -32,8 +31,8 @@ node {
         bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
 		}
 		slackSend('Code analysis stage complete.')
-		}
-		catch(Exception e) {slackSend('Code analysis stage failed:')}
+		
+
     }
 
 
@@ -47,13 +46,7 @@ node {
             }      
         }
         currentBuild.result = 'SUCCESS'
-    slackSend('Deploy Stage:' + $currentBuild.result)
+    slackSend('Deployed')
     }
-    catch(Exception e)
-    {
-        currentBuild.result = 'FAILURE'
-        slackSend('Deploy Stage:' + $currentBuild.result)
-    }
-    
-}
+
     
