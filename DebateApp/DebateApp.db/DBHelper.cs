@@ -130,9 +130,16 @@ namespace DebateApp.db
 
             var newInfo = JsonConvert.SerializeObject(dList);
 
-            System.IO.WriteAllText();
+            File.WriteAllText("DebateStrings.txt", newInfo);
 
 
+        }
+        public void AddDebate2(Debate d)
+        {
+            dList = JsonConvert.DeserializeObject<List<Debate>>(FileIn.ReadToEnd());
+            dList.Add(d);
+            var NewList = JsonConvert.SerializeObject(dList);
+            File.WriteAllText("DebateStrings.txt", NewList);
         }
     }
 }
