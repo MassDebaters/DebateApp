@@ -12,7 +12,7 @@ namespace DebateApp.Test
         {
             var dut = new Casual(4);
             var dut2 = new Casual(5);
-            var dbh = new DBHelper();
+            var dbh = new Casual(6);
             dbh.AddDebate2(dut);
             
         }
