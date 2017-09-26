@@ -4,50 +4,26 @@ node {
     stage('Import'){
         git 'https://github.com/glonsdale/DebateApp.git'
     }
-    
-    stage('Analyze Client'){
+
+    stage('Build'){
         dir('DebateApp/DebateApp.Client'){
-        bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
-        bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateApp.Client.csproj /t:rebuild'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
+            bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
+            bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
         }
     }
-    stage('Analyze DB'){
-		dir('DebateApp/DebateApp.db'){
-		bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
+    slackSend('Build complete, analysis beginning')
+    
+    stage('Analyze'){
+        bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
         bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
-        bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateApp.db.csproj /t:rebuild'
+        bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateApp.sln /t:rebuild'
         bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
-		}
-    }
-    stage('Analyze Domain'){
-		dir('DebateApp/DebateApp.Domain'){
-		bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
-        bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateApp.Domain.csproj /t:rebuild'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
-		}
-    }
-    stage('Analyze Test'){        
-		dir('DebateApp/DebateApp.Test'){
-		bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
-        bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateApp.Test.csproj /t:rebuild'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
-		}
     }
 
 		
-	slackSend('Code analysis stage complete.')
+	slackSend('Code analysis stage complete, app will now be deployed')
 		
 		
-
-
-
-
-
-
     stage('Deploy'){
         dir('DebateApp/DebateApp.Client'){
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" build /p:DeployOnBuild=true /p:PublishProfile=publish'
