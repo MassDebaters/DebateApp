@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using DebateApp.Domain;
+using DebateApp.Client.Models;
 
 namespace DebateApp.Client.Controllers
 {
@@ -18,10 +19,22 @@ namespace DebateApp.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CheckLogin([Bind("Username", "Password")] User user)
+        public IActionResult NewUser([Bind("Username","Password")] UserModel userModel)
         {
-            string username = user.Username; //Request["Username"];
-            string password = user.Password; //Request["Password"];
+            User newUser = UserHelper.CreateUser(userModel.Username, userModel.Password);
+            if(newUser == null)
+              return RedirectToAction("Login");
+
+            TempData["user"] = newUser;
+            return RedirectToAction("DebateFromLogin","Debate");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CheckLogin([Bind("Username", "Password")] UserModel userModel)
+        {
+            string username = userModel.Username; //Request["Username"];
+            string password = userModel.Password; //Request["Password"];
 
             if(!UserHelper.CheckPassword(username, password))
               return RedirectToAction("Login");

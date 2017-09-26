@@ -8,17 +8,22 @@ namespace DebateApp.Client.Controllers
     {
         public IActionResult DebateIndex(string username, string password)
         {
-            return View(new User(username, password));
+          if(!UserHelper.CheckPassword(username, password)) 
+            return RedirectToAction("Login","Login");
+            
+          return View(new User(username, password));
         }
 
         public IActionResult MyProfile(string username, string password)
         {
-            return View(new User(username, password));
+          if(!UserHelper.CheckPassword(username, password)) 
+            return RedirectToAction("Login","Login");
+
+          return View(new User(username, password));
         }
 
         public IActionResult DebateFromLogin()
         {
-
             return View(TempData["user"]);
         }
 
