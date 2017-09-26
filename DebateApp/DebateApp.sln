@@ -1,26 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateApp.Client", "DebateApp.Client\DebateApp.Client.csproj", "{4994AC9C-851E-4395-8E82-FA30793F1143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.Client", "DebateApp.Client\DebateApp.Client.csproj", "{4994AC9C-851E-4395-8E82-FA30793F1143}"
+	ProjectSection(ProjectDependencies) = postProject
+		{479152A7-8726-455B-84E6-D8DC624EB090} = {479152A7-8726-455B-84E6-D8DC624EB090}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateApp.Test", "DebateApp.Test\DebateApp.Test.csproj", "{38B73214-50C3-4F57-8708-F5518F05013F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.Test", "DebateApp.Test\DebateApp.Test.csproj", "{38B73214-50C3-4F57-8708-F5518F05013F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D525E343-AB69-491F-9794-8E22D5D93FA9} = {D525E343-AB69-491F-9794-8E22D5D93FA9}
 		{4994AC9C-851E-4395-8E82-FA30793F1143} = {4994AC9C-851E-4395-8E82-FA30793F1143}
 		{479152A7-8726-455B-84E6-D8DC624EB090} = {479152A7-8726-455B-84E6-D8DC624EB090}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateApp.Domain", "DebateApp.Domain\DebateApp.Domain.csproj", "{479152A7-8726-455B-84E6-D8DC624EB090}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.Domain", "DebateApp.Domain\DebateApp.Domain.csproj", "{479152A7-8726-455B-84E6-D8DC624EB090}"
 	ProjectSection(ProjectDependencies) = postProject
-		{4994AC9C-851E-4395-8E82-FA30793F1143} = {4994AC9C-851E-4395-8E82-FA30793F1143}
+		{D525E343-AB69-491F-9794-8E22D5D93FA9} = {D525E343-AB69-491F-9794-8E22D5D93FA9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateApp.db", "DebateApp.db\DebateApp.db.csproj", "{D525E343-AB69-491F-9794-8E22D5D93FA9}"
-	ProjectSection(ProjectDependencies) = postProject
-		{479152A7-8726-455B-84E6-D8DC624EB090} = {479152A7-8726-455B-84E6-D8DC624EB090}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.db", "DebateApp.db\DebateApp.db.csproj", "{D525E343-AB69-491F-9794-8E22D5D93FA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
