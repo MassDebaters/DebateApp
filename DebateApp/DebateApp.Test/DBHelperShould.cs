@@ -20,9 +20,9 @@ namespace DebateApp.Test
             var dut2 = new Casual(5);
             var dbh = new Casual(6);
             
-            dbh.AddDebate2(dut);
+            dbh.AddDebate(dut);
             _output.WriteLine(dbh.message);
-            dbh.AddDebate2(dut2);
+            dbh.AddDebate(dut2);
             
         }
     }

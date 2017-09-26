@@ -29,15 +29,6 @@ namespace DebateApp.Domain
         public int NumberOfRounds { get; set; }
         public int Pot { get; set; }
 
-        public void AddDebate(object obj)
-        {
-            var result = JsonConvert.SerializeObject(obj);
-
-            //FileOut.WriteLine(result);//writing to text file
-            //FileOut.Close();//idk about this
-        }
-
-
         /*public Casual GetDebate(int id)
         {
             var stringId = id.ToString();
@@ -90,20 +81,9 @@ namespace DebateApp.Domain
         //    File.WriteAllText("DebateStrings.txt", newInfo);
         //}
         public string message;
-        public void AddDebate2(Casual d)
+        public void AddDebate(Casual d)
         {
-            //using (var stream = File.Open("DebateString.txt", FileMode.Open))
-            //{
-            //    // Use stream
-            //    FileIn = new StreamReader(stream);
-            //    dList = JsonConvert.DeserializeObject<List<Debate>>(FileIn.ReadToEnd());
-            //    dList.Add(d);
-            //    var NewList = JsonConvert.SerializeObject(dList);
-            //    File.WriteAllText("DebateStrings.txt", NewList);
-            //}
-
-            //FileIn.Close();
-            var path = "C:\\Users\\lonsd\\Desktop\\DebateApp\\DebateApp\\DebateApp.Domain\\DebateStrings.txt";
+            var path = "C:\\Revature\\DebateApp\\DebateApp\\DebateApp.Domain\\DebateStrings.txt";
             string s = File.ReadAllText(path);
             message = s;
             var DebateList = JsonConvert.DeserializeObject<List<Casual>>(s);
