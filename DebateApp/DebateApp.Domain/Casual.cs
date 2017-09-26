@@ -9,6 +9,7 @@ namespace DebateApp.Domain
         public Casual(int CreatedBy)
         {
             //set the default debate state
+            //test commit
         }
     }
 }
