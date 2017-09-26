@@ -23,10 +23,17 @@ namespace DebateApp.Client.Controllers
         {
             User newUser = UserHelper.CreateUser(userModel.Username, userModel.Password);
             if(newUser == null)
+            {
+              Console.WriteLine("New User: UserHelper.CreateUser returned null");
               return RedirectToAction("Login");
+            }
 
-            TempData["user"] = newUser;
-            return RedirectToAction("DebateFromLogin","Debate");
+            Console.WriteLine("New User: UserHelper.CreateUser returned a User object");
+            Console.WriteLine("name: "+newUser.Username);
+            Console.WriteLine("Redirecting to Debate View");
+            TempData["username"] = newUser.Username; // It made it here
+            TempData["password"] = newUser.Password;
+            return RedirectToAction("MyProfile","Debate");
         }
 
         [HttpPost]
@@ -37,10 +44,15 @@ namespace DebateApp.Client.Controllers
             string password = userModel.Password; //Request["Password"];
 
             if(!UserHelper.CheckPassword(username, password))
+            {
+              Console.WriteLine("CheckLogin: Wrong Password or Username "+username+" "+password);
               return RedirectToAction("Login");
+            }
             
-            TempData["user"] = UserHelper.ReturnUser(username,password);
-            return RedirectToAction("DebateFromLogin","Debate");
+            TempData["username"] = username;
+            TempData["password"] = password;
+            Console.WriteLine("CheckLogin: Sending to MyProfile...");
+            return RedirectToAction("MyProfile","Debate");
         }
 
     }

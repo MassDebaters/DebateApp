@@ -17,6 +17,7 @@ namespace DebateApp.db
         public void AddAccount(string username, string password)
         {
             dbHelper.Accounts.Add(new Accounts() { Username = username, Password = password });
+            dbHelper.SaveChanges();
         }
 
         public void AddPost(int accId, int time)
@@ -48,7 +49,7 @@ namespace DebateApp.db
         {
             var userName = dbHelper.Accounts.Where(un => un.Username == username);
 
-            if(userName.Count() == 0)
+            if(userName.Count() == 0 && username.Length > 0)
             {
                 return true;
             }

@@ -1,5 +1,6 @@
 using System.Linq;
 using DebateApp.db;
+using System;
 
 namespace DebateApp.Domain 
 {
@@ -15,11 +16,12 @@ namespace DebateApp.Domain
 
     public static User CreateUser(string name, string password)
     {
-      UserHelper helper = new UserHelper();
+      UserHelper helper = new UserHelper(); 
       bool uniqueUsername = helper.UniqueUsername(name);
       if(uniqueUsername){
         helper.AddAccount(name,password);
-        return new User(name, password);
+        Console.WriteLine("User: not null");
+        return new User(name, password); // should work 
       }
       return null;
     }
