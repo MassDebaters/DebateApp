@@ -42,8 +42,23 @@ namespace DebateApp.Client
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "debate",
+                    template: "Debate/{username}/{password}",
+                    defaults: new { controller = "Debate", action = "DebateIndex"}
+                    
+                );
+
+                routes.MapRoute(
+                    name: "myprofile",
+                    template: "Debate/DebateIndex/{username}/{password}",
+                    defaults: new { controller = "Debate", action = "MyProfile"}
+                );
+
+                routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{*url}",
+                    defaults: new { controller = "Login", action = "Login"}
+                );
             });
         }
     }

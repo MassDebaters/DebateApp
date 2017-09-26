@@ -6,32 +6,19 @@ namespace DebateApp.Domain
 {
     public class User
     {
-        public Accounts Account {get;set;}
+        private Accounts _account {get;set;}
 
-        public int UserID { get; set; }
-        public string UserPwd { get; set; }
-        public string UserName { get; set; }
-        public int UserAstros { get; set; }
-        public List<Debate> YourDebates { get; set; }
-        public List<Notification> Notifications { get; set; }
+        public int UserID { get {return _account.AccountId;}}
+        public string Username { get {return _account.Username;}}
+        public string Password { get {return _account.Password;}}
+        public int Astros { get {return _account.Astros;}}
+        //public List<Debate> YourDebates { get; set; }
+        //public List<Notification> Notifications { get; set; }
 
 
         public User(string name, string password)
         {
-            Account = new UserHelper().Account(name, password);
-        }
-
-        public static User CreateUser(string name, string password)
-        {
-            User user = null;
-            UserHelper helper = new UserHelper();
-            bool uniqueUsername = helper.UniqueUsername(name);
-
-            if(uniqueUsername){
-                helper.AddAccount(name,password);
-                user = new User(name, password);
-            }
-            return user;
+            _account = UserHelper.Account(name, password);
         }
     }
 }
