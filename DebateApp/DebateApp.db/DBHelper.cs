@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DebateApp.Domain;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +11,12 @@ namespace DebateApp.db
     class DBHelper
     {
         private DebateAppDBContext dbHelper;
+        private List<JObject> jsonObjects;
 
         public DBHelper()
         {
             dbHelper = new DebateAppDBContext();
+            jsonObjects = new List<JObject>();
         }
 
         public void AddAccount(string username, string password)
@@ -56,6 +61,26 @@ namespace DebateApp.db
             {
                 return false;
             }
+        }
+
+        public void ConvertToJson(object obj)
+        {
+            var result = JsonConvert.SerializeObject(obj);
+            JObject jo = JObject.Parse(result);
+            jsonObjects.Add(jo);
+        }
+
+        public string FindDebateFromJson(int id)
+        {
+            var stringId = id.ToString();
+            
+            JObject debate = jsonObjects.Values<JObject>()
+                .Where(m => m["DebateId"].Value<string>() == stringId)
+                .FirstOrDefault();
+
+            var debateString = debate.ToString();
+
+            return debateString;
         }
     }
 }
