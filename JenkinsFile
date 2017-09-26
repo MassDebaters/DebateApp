@@ -2,7 +2,7 @@
 node {
     slackSend("Started build $currentBuild.number" + ".")
     stage('Import'){
-        git 'https://github.com/MasterDebaters/DebateApp.git'
+        git 'https://github.com/MassDebaters/DebateApp.git'
     }
 
     stage('Build'){
