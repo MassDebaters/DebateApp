@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DebateApp.db
 {
-    class DBHelper
+    public class DBHelper
     {
-        private DebateAppDBContext dbHelper;
+        protected DebateAppDBContext dbHelper;
 
         public DBHelper()
         {
