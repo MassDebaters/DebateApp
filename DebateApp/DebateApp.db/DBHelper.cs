@@ -70,7 +70,7 @@ namespace DebateApp.db
             jsonObjects.Add(jo);
         }
 
-        public string FindDebateFromJson(int id)
+        public Casual FindDebate(int id)
         {
             var stringId = id.ToString();
             
@@ -80,7 +80,10 @@ namespace DebateApp.db
 
             var debateString = debate.ToString();
 
-            return debateString;
+            Casual debateObject = JsonConvert.DeserializeObject<Casual>(debateString);
+
+
+            return debateObject;
         }
     }
 }
