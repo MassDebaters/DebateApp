@@ -4,7 +4,7 @@ node {
     stage('Import'){
     git 'https://github.com/glonsdale/DebateApp.git'
     }
-    
+
     stage('Analyze'){
 	steps{
         dir('DebateApp/DebateApp.Client'){
@@ -33,7 +33,6 @@ node {
 		}
 		}
 		slackSend('Code analysis stage complete.')
-		
 		
 
     }
