@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using DebateApp.Domain;
+using DebateApp.Client.Models;
 
 namespace DebateApp.Client.Controllers
 {
@@ -10,8 +11,8 @@ namespace DebateApp.Client.Controllers
         {
           if(!UserHelper.CheckPassword(username, password)) 
             return RedirectToAction("Login","Login");
-            
-          return View(new User(username, password));
+
+          return View(UserModel.CreateUserModel(username, password)); // needs to be a list of debates
         }
 
         public IActionResult MyProfile(string username, string password)
@@ -19,7 +20,7 @@ namespace DebateApp.Client.Controllers
           if(!UserHelper.CheckPassword(username, password)) 
             return RedirectToAction("Login","Login");
 
-          return View(new User(username, password));
+          return View(UserModel.CreateUserModel(username, password));
         }
 
         public IActionResult DebateFromLogin()

@@ -9,7 +9,7 @@ namespace DebateApp.Client.Controllers
 
         public IActionResult MyPosts(string username, string password)
         {
-            return View(new User(username, password));
+            return View(new User(username, password)); // depreciated. use UserModel
         }
 
         public IActionResult NewPost(string username, string password)
