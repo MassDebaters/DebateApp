@@ -42,6 +42,7 @@ namespace DebateApp.Domain
             {
                 DebateList = new List<Casual>();
                 DebateList.Add(d);
+                throw (e);
             }
             
             var NewList = JsonConvert.SerializeObject(DebateList);
