@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 namespace DebateApp.Test
 {
-    public class DBHelperShould
+    public class DebateShould
     {
         private readonly ITestOutputHelper _output;
         public DBHelperShould(ITestOutputHelper Output)
