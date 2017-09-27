@@ -10,6 +10,7 @@ namespace DebateApp.Domain
         {
             //set the default debate state
             //test commit
+            
         }
     }
 }
