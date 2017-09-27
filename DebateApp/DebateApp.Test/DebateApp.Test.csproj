@@ -13,8 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DebateApp.Client\DebateApp.Client.csproj" />
-    <ProjectReference Include="..\DebateApp.db\DebateApp.db.csproj" />
     <ProjectReference Include="..\DebateApp.Domain\DebateApp.Domain.csproj" />
   </ItemGroup>
 
