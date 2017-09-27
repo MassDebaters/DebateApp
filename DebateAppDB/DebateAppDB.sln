@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.db", "DebateApp.d
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.DbRest", "DebateApp.DbRest\DebateApp.DbRest.csproj", "{1B9F35E5-786A-4A26-BE28-4DDCD8C96D8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateAppDB.test", "DebateAppDB.test\DebateAppDB.test.csproj", "{B199AFDE-E982-49E3-9996-D197EE863748}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateAppDB.test", "DebateAppDB.test\DebateAppDB.test.csproj", "{B199AFDE-E982-49E3-9996-D197EE863748}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D525E343-AB69-491F-9794-8E22D5D93FA9} = {D525E343-AB69-491F-9794-8E22D5D93FA9}
+		{1B9F35E5-786A-4A26-BE28-4DDCD8C96D8E} = {1B9F35E5-786A-4A26-BE28-4DDCD8C96D8E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

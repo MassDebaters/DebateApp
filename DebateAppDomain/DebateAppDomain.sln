@@ -5,12 +5,16 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateAppDomain.Test", "DebateApp.Test\DebateAppDomain.Test.csproj", "{38B73214-50C3-4F57-8708-F5518F05013F}"
 	ProjectSection(ProjectDependencies) = postProject
+		{6D5E5422-A58D-4F88-974D-F05C9C622467} = {6D5E5422-A58D-4F88-974D-F05C9C622467}
 		{479152A7-8726-455B-84E6-D8DC624EB090} = {479152A7-8726-455B-84E6-D8DC624EB090}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.Domain", "DebateApp.Domain\DebateApp.Domain.csproj", "{479152A7-8726-455B-84E6-D8DC624EB090}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateAppDomainAPI", "DebateAppDomainAPI\DebateAppDomainAPI.csproj", "{6D5E5422-A58D-4F88-974D-F05C9C622467}"
+	ProjectSection(ProjectDependencies) = postProject
+		{479152A7-8726-455B-84E6-D8DC624EB090} = {479152A7-8726-455B-84E6-D8DC624EB090}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
