@@ -29,7 +29,7 @@ namespace DebateApp.Domain
         
         public string SaveDebate(Casual d)
         {
-            var path = "C:\\Revature\\DebateApp\\DebateApp\\DebateApp.Domain\\DebateStrings.txt";
+            var path = Directory.GetCurrentDirectory() + @"\DebateStrings.txt";
             string s = File.ReadAllText(path);
             
             var DebateList = JsonConvert.DeserializeObject<List<Casual>>(s);
@@ -40,9 +40,10 @@ namespace DebateApp.Domain
             }
             catch(Exception e)
             {
-                DebateList = new List<Casual>();
-                DebateList.Add(d);
-                throw (e);
+                DebateList = new List<Casual>
+                {
+                    d
+                };
             }
             
             var NewList = JsonConvert.SerializeObject(DebateList);

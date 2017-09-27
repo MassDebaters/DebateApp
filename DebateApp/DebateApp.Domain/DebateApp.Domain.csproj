@@ -13,4 +13,10 @@
     <ProjectReference Include="..\DebateApp.db\DebateApp.db.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DebateStrings.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
