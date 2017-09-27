@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DebateApp.db;
 
 namespace DebateApp.DbRest.Controllers
 {
@@ -13,10 +14,12 @@ namespace DebateApp.DbRest.Controllers
     {
         // GET: api/Accounts
         [HttpGet]
-        public IEnumerable<string> Get()
+        /*public IEnumerable<Accounts> Get()
         {
+            //return all accounts in database
+
             return new string[] { "value1", "value2" };
-        }
+        }*/
 
         // GET: api/Accounts/5
         [HttpGet("{id}", Name = "Get")]
