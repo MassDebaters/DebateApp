@@ -32,6 +32,7 @@ namespace DebateApp.db
             if(account != null)
             {
                 dbHelper.Accounts.Remove(account);
+                dbHelper.SaveChanges();
             }
         }
 
