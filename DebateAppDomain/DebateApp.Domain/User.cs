@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DebateApp.db;
+
 
 namespace DebateApp.Domain
 {
@@ -12,13 +12,20 @@ namespace DebateApp.Domain
         public string Username { get {return _account.Username;}}
         public string Password { get {return _account.Password;}}
         public int Astros { get {return _account.Astros;}}
-        //public List<Debate> YourDebates { get; set; }
-        //public List<Notification> Notifications { get; set; }
+        public List<Debate> YourDebates { get; set; }
+        public List<Notification> Notifications { get; set; }
 
 
         public User(string name, string password)
         {
             _account = UserHelper.Account(name, password);
+        }
+
+        public Debate Post(Post p, Debate d)
+        {
+            var UpdatedDebate = d;
+            d.UpdatePosts(p);
+            return d;
         }
     }
 }
