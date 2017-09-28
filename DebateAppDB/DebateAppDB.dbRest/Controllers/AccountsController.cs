@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DebateApp.db;
+using DebateAppDB.dbRest.Models;
 
 namespace DebateAppDB.dbRest.Controllers
 {
@@ -12,25 +13,45 @@ namespace DebateAppDB.dbRest.Controllers
     [Route("api/Accounts")]
     public class AccountsController : Controller
     {
-        private DBHelper helper = new DBHelper();
+        private AccountModel account = new AccountModel();
         // GET: api/Accounts
-        [HttpGet]
+        /*[HttpGet]
         public IEnumerable<Accounts> Get()
         {
-            return helper.GetAllAccounts();
+            return account.GetAllAccounts();
+        }*/
+
+        // GET: api/Accounts/5
+        /*[HttpGet("{id}", Name = "Get")]
+        public Accounts Get(int id)
+        {
+            return account.GetAccount(id);
+        }*/
+
+        [HttpGet]
+        public IEnumerable<AccountModel> Get()
+        {
+            return account.GetAllAccounts();
         }
 
         // GET: api/Accounts/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public AccountModel Get(int id)
         {
-            return "value";
+            return account.GetAccount(id);
         }
-        
+
+        [HttpGet("{username}", Name = "UniqueUsername")]
+        public bool UniqueUsername(string username)
+        {
+            return account.UniqueUsername(username);
+        }
+
         // POST: api/Accounts
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post(string username, string password) //[FromBody]string password)
         {
+            account.AddAccount(username, password);
         }
         
         // PUT: api/Accounts/5
@@ -43,6 +64,7 @@ namespace DebateAppDB.dbRest.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            account.DeleteAccount(id);
         }
     }
 }
