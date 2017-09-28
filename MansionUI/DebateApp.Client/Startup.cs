@@ -41,24 +41,24 @@ namespace DebateApp.Client
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "newuser",
-                    template: "Login/NewUser",
-                    defaults: new { controller = "Login", action = "NewUser"}
-                );
+                // routes.MapRoute(
+                //     name: "newuser",
+                //     template: "Login/NewUser",
+                //     defaults: new { controller = "Login", action = "NewUser"}
+                // );
 
-                routes.MapRoute(
-                    name: "checklogin",
-                    template: "Login/CheckLogin",
-                    defaults: new { controller = "Login", action = "CheckLogin"}
-                );
+                // routes.MapRoute(
+                //     name: "checklogin",
+                //     template: "Login/CheckLogin",
+                //     defaults: new { controller = "Login", action = "CheckLogin"}
+                // );
 
-                routes.MapRoute(
-                    name: "debate",
-                    template: "Debate/DebateIndex/{username}/{password}",
-                    defaults: new { controller = "Debate", action = "DebateIndex"}
+                // routes.MapRoute(
+                //     name: "debate",
+                //     template: "Debate/DebateIndex/{username}/{password}",
+                //     defaults: new { controller = "Debate", action = "DebateIndex"}
                     
-                );
+                // );
 
                 //  routes.MapRoute(
                 //     name: "debatefromlogin",
@@ -67,23 +67,30 @@ namespace DebateApp.Client
                     
                 // );
 
-                routes.MapRoute(
-                    name: "myprofile",
-                    template: "Debate/MyProfile/{username}/{password}",
-                    defaults: new { controller = "Debate", action = "MyProfile"}
-                );
+                // routes.MapRoute(
+                //     name: "myprofile",
+                //     template: "Debate/MyProfile/{username}/{password}",
+                //     defaults: new { controller = "Debate", action = "MyProfile"}
+                // );
+
+                // routes.MapRoute(
+                //     name: "myprofiletemp",
+                //     template: "Debate/MyProfile",
+                //     defaults: new { controller = "Debate", action = "MyProfile"}
+                // );
+
+                // routes.MapRoute(
+                //     name: "login",
+                //     template: "{*url}",
+                //     defaults: new { controller = "Login", action = "Login"}
+                // );
 
                 routes.MapRoute(
-                    name: "myprofiletemp",
-                    template: "Debate/MyProfile",
-                    defaults: new { controller = "Debate", action = "MyProfile"}
-                );
-
-                routes.MapRoute(
-                    name: "login",
+                    name: "practice",
                     template: "{*url}",
-                    defaults: new { controller = "Login", action = "Login"}
+                    defaults: new { controller = "Practice", action = "Practice"}
                 );
+
             });
         }
     }
