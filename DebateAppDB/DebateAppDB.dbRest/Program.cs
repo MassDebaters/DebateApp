@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace DebateApp.DbRest
+namespace DebateAppDB.dbRest
 {
     public class Program
     {

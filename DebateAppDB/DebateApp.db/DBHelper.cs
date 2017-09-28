@@ -60,6 +60,14 @@ namespace DebateApp.db
             }
         }
 
+        public List<Accounts> GetAllAccounts()
+        {
+            return dbHelper.Accounts.ToList();
+        }
         
+        public Accounts GetAccount(int id)
+        {
+            return dbHelper.Accounts.Find(id);
+        }
     }
 }

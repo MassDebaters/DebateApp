@@ -6,20 +6,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DebateApp.db;
 
-namespace DebateApp.DbRest.Controllers
+namespace DebateAppDB.dbRest.Controllers
 {
     [Produces("application/json")]
     [Route("api/Accounts")]
     public class AccountsController : Controller
     {
+        private DBHelper helper = new DBHelper();
         // GET: api/Accounts
         [HttpGet]
-        /*public IEnumerable<Accounts> Get()
+        public IEnumerable<Accounts> Get()
         {
-            //return all accounts in database
-
-            return new string[] { "value1", "value2" };
-        }*/
+            return helper.GetAllAccounts();
+        }
 
         // GET: api/Accounts/5
         [HttpGet("{id}", Name = "Get")]

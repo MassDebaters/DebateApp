@@ -14,7 +14,7 @@ namespace DebateApp.db
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(File.ReadAllText("./config.txt"));
+                optionsBuilder.UseSqlServer("data source = sqlweeklenny1.database.windows.net; initial catalog = DebateAppDB; user id = lennylopez; password = ThisIsATemp42!");//File.ReadAllText("./config.txt"));
             }
         }
 
