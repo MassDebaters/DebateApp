@@ -8,7 +8,8 @@ namespace DebateApp.Domain
     {
         public string Team { get; set; }
         public int Astros { get; set; }
+        public int Votes { get; set; }
         public Dictionary<String,String> Sources { get; set; }
-
+        public int DebateID { get; set; }
     }
 }

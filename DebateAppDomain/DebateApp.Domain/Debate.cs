@@ -12,20 +12,34 @@ namespace DebateApp.Domain
 
 
         public int DebateID { get; set; }
+        private bool _gamestage;
+        public bool GameStage { get { return _gamestage; } }
         public List<Post> Comments { get; set; }
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
-        public Dictionary<string,List<User>> Teams { get; set; }
+        public Roster Players { get; set; }
         public List<User> Audience { get; set; }
-        public int CurrentTurn { get; set; }
         public int TurnLength { get; set; }
         public int PostLength { get; set; }
         public int SourcesRequired { get; set; }
         public List<RoundState> Round { get; set; }
         public int NumberOfRounds { get; set; }
+        public int NumberOfPlayersPerTeam { get; set; }
         public int Pot { get; set; }
-             
-        public Debate UpdatePosts(Post p)
+        public bool SetupStage
+        {
+            get
+            {
+                if (Players.ReadyToStart)
+                {
+                    _gamestage = true;
+                    return false;
+                }
+                else { return true; }
+            }
+        }
+
+        public void UpdatePosts(Post p)
         {
             if(p is DebatePost && p.Validate())
             {
@@ -35,7 +49,7 @@ namespace DebateApp.Domain
             {
                 Comments.Add(p);
             }
-            return this;
+            
         }
     }
 }
