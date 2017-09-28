@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateAppDomain.Test", "Deb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateApp.Domain", "DebateApp.Domain\DebateApp.Domain.csproj", "{479152A7-8726-455B-84E6-D8DC624EB090}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateAppDomainAPI", "DebateAppDomainAPI\DebateAppDomainAPI.csproj", "{6D5E5422-A58D-4F88-974D-F05C9C622467}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebateAppDomainAPI", "DebateAppDomainAPI\DebateAppDomainAPI.csproj", "{6D5E5422-A58D-4F88-974D-F05C9C622467}"
 	ProjectSection(ProjectDependencies) = postProject
 		{479152A7-8726-455B-84E6-D8DC624EB090} = {479152A7-8726-455B-84E6-D8DC624EB090}
 	EndProjectSection

@@ -10,8 +10,8 @@ namespace DebateAppDomainAPI
     {
         public Debate GetDebate(int id)
         {
-            var res = null;//http client sends get request with ID to db debate controller
-            var d = .Deserialize(res);
+            //var res = null;//http client sends get request with ID to db debate controller
+            //var d = .Deserialize(res);
         }
     }
 }
