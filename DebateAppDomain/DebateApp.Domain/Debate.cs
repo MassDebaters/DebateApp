@@ -27,29 +27,6 @@ namespace DebateApp.Domain
 
      
         
-        public string SaveDebate(Casual d)
-        {
-            var path = Directory.GetCurrentDirectory() + @"\DebateStrings.txt";
-            string s = File.ReadAllText(path);
-            
-            var DebateList = JsonConvert.DeserializeObject<List<Casual>>(s);
 
-            try
-            {
-                DebateList.Add(d);
-            }
-            catch(Exception e)
-            {
-                DebateList = new List<Casual>
-                {
-                    d
-                };
-            }
-            
-            var NewList = JsonConvert.SerializeObject(DebateList);
-            File.WriteAllText(path, NewList);
-            return s;
-            
-        }
     }
 }
