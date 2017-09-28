@@ -12,7 +12,7 @@ namespace DebateApp.Domain
 
 
         public int DebateID { get; set; }
-        public List<Post> Posts { get; set; }
+        public List<Post> Comments { get; set; }
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
         public Dictionary<string,List<User>> Teams { get; set; }
@@ -24,9 +24,18 @@ namespace DebateApp.Domain
         public List<RoundState> Round { get; set; }
         public int NumberOfRounds { get; set; }
         public int Pot { get; set; }
-
-     
-        
-
+             
+        public Debate UpdatePosts(Post p)
+        {
+            if(p is DebatePost && p.Validate())
+            {
+                Round[Round.Count].Responses.Add(p as DebatePost);
+            }
+            if (p is Comment && p.Validate())
+            {
+                Comments.Add(p);
+            }
+            return this;
+        }
     }
 }
