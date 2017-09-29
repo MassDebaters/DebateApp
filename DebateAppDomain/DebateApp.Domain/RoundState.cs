@@ -6,7 +6,7 @@ namespace DebateApp.Domain
 {
     public class RoundState
     {
-        public bool RoundComplete { get; set; }
+        
         public List<DebatePost> Responses { get; set; }
         public int VotesL { get; set; }
         public int VotesR {get; set;}

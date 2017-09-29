@@ -12,8 +12,8 @@ namespace DebateApp.Domain
         public string Username { get; set; }
         public string Password { get; set; }
         public int Astros { get; set; }
-        public List<Debate> YourDebates { get; set; }
-        public List<Notification> Notifications { get; set; }
+        public List<int> YourDebates { get; set; }
+        public List<int> Notifications { get; set; }
 
 
         //public User(string name, string password)
@@ -21,9 +21,8 @@ namespace DebateApp.Domain
         //    _account = UserHelper.Account(name, password);
         //}
 
-        public Debate Post(Post p, Debate d)
+        public Debate Post(DebatePost p, Debate d)
         {
-            var UpdatedDebate = d;
             d.UpdatePosts(p);
             return d;
         }

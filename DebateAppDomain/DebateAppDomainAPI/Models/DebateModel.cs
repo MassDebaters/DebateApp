@@ -11,21 +11,17 @@ namespace DebateAppDomainAPI.Models
     public class DebateModel
     {
         private int _D_id;
-        private int _U_id;
         private HttpClient client = new HttpClient();
         private string DBRest = "http://localhost:54277/api/";
-        public DebateModel(int D_id, int U_id)
+        public DebateModel(int D_id)
         {
             _D_id = D_id;
-            _U_id = U_id;
         }
-        private User _u
+        public DebateModel()
         {
-            get
-            {
-                var res = client.GetAsync(DBRest + "/User/Get")
-            }
+
         }
+
         private Debate _d { get
             {
                 try
@@ -36,7 +32,7 @@ namespace DebateAppDomainAPI.Models
                 }
                 catch(Exception)
                 {
-                    return new Casual(_u.UserID);
+                    return new Casual(new TestUser());
                 }
             }
 

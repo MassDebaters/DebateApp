@@ -11,10 +11,10 @@ namespace DebateApp.Domain
     {
 
 
-        public int DebateID { get; set; }
-        private bool _gamestage;
+        //public int DebateID { get; set; }
+        private bool _gamestage = false;
         public bool GameStage { get { return _gamestage; } }
-        public List<Post> Comments { get; set; }
+        //public List<Post> Comments { get; set; }
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
         public Roster Players { get; set; }
@@ -39,16 +39,10 @@ namespace DebateApp.Domain
             }
         }
 
-        public void UpdatePosts(Post p)
+        public void UpdatePosts(DebatePost p)
         {
-            if(p is DebatePost && p.Validate())
-            {
-                Round[Round.Count].Responses.Add(p as DebatePost);
-            }
-            if (p is Comment && p.Validate())
-            {
-                Comments.Add(p);
-            }
+
+        
             
         }
     }
