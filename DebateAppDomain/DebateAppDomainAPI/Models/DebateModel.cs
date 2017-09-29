@@ -22,7 +22,9 @@ namespace DebateAppDomainAPI.Models
 
         }
 
-        private Debate _d { get
+        private Debate _d
+        {
+            get
             {
                 try
                 {
@@ -30,12 +32,17 @@ namespace DebateAppDomainAPI.Models
                     var ResObject = JsonConvert.DeserializeObject<Debate>(res.ToString());
                     return ResObject;
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     return new Casual(new TestUser());
                 }
             }
+        }
+        public Debate Expose()
+        {
+            return _d;
+        }
 
-        
+        }
     }
-}
+

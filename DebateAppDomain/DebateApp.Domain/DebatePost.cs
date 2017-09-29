@@ -17,10 +17,12 @@ namespace DebateApp.Domain
         public int Votes { get; set; }
         public Dictionary<String, String> Sources { get; set; }
         public int DebateID { get; set; }
-        public DebatePost()
+        public DebatePost(string s, User u)
         {
             PostID = idcounter;
             idcounter += 1;
+            CommentText = s;
+            UserID = u.UserID;
         }
         public virtual bool Validate()
         {

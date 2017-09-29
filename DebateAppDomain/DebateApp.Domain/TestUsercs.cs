@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DebateApp.Domain
 {
-    class TestUser : User
+    public class TestUser : User
     {
         public TestUser() : base()
         {
