@@ -38,6 +38,10 @@ namespace DebateAppDomainAPI.Models
                 }
             }
         }
+        public CreateCasual(int Userid, string DebateTopic, string TeamLOpener)
+        {
+            
+        }
         public Debate Expose()
         {
             return _d;

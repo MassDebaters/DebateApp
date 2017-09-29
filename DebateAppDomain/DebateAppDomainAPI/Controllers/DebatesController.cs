@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using DebateAppDomainAPI.Models;
 
 namespace DebateAppDomainAPI.Controllers
 {
@@ -11,16 +12,20 @@ namespace DebateAppDomainAPI.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetNewCasual(int UserID)
         {
-            return new string[] { "value1", "value2" };
+            var DBModel = new DebateModel();
+            DBModel.CreateCasual(id);
+            return DBModel.Expose();
+            
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            var DBModel = new DebateModel(id);
+            return DBModel.Expose();
         }
 
         // POST api/values
