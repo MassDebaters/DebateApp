@@ -29,29 +29,32 @@ namespace DebateAppDB.dbRest.Controllers
         }*/
 
         [HttpGet]
-        public IEnumerable<AccountModel> Get()
+        public IEnumerable<AccountModel> GetAllAccounts()
         {
             return account.GetAllAccounts();
         }
 
         // GET: api/Accounts/5
-        [HttpGet("{id}", Name = "Get")]
-        public AccountModel Get(int id)
+        [HttpGet("{id}")]
+        public AccountModel GetAccount(int id)
         {
             return account.GetAccount(id);
         }
 
-        [HttpGet("{username}", Name = "UniqueUsername")]
+        //GET: api/Accounts/username/somestring
+        [HttpGet("username/{username}")]
         public bool UniqueUsername(string username)
         {
+            
             return account.UniqueUsername(username);
         }
-
+        
+        
         // POST: api/Accounts
         [HttpPost]
-        public void Post(string username, string password) //[FromBody]string password)
+        public void Post([FromBody]Accounts user)
         {
-            account.AddAccount(username, password);
+            account.AddAccount(user);
         }
         
         // PUT: api/Accounts/5

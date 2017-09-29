@@ -1,4 +1,5 @@
 ﻿using DebateApp.db;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace DebateAppDB.dbRest.Models
     public class AccountModel
     {
         public string Username { get; set; }
+        public string Role { get; set; }
         public int Astros { get; set; }
 
         private DebateAppDBContext context = new DebateAppDBContext();
@@ -19,7 +21,7 @@ namespace DebateAppDB.dbRest.Models
 
             foreach(var item in context.Accounts)
             {
-                var account = new AccountModel() { Username = item.Username, Astros = item.Astros };
+                var account = new AccountModel() { Username = item.Username, Astros = item.Astros, Role = item.Role };
 
                 accounts.Add(account);
             }
@@ -32,13 +34,14 @@ namespace DebateAppDB.dbRest.Models
 
             Username = account.Username;
             Astros = account.Astros;
+            Role = account.Role;
 
             return this;
         }
 
-        public void AddAccount(string userName, string password)
+        public void AddAccount(Accounts account)
         {
-            context.Accounts.Add(new Accounts() { Username = userName, Password = password });
+            context.Accounts.Add(account);
             context.SaveChanges();
         }
 
@@ -94,5 +97,8 @@ namespace DebateAppDB.dbRest.Models
                 return true;
             }
         }
+
+        
+        //post with json string to serialize?
     }
 }
