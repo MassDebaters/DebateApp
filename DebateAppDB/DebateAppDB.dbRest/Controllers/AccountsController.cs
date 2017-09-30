@@ -1,32 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DebateApp.db;
 using DebateAppDB.dbRest.Models;
+using System.IO;
+using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace DebateAppDB.dbRest.Controllers
 {
-    [Produces("application/json")]
+    [Produces("application/json", "text/plain")]
     [Route("api/Accounts")]
     public class AccountsController : Controller
     {
-        private AccountModel account = new AccountModel();
-        // GET: api/Accounts
-        /*[HttpGet]
-        public IEnumerable<Accounts> Get()
-        {
-            return account.GetAllAccounts();
-        }*/
+        private AccountModel account;
+        private readonly IConfiguration _Configuration;
 
-        // GET: api/Accounts/5
-        /*[HttpGet("{id}", Name = "Get")]
-        public Accounts Get(int id)
+        public AccountsController(IConfiguration configuration)
         {
-            return account.GetAccount(id);
-        }*/
+            _Configuration = configuration;
+            account = new AccountModel(_Configuration);
+        }
 
         [HttpGet]
         public IEnumerable<AccountModel> GetAllAccounts()
@@ -48,8 +42,16 @@ namespace DebateAppDB.dbRest.Controllers
             
             return account.UniqueUsername(username);
         }
+
         
-        
+        /*[HttpPost("debate")]
+        public void Debate([FromBody]object dString)
+        {       
+            
+
+            //file.WriteLine(dString);
+        }*/
+
         // POST: api/Accounts
         [HttpPost]
         public void Post([FromBody]Accounts user)

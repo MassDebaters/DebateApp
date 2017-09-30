@@ -1,20 +1,27 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace DebateApp.db
 {
     public partial class DebateAppDBContext : DbContext
     {
+        private readonly IConfiguration _Configuration;
+
         public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
+
+        public DebateAppDBContext(IConfiguration configuration)
+        {
+            _Configuration = configuration;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"data source = sqlweeklenny1.database.windows.net; initial catalog = DebateAppDB; user id = lennylopez; password = ThisIsATemp42!");
+                optionsBuilder.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection"));
             }
         }
 
