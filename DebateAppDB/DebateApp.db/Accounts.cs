@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace DebateApp.db
 {
@@ -15,6 +14,7 @@ namespace DebateApp.db
         public string Username { get; set; }
         public string Password { get; set; }
         public int Astros { get; set; }
+        public string Role { get; set; }
 
         public ICollection<Posts> Posts { get; set; }
     }
