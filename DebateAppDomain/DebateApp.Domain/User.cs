@@ -32,7 +32,7 @@ namespace DebateApp.Domain
         public void Vote(Debate d, bool team)
         {
            
-            if (HasVoted == false)
+            if (HasVoted == false && d.Audience.Contains(this))
             {
                 d.ActiveRound.Vote(team);
                 HasVoted = true;
@@ -41,8 +41,27 @@ namespace DebateApp.Domain
 
         public void JoinDebate(Debate d, DebatePost p, bool TeamR)
         {
-            
-            
+            var i = 0;
+            if(TeamR) { i += 1; }
+            if (d.Teams[i].IsNotFull()&&d.SetupStage)
+            {
+                d.Teams[1].Members.Add(this);
+            }
+        }
+        public void ViewDebate(Debate d)
+        {
+            if(!d.Audience.Contains(this))
+            {
+                d.Audience.Add(this);
+            }
+        }
+
+        public void LeaveDebate(Debate d)
+        {
+            if(d.Audience.Contains(this))
+            {
+                d.Audience.Remove(this));
+            }
         }
     }
 }

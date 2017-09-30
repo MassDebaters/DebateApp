@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DebateApp.Domain
 {
@@ -10,7 +11,10 @@ namespace DebateApp.Domain
         public List<User> Members { get; set; }
         public int RoundsWon = 0;
         public double WinningsShare = 0.5;
-
+        public Team(int Max)
+        {
+            TeamLimit = Max;
+        }
         public bool ReadyToStart
         {
             get
@@ -20,5 +24,9 @@ namespace DebateApp.Domain
             }
         }
 
+        internal bool IsNotFull()
+        {
+            return Members.Count < TeamLimit;
+        }
     }
 }

@@ -14,7 +14,9 @@ namespace DebateApp.Domain
         public bool GameStage { get { return _gamestage; } }
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
-        public List<Team> Teams { get; set; }
+        public static int NumberOfPlayersPerTeam { get; set; }
+        public List<Team> Teams = new List<Team>() { new Team(NumberOfPlayersPerTeam),
+                                                     new Team(NumberOfPlayersPerTeam) };
         public List<User> Audience { get; set; }
         public int TurnLength { get; set; }
         public int PostLength { get; set; }
@@ -22,7 +24,7 @@ namespace DebateApp.Domain
         public List<RoundState> Round { get; set; }
         public RoundState ActiveRound { get { return Round[Round.Count]; } set { ActiveRound = value; } }
         public int NumberOfRounds { get; set; }
-        public int NumberOfPlayersPerTeam { get; set; }
+        
         public int Pot { get; set; }
         public bool SetupStage
         {
