@@ -7,15 +7,14 @@ namespace DebateApp.Domain
 
         public DebatePost TeamLOpener { get; set; }
         public DebatePost TeamROpener { get; set; }
-        public int DebateID { get; set; }
         public int TeamCount { get; set; }
-        public Dictionary<bool, List<User>> TeamLMembers { get; set; }
-        public Dictionary<bool, List<User>> TeamRMembers { get; set; }
-
-        public bool ReadyToStart { get
+        public List<User> TeamLMembers { get; set; }
+        public List<User> TeamRMembers { get; set; }
+        public bool SetupComplete { get; set; }
+        public void ReadyToStart() 
             {
-                return (TeamLOpener != null && TeamROpener != null) &&
-                        (TeamLMembers.Count + TeamRMembers.Count == TeamCount * 2);
+                    SetupComplete = (TeamLOpener != null && TeamROpener != null) &&
+                                    (TeamLMembers.Count + TeamRMembers.Count == TeamCount * 2);
             }
         }
 

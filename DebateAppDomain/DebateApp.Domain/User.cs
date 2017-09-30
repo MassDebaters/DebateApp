@@ -6,7 +6,7 @@ namespace DebateApp.Domain
 {
     public class User
     {
-        //private Accounts _account {get;set;}
+       
 
         public int UserID { get; set; }
         public string Username { get; set; }
@@ -14,17 +14,18 @@ namespace DebateApp.Domain
         public int Astros { get; set; }
         public List<int> YourDebates { get; set; }
         public List<int> Notifications { get; set; }
+        public bool HasVoted = false;
+        public bool HasResponded = false;
 
 
-        //public User(string name, string password)
-        //{
-        //    _account = UserHelper.Account(name, password);
-        //}
 
-        public Debate Post(DebatePost p, Debate d)
+        public void Post(DebatePost p, Debate d)
         {
-            d.UpdatePosts(p);
-            return d;
+            var current = d.Round[d.Round.Count];
+            if (p.Validate()&& current.PostIsAllowed(p))
+            {
+                current.Responses.Add(p);
+            }
         }
     }
 }

@@ -13,7 +13,9 @@ namespace DebateApp.Domain
         public double SwingL { get; set; }
         public double SwingR { get; set; }
         public int CurrentTurn { get; set; }
-        public int DebateID { get; set; }
+        public int TeamCount { get; set; }
+        public List<User> TeamLMembers { get; set; }
+        public List<User> TeamRMembers { get; set; }
 
 
 
@@ -23,6 +25,11 @@ namespace DebateApp.Domain
             {
                 Responses.Add(d);
             }
+        }
+
+        public bool PostIsAllowed(DebatePost p)
+        {
+            var 
         }
     }
 }

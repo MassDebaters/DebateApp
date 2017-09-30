@@ -6,19 +6,20 @@ namespace DebateApp.Domain
 {
     public class Casual : Debate
     {
-        public Casual(User CreatedBy) : base()
+        public Casual(User CreatedBy, string Topic, string Category, string Opener) : base()
         {
-            DebatePost OpenerL = new DebatePost("No! The purpose of life is to eat, drink, and be merry!", CreatedBy);
+            
             
             var c = new List<User>() { CreatedBy };
-            DebateTopic = "Is life meaningless?";
-            DebateCategory = "Dude, relax";
+            DebateTopic = Topic;
+            DebateCategory = Category;
             Players = new Roster()
             {
                 TeamLMembers = new Dictionary<bool, List<User>>(),
                 TeamRMembers = new Dictionary<bool, List<User>>(),
-                TeamLOpener = OpenerL
+                TeamLOpener = new DebatePost(Opener, CreatedBy)
             };
+            Players.TeamLMembers.Add(false, c);
             Audience = new List<User>();
             TurnLength = 60;
             PostLength = 200;
