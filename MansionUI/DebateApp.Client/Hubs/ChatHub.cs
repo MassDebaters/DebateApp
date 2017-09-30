@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DebateApp.Client.Hubs
 {
     [HubName("chat")]
-    public class ChatHub :Hub
+    public class ChatHub : Hub
     {
         public void Join()
         {
