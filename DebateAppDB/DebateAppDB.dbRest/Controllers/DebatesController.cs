@@ -26,20 +26,21 @@ namespace DebateAppDB.dbRest.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return debate.GetDebate(id);
         }
         
         // POST: api/Debates
         [HttpPost]
-        public void Post([FromBody]object deb)
+        public void Post([FromBody]DebateModel deb)//object deb)
         {
             debate.AddDebate(deb);
         }
         
         // PUT: api/Debates/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]object value)
         {
+            debate.UpdateDebate(id, value);
         }
         
         // DELETE: api/ApiWithActions/5
