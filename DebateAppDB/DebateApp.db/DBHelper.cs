@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace DebateApp.db
     public class DBHelper
     {
         protected DebateAppDBContext dbHelper;
+        private readonly IConfiguration _Configuration;
 
-        public DBHelper()
+        public DBHelper(IConfiguration configuration)
         {
-            dbHelper = new DebateAppDBContext();
+            _Configuration = configuration;
+            dbHelper = new DebateAppDBContext(_Configuration);
         }
 
         public void AddAccount(string username, string password)
