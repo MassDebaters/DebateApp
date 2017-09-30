@@ -13,11 +13,9 @@ namespace DebateApp.Domain
             var c = new List<User>() { CreatedBy };
             DebateTopic = Topic;
             DebateCategory = Category;
-            Players = new Roster()
+            Teams = new List<Team>()
             {
-                TeamLMembers = new Dictionary<bool, List<User>>(),
-                TeamRMembers = new Dictionary<bool, List<User>>(),
-                TeamLOpener = new DebatePost(Opener, CreatedBy)
+
             };
             Players.TeamLMembers.Add(false, c);
             Audience = new List<User>();

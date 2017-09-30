@@ -12,20 +12,17 @@ namespace DebateAppDomainAPI.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> GetNewCasual(int UserID)
-        {
-            var DBModel = new DebateModel();
-            DBModel.CreateCasual(id);
-            return DBModel.Expose();
+        //public IEnumerable<string> CreateDebate([FromBody]DebateModel dm)
+        //{
             
-        }
+        //}
 
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            var DBModel = new DebateModel(id);
-            return DBModel.Expose();
+            //var DBModel = new DebateModel(id);
+            return "";
         }
 
         // POST api/values

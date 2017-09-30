@@ -34,14 +34,11 @@ namespace DebateAppDomainAPI.Models
                 }
                 catch (Exception)
                 {
-                    return new Casual(new TestUser());
+                    return new Casual(new TestUser(), "Are we any good at this?", "Anxiety","Not yet...");
                 }
             }
         }
-        public CreateCasual(int Userid, string DebateTopic, string TeamLOpener)
-        {
-            
-        }
+
         public Debate Expose()
         {
             return _d;

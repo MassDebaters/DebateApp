@@ -16,6 +16,7 @@ namespace DebateApp.Domain
         public int TeamCount { get; set; }
         public List<User> TeamLMembers { get; set; }
         public List<User> TeamRMembers { get; set; }
+        public bool Active { get; set; }
 
 
         internal void Vote(bool team)
@@ -28,6 +29,11 @@ namespace DebateApp.Domain
             {
                 VotesR += 1;
             }
+        }
+
+        internal void RoundEnd(Debate d)
+        {
+            SwingL
         }
     }
 }

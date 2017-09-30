@@ -14,7 +14,7 @@ namespace DebateApp.Domain
         public bool GameStage { get { return _gamestage; } }
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
-        public Roster Teams { get; set; }
+        public List<Team> Teams { get; set; }
         public List<User> Audience { get; set; }
         public int TurnLength { get; set; }
         public int PostLength { get; set; }
@@ -27,7 +27,7 @@ namespace DebateApp.Domain
         {
             get
             {
-                if (Players.ReadyToStart)
+                if (Teams.ReadyToStart)
                 {
                     _gamestage = true;
                     return false;
