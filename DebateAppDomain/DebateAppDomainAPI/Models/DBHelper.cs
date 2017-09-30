@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DebateAppDomainAPI.Models
 {
-    public class DBServiceHelper
+    public class DBButler
     {
         private HttpClient _client = new HttpClient();
         private string _api = "http://localhost:54277/api/";
-        public DebateModel GetDebate(int id)
+        public DebateModel DBReq(int id, string cmd, bool post)
         {
             var res = _client.GetAsync(_api + "Debate/Get/" + id).GetAwaiter().GetResult();
             var ResObject = JsonConvert.DeserializeObject<DebateModel>(res.ToString());
