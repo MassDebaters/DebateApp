@@ -4,6 +4,7 @@
     <ProjectGuid>4994ac9c-851e-4395-8e82-fa30793f1143</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="gray.microsoft.aspnetcore.signalr.server" Version="0.2.0-alpha1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>

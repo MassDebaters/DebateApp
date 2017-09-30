@@ -4,8 +4,24 @@
     ViewData["Title"] = "Practice";
 }
 
-<h2>All Chat Construction Space</h2>
-<hr />
+<div class="room"></div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/signalr/jquery.signalR.min.js"></script>
+<script src="signalr/hubs"> </script>
 
+<script>
+
+    var connection = $.hubConnection(), hub = connection.createHubProxy('chat');
+    var join = function () {
+        $('<p>').text(msg).appentTo('.room');
+
+    };
+    hub.on('join', join);
+
+    connection.start(function () {
+        hub.invoke('join');
+
+    });
+</script>
 
 

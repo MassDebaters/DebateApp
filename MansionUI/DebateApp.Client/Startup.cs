@@ -22,6 +22,7 @@ namespace DebateApp.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,9 +39,16 @@ namespace DebateApp.Client
             }
 
             app.UseStaticFiles();
+            app.UseSignalR();
 
             app.UseMvc(routes =>
-            {
+           
+            { //default for signalr
+            //    routes.MapRoute(
+            //      name: "default",
+            //      template: "{controller = Home} / {action = index} / {id?}");
+            
+              
                 // routes.MapRoute(
                 //     name: "newuser",
                 //     template: "Login/NewUser",
@@ -57,14 +65,14 @@ namespace DebateApp.Client
                 //     name: "debate",
                 //     template: "Debate/DebateIndex/{username}/{password}",
                 //     defaults: new { controller = "Debate", action = "DebateIndex"}
-                    
+
                 // );
 
                 //  routes.MapRoute(
                 //     name: "debatefromlogin",
                 //     template: "Debate/DebateIndex/{username}/{password}",
                 //     defaults: new { controller = "Debate", action = "DebateIndex"}
-                    
+
                 // );
 
                 // routes.MapRoute(
