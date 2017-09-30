@@ -44,9 +44,9 @@ namespace DebateApp.Client
             app.UseMvc(routes =>
            
             { //default for signalr
-            //    routes.MapRoute(
-            //      name: "default",
-            //      template: "{controller = Home} / {action = index} / {id?}");
+                routes.MapRoute(
+                 name: "default",
+                  template: "{controller = Home} / {action = index}");
             
               
                 // routes.MapRoute(

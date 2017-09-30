@@ -2,22 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class= "room"><</div>
+<div class= "room"> </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/signalr/jquery.signalR.min.js"></script>
-<script src= "signalr/hubs"> </script>
+ <script src="~/lib/signalr/jquery.signalR-2.2.0.js"></script>
+<script src= "/signalr/hubs" ></script>
 
 <script>
+    let chat = $.connection.chat;
+    let hub = $.connection.hub;
 
-    var connection = $.hubConnection(), hub = connection.createHubProxy('chat');
-    var join = function () {
-        $('<p>').text(msg).appentTo('.room');
+    chat.client.sayHello = function (msg) {
+        let p = $('<p>').text(msg);
 
+        $('.room').append(p);
     };
-    hub.on('join', join);
 
-    connection.start(function () {
-        hub.invoke('join');
+    hub.start().done(function (){
+        chat.server.hello
+    
+    })
 
-    });
+
 </script>
