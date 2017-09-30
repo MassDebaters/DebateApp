@@ -6,7 +6,7 @@ namespace DebateApp.Domain
 {
     public class Casual : Debate
     {
-        public Casual(User CreatedBy, string Topic, string Category, string Opener) : base()
+        public Casual(User CreatedBy, string Topic, string Category, string OpeningPost) : base()
         {
             
             
@@ -15,9 +15,19 @@ namespace DebateApp.Domain
             DebateCategory = Category;
             Teams = new List<Team>()
             {
-
+                new Team()
+                {
+                    Opener = new DebatePost(OpeningPost, CreatedBy),
+                    TeamLimit = 1,
+                    Members = new List<User>() { CreatedBy }
+                },
+                new Team()
+                {
+                    TeamLimit = 1,
+                    Members = new List<User>()
+                }
             };
-            Players.TeamLMembers.Add(false, c);
+            
             Audience = new List<User>();
             TurnLength = 60;
             PostLength = 200;

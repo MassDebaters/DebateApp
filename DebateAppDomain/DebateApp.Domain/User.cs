@@ -22,34 +22,26 @@ namespace DebateApp.Domain
 
         public void Post(DebatePost p, Debate d)
         {
-            var current = d.Round[d.Round.Count];
+            
             if (p.Validate() && HasResponded==false)
             {
-                current.Responses.Add(p);
+                d.ActiveRound.Responses.Add(p);
                 HasResponded = true;
             }
         }
         public void Vote(Debate d, bool team)
         {
-            var current = d.Round[d.Round.Count];
+           
             if (HasVoted == false)
             {
-                current.Vote(team);
+                d.ActiveRound.Vote(team);
                 HasVoted = true;
             }
         }
 
-        public void JoinDebate(Debate d, DebatePost p)
+        public void JoinDebate(Debate d, DebatePost p, bool TeamR)
         {
-            if(!d.Teams.TeamRMembers.Contains(this))
-            {
-                d.Teams.TeamRMembers.Add(this);
-            }
             
-            if (p.Validate())
-            {
-                d.Teams.TeamROpener = p;
-            }
             
         }
     }

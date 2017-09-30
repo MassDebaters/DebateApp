@@ -6,17 +6,14 @@ namespace DebateApp.Domain
 {
     public class RoundState
     {
-        
-        public List<DebatePost> Responses { get; set; }
-        public int VotesL { get; set; }
-        public int VotesR {get; set;}
-        public double SwingL { get; set; }
-        public double SwingR { get; set; }
-        public int CurrentTurn { get; set; }
-        public int TeamCount { get; set; }
-        public List<User> TeamLMembers { get; set; }
-        public List<User> TeamRMembers { get; set; }
-        public bool Active { get; set; }
+
+        public List<DebatePost> Responses = new List<DebatePost>();
+        public int VotesL = 0;
+        public int VotesR = 0;
+        public double SwingL = 0.5;
+        public double SwingR = 0.5;
+        public int CurrentTurn = 1;
+        public bool Active = true;
 
 
         internal void Vote(bool team)
@@ -33,7 +30,7 @@ namespace DebateApp.Domain
 
         internal void RoundEnd(Debate d)
         {
-            SwingL
+            
         }
     }
 }

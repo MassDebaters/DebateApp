@@ -6,14 +6,17 @@ namespace DebateApp.Domain
     {
 
         public DebatePost Opener { get; set; }
-        public int TeamCount { get; set; }
+        public int TeamLimit { get; set; }
         public List<User> Members { get; set; }
+        public int RoundsWon = 0;
+        public double WinningsShare = 0.5;
+
         public bool ReadyToStart
         {
             get
             {
                 return (Opener != null) &&
-                       (Members.Count == TeamCount);
+                       (Members.Count == TeamLimit);
             }
         }
 

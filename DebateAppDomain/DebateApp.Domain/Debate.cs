@@ -20,6 +20,7 @@ namespace DebateApp.Domain
         public int PostLength { get; set; }
         public int SourcesRequired { get; set; }
         public List<RoundState> Round { get; set; }
+        public RoundState ActiveRound { get { return Round[Round.Count]; } set { ActiveRound = value; } }
         public int NumberOfRounds { get; set; }
         public int NumberOfPlayersPerTeam { get; set; }
         public int Pot { get; set; }
@@ -27,7 +28,7 @@ namespace DebateApp.Domain
         {
             get
             {
-                if (Teams.ReadyToStart)
+                if (Teams.TrueForAll(t => t.ReadyToStart))
                 {
                     _gamestage = true;
                     return false;
