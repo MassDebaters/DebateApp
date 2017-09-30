@@ -12,6 +12,7 @@ namespace DebateAppDB.dbRest.Models
     {
         private readonly IConfiguration _Configuration;
 
+        public int AccountId { get; set; }
         public string Username { get; set; }
         public string Role { get; set; }
         public int Astros { get; set; }
@@ -30,7 +31,7 @@ namespace DebateAppDB.dbRest.Models
 
             foreach(var item in context.Accounts)
             {
-                var account = new AccountModel(_Configuration) { Username = item.Username, Astros = item.Astros, Role = item.Role };
+                var account = new AccountModel(_Configuration) {AccountId = item.AccountId, Username = item.Username, Astros = item.Astros, Role = item.Role };
 
                 accounts.Add(account);
             }
@@ -41,6 +42,7 @@ namespace DebateAppDB.dbRest.Models
         {
             var account = context.Accounts.Find(id);
 
+            AccountId = account.AccountId;
             Username = account.Username;
             Astros = account.Astros;
             Role = account.Role;

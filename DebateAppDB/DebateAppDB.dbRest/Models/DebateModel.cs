@@ -45,20 +45,23 @@ namespace DebateAppDB.dbRest.Models
             File.WriteAllText(path, NewList);
         }
 
-        public string GetAllDebates()
-        { 
-            return File.ReadAllText(path);
+        public List<DebateModel> GetAllDebates()
+        {
+            var debates = File.ReadAllText(path);
+            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
+
+            return DebateList;
         }
 
-        public string GetDebate(int id)
+        public DebateModel GetDebate(int id)
         {
             string s = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
 
-            var debate = DebateList.FindAll(x => x.Debate_id == id);
-            var debateString = JsonConvert.SerializeObject(debate);
+            var debate = DebateList.FindAll(x => x.Debate_id == id).SingleOrDefault();
+            //var debateString = JsonConvert.SerializeObject(debate);
 
-            return debateString;
+            return debate;
         }
 
         public void UpdateDebate(int id, object newInfo)

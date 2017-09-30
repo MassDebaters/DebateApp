@@ -17,14 +17,14 @@ namespace DebateAppDB.dbRest.Controllers
         private DebateModel debate = new DebateModel();
         // GET: api/Debates
         [HttpGet]
-        public string Get()
+        public List<DebateModel> Get()
         {
             return debate.GetAllDebates();//new string[] { "value1", "value2" };
         }
 
         // GET: api/Debates/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public DebateModel Get(int id)
         {
             return debate.GetDebate(id);
         }
