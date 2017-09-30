@@ -18,18 +18,16 @@ namespace DebateApp.Domain
         public List<User> TeamRMembers { get; set; }
 
 
-
-        public void UpdateDebate(DebatePost d)
+        internal void Vote(bool team)
         {
-            if (d.Validate() && (Responses.Find(r => r.Team == d.Team) == null))
+            if(team)
             {
-                Responses.Add(d);
+                VotesL += 1;
             }
-        }
-
-        public bool PostIsAllowed(DebatePost p)
-        {
-            var 
+            if(!team)
+            {
+                VotesR += 1;
+            }
         }
     }
 }
