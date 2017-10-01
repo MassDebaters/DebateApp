@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR.Hubs;
 
 namespace DebateApp.Client.Hubs
 {
-    [HubName("chat")]
+    [HubName("chathub")]
     public class ChatHub : Hub
     {
         public void Send(string name, string message)
