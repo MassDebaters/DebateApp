@@ -6,7 +6,7 @@ node {
     }
 
     stage('Build'){
-        dir('DebateApp/DebateApp.Client'){
+        dir('DebateApp/DebateAppDomain'){
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
         }
