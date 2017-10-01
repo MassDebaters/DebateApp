@@ -7,7 +7,7 @@ namespace DebateApp.Client.Hubs
     [HubName("chat")]
     public class ChatHub : Hub
     {
-        public void SendM(string name, string message)
+        public void Send(string name, string message)
         {
             Clients.All.addNewMessageToPage(name, message);
         }
