@@ -10,45 +10,39 @@ namespace DebateApp.Domain
     public abstract class Debate
     {
 
-
-        public int DebateID { get; set; }
-        public List<Post> Posts { get; set; }
+        private bool _gamestage = false;
+        public bool GameStage { get { return _gamestage; } }
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
-        public Dictionary<string,List<User>> Teams { get; set; }
+        public static int NumberOfPlayersPerTeam { get; set; }
+        public List<Team> Teams = new List<Team>() { new Team(NumberOfPlayersPerTeam),
+                                                     new Team(NumberOfPlayersPerTeam) };
         public List<User> Audience { get; set; }
-        public int CurrentTurn { get; set; }
         public int TurnLength { get; set; }
         public int PostLength { get; set; }
         public int SourcesRequired { get; set; }
-        public List<RoundState> Round { get; set; }
+        public List<RoundState> Round = new List<RoundState>();
+        public RoundState ActiveRound() { return Round[Round.Count-1]; }
         public int NumberOfRounds { get; set; }
-        public int Pot { get; set; }
-
-     
         
-        public string SaveDebate(Casual d)
+        public int Pot { get; set; }
+        public bool SetupStage
         {
-            var path = Directory.GetCurrentDirectory() + @"\DebateStrings.txt";
-            string s = File.ReadAllText(path);
-            
-            var DebateList = JsonConvert.DeserializeObject<List<Casual>>(s);
-
-            try
+            get
             {
-                DebateList.Add(d);
-            }
-            catch(Exception e)
-            {
-                DebateList = new List<Casual>
+                if (Teams.TrueForAll(t => t.ReadyToStart))
                 {
-                    d
-                };
+                    _gamestage = true;
+                    return false;
+                }
+                else { return true; }
             }
-            
-            var NewList = JsonConvert.SerializeObject(DebateList);
-            File.WriteAllText(path, NewList);
-            return s;
+        }
+
+        public void UpdatePosts(DebatePost p)
+        {
+
+        
             
         }
     }

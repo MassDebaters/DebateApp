@@ -1,5 +1,5 @@
 using DebateApp.Domain;
-using DebateApp.db;
+
 using System;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,14 +16,12 @@ namespace DebateApp.Test
         [Fact]
         public void AddADebateToTheFileSystem()
         {
-            var dut = new Casual(4);
-            var dut2 = new Casual(5);
-            var dbh = new Casual(6);
+            //var uut = new TestUser();
+            //var dut = new Casual(uut);
+            //var dut2 = new Casual(uut);
+            //var dbh = new Casual(uut);
             
-            var addedjson = dbh.SaveDebate(dut);
-            _output.WriteLine(addedjson);
-            dbh.SaveDebate(dut2);
-            
+    
         }
     }
 }

@@ -1,24 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
-using DebateApp.db;
+
 
 namespace DebateApp.Domain
 {
     public class User
     {
-        private Accounts _account {get;set;}
+       
 
-        public int UserID { get {return _account.AccountId;}}
-        public string Username { get {return _account.Username;}}
-        public string Password { get {return _account.Password;}}
-        public int Astros { get {return _account.Astros;}}
-        //public List<Debate> YourDebates { get; set; }
-        //public List<Notification> Notifications { get; set; }
+        public int UserID { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public int Astros { get; set; }
+        public List<int> YourDebates { get; set; }
+        public List<int> Notifications { get; set; }
+        public bool HasVoted = false;
+        public bool HasResponded = false;
+        
 
 
-        public User(string name, string password)
+
+        public void Post(DebatePost p, Debate d)
         {
-            _account = UserHelper.Account(name, password);
+            
+            if (p.Validate() && HasResponded==false)
+            {
+                d.ActiveRound().Responses.Add(p);
+                HasResponded = true;
+            }
+        }
+        public void Vote(Debate d, bool team)
+        {
+           
+            if (HasVoted == false && d.Audience.Contains(this))
+            {
+                d.ActiveRound().Vote(team);
+                HasVoted = true;
+            }
+        }
+
+        public void JoinDebate(Debate d, DebatePost p, bool TeamR)
+        {
+            var i = 0;
+            if(TeamR) { i += 1; }
+            if (d.Teams[i].IsNotFull()&&d.SetupStage)
+            {
+                d.Teams[1].Members.Add(this);
+            }
+        }
+        public void ViewDebate(Debate d)
+        {
+            if(!d.Audience.Contains(this))
+            {
+                d.Audience.Add(this);
+            }
+        }
+
+        public void LeaveDebate(Debate d)
+        {
+            if(d.Audience.Contains(this))
+            {
+                d.Audience.Remove(this);
+            }
         }
     }
 }
