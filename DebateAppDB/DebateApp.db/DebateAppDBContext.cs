@@ -1,20 +1,27 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace DebateApp.db
 {
     public partial class DebateAppDBContext : DbContext
     {
+        private readonly IConfiguration _Configuration;
+
         public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
+
+        public DebateAppDBContext(IConfiguration configuration)
+        {
+            _Configuration = configuration;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(File.ReadAllText("./config.txt"));
+                optionsBuilder.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection"));
             }
         }
 
@@ -29,6 +36,8 @@ namespace DebateApp.db
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.Role).HasMaxLength(100);
 
                 entity.Property(e => e.Username)
                     .IsRequired()
