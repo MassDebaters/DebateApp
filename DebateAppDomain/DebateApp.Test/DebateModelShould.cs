@@ -27,7 +27,7 @@ namespace DebateAppDomain.Test
         [Fact]
         public void SendOutASerializedCasualDebate()
         {
-            _output.WriteLine(dbh.DBCreateDebate(dmut));
+            _output.WriteLine(JsonConvert.SerializeObject(dmut));
         }
     }
 }

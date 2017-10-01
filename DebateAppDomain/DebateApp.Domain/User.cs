@@ -25,7 +25,7 @@ namespace DebateApp.Domain
             
             if (p.Validate() && HasResponded==false)
             {
-                d.ActiveRound.Responses.Add(p);
+                d.ActiveRound().Responses.Add(p);
                 HasResponded = true;
             }
         }
@@ -34,7 +34,7 @@ namespace DebateApp.Domain
            
             if (HasVoted == false && d.Audience.Contains(this))
             {
-                d.ActiveRound.Vote(team);
+                d.ActiveRound().Vote(team);
                 HasVoted = true;
             }
         }
@@ -60,7 +60,7 @@ namespace DebateApp.Domain
         {
             if(d.Audience.Contains(this))
             {
-                d.Audience.Remove(this));
+                d.Audience.Remove(this);
             }
         }
     }

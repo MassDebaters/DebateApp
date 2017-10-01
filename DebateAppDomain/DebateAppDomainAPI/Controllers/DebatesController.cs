@@ -10,45 +10,21 @@ using System.Net.Http;
 namespace DebateAppDomainAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class DebatesController : Controller
     {
         private DBHelper _dbh = new DBHelper();
         // GET api/values
-        [HttpGet]
+        [HttpPost]
         public DebateModel CreateCasual([FromForm]CreateCasualModel cm)
         {
-            var c = new Casual(cm.u.user, cm.Topic, cm.Category, cm.Opener);
+            var c = new Casual(new TestUser(), cm.Topic, cm.Category, cm.Opener);
             var d = new DebateModel(c);
-            var res = _dbh.DBCreateDebate(d);
+            //var res = _dbh.DBCreateDebate(d);
            
-            return res;
+            return d;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            //var DBModel = new DebateModel(id);
-            return "";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

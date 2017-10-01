@@ -16,10 +16,10 @@ namespace DebateApp.Test
         [Fact]
         public void AddADebateToTheFileSystem()
         {
-            var uut = new TestUser();
-            var dut = new Casual(uut);
-            var dut2 = new Casual(uut);
-            var dbh = new Casual(uut);
+            //var uut = new TestUser();
+            //var dut = new Casual(uut);
+            //var dut2 = new Casual(uut);
+            //var dbh = new Casual(uut);
             
     
         }

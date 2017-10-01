@@ -21,8 +21,8 @@ namespace DebateApp.Domain
         public int TurnLength { get; set; }
         public int PostLength { get; set; }
         public int SourcesRequired { get; set; }
-        public List<RoundState> Round { get; set; }
-        public RoundState ActiveRound { get { return Round[Round.Count]; } set { ActiveRound = value; } }
+        public List<RoundState> Round = new List<RoundState>();
+        public RoundState ActiveRound() { return Round[Round.Count-1]; }
         public int NumberOfRounds { get; set; }
         
         public int Pot { get; set; }
