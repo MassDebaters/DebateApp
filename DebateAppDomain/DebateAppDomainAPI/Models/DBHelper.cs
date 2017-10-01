@@ -20,48 +20,60 @@ namespace DebateAppDomainAPI.Models
         private string PutUser = "Account/Put/";
 
         
-        public string DBGetDebate(int? id)
+        public DebateModel DBGetDebate(int? id)
         {
             var res = _client.GetAsync(_api + GetDebate + id).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return ResObject;
+            return JsonConvert.DeserializeObject<DebateModel>(ResObject);
         }
 
-        public string DBGetAllDebate()
+        public List<DebateModel> DBGetAllDebate()
         {
-            return DBGetDebate(null);
+            var res = _client.GetAsync(_api + GetDebate).GetAwaiter().GetResult();
+            var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<List<DebateModel>>(ResObject);
         }
 
-        public string DBGetUser(int? id)
+        public UserModel DBGetUser(int? id)
         {
             var res = _client.GetAsync(_api + GetUser + id).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return ResObject;
+            return JsonConvert.DeserializeObject<UserModel>(ResObject);
         }
 
-        public string DBGetAllUser()
+        public List<UserModel> DBGetAllUser()
         {
-            return DBGetUser(null);
+            var res = _client.GetAsync(_api + GetUser).GetAwaiter().GetResult();
+            var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<List<UserModel>>(ResObject);
         }
 
-        public void DBCreateUser(UserModel u)
+        public UserModel DBCreateUser(UserModel u)
         {
-            _client.PostAsync(_api + PostUser, new StringContent(JsonConvert.SerializeObject(u)));
+            var cd = _client.PostAsync(_api + PostUser, new StringContent(JsonConvert.SerializeObject(u)));
+            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<UserModel>(cds);
         }
 
-        public void DBSaveUserChanges(UserModel u)
+        public UserModel DBSaveUserChanges(UserModel u)
         {
-            _client.PutAsync(_api + PutUser, new StringContent(JsonConvert.SerializeObject(u)));
+            var cd = _client.PutAsync(_api + PutUser, new StringContent(JsonConvert.SerializeObject(u)));
+            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<UserModel>(cds);
         }
 
-        public void DBCreateDebate(DebateModel d)
+        public DebateModel DBCreateDebate(DebateModel d)
         {
-            _client.PostAsync(_api + PostDebate, new StringContent(JsonConvert.SerializeObject(d)));
+            var cd = _client.PostAsync(_api + PostDebate, new StringContent(JsonConvert.SerializeObject(d)));
+            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<DebateModel>(cds);
         }
 
-        public void DBSaveDebateChanges(DebateModel d)
+        public DebateModel DBSaveDebateChanges(DebateModel d)
         {
-            _client.PutAsync(_api + PutDebate, new StringContent(JsonConvert.SerializeObject(d)));
+            var cd = _client.PutAsync(_api + PutDebate, new StringContent(JsonConvert.SerializeObject(d)));
+            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<DebateModel>(cds);
         }
 
 
