@@ -17,6 +17,7 @@ namespace DebateAppDB.dbRest.Models
         //add function to write into file
         public void AddDebate(DebateModel debate)//object debate)
         {
+            //add and return the max id
             string s = File.ReadAllText(path);
             //var max = debates.Max(x => x.Key);
 
@@ -74,6 +75,15 @@ namespace DebateAppDB.dbRest.Models
 
             var NewList = JsonConvert.SerializeObject(DebateList);
             File.WriteAllText(path, NewList);
+        }
+
+        public int GetMaxIndex()
+        {
+            string s = File.ReadAllText(path);
+            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
+            var max = DebateList.Max(x => x.Debate_id);
+
+            return max;
         }
     }  
 }
