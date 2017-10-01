@@ -5,7 +5,7 @@ node {
 
 
     stage('Import'){
-        git branch: 'Chore/PipelineTesting', credentialsId: 'revature-class-demo-githubtoken', url: 'https://github.com/MassDebaters/DebateApp'
+        git 'https://github.com/MassDebaters/DebateApp.git'
     }
 
     stage('Build')
