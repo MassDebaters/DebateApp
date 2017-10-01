@@ -18,11 +18,11 @@ namespace DebateAppDomainAPI.Controllers
         [HttpPost]
         public DebateModel CreateCasual([FromForm]CreateCasualModel cm)
         {
-            var c = new Casual(new TestUser(), cm.Topic, cm.Category, cm.Opener);
+            var u = _dbh.DBGetUser(cm.UserID);
+            var c = new Casual(u.UserLogic, cm.Topic, cm.Category, cm.Opener);
             var d = new DebateModel(c);
-            //var res = _dbh.DBCreateDebate(d);
-           
-            return d;
+            var res = _dbh.DBCreateDebate(d);
+            return res;
         }
 
         

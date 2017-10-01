@@ -27,11 +27,11 @@ namespace DebateAppDomainAPI.Models
             return JsonConvert.DeserializeObject<DebateModel>(ResObject);
         }
 
-        public List<DebateModel> DBGetAllDebate()
+        public IEnumerable<DebateModel> DBGetAllDebate()
         {
             var res = _client.GetAsync(_api + GetDebate).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<List<DebateModel>>(ResObject);
+            return JsonConvert.DeserializeObject<IEnumerable<DebateModel>>(ResObject);
         }
 
         public UserModel DBGetUser(int? id)
@@ -41,11 +41,11 @@ namespace DebateAppDomainAPI.Models
             return JsonConvert.DeserializeObject<UserModel>(ResObject);
         }
 
-        public List<UserModel> DBGetAllUser()
+        public IEnumerable<UserModel> DBGetAllUser()
         {
             var res = _client.GetAsync(_api + GetUser).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<List<UserModel>>(ResObject);
+            return JsonConvert.DeserializeObject<IEnumerable<UserModel>>(ResObject);
         }
 
         public UserModel DBCreateUser(UserModel u)
@@ -66,6 +66,7 @@ namespace DebateAppDomainAPI.Models
         {
             var cd = _client.PostAsync(_api + PostDebate, new StringContent(JsonConvert.SerializeObject(d)));
             string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+         
             return JsonConvert.DeserializeObject<DebateModel>(cds);
         }
 

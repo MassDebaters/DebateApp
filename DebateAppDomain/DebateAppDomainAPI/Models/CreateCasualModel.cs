@@ -7,7 +7,7 @@ namespace DebateAppDomainAPI.Models
 {
     public class CreateCasualModel
     {
-        public UserModel u;
+        public int UserID { get; set; }
         public string Topic { get; set; }
         public string Category { get; set; }
         public string Opener { get; set; }

@@ -9,9 +9,21 @@ namespace DebateAppDomainAPI.Models
 {
     public class UserModel
     {
-        public int UserID { get; set; }
-        public User user { get; set; }
-        public string UserString => JsonConvert.SerializeObject(user);
+        private DBHelper dbh = new DBHelper();
+        //for binding
+        public int AccountId { get; set; }
+        public string Username { get; set; }
+        public string Role { get; set; }
+        public int Astros { get; set; }
+        //for logical operations
+        public User UserLogic;
+
+        public UserModel(User u)
+        {
+            UserLogic = u;
+        }
+
+
 
     }
 }
