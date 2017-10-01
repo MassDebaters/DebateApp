@@ -1,6 +1,9 @@
 
 node {
     //slackSend("Started build $currentBuild.number" + ".")
+    stages{
+
+
     stage('Import'){
         git branch: 'Chore/PipelineTesting', credentialsId: 'revature-class-demo-githubtoken', url: 'https://github.com/MassDebaters/DebateApp'
     }
@@ -69,6 +72,7 @@ node {
             }
            
         }
+    }
        
     //slackSend('Deployed')
 }
