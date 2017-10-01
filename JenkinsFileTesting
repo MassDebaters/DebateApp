@@ -1,7 +1,7 @@
 
 node {
     //slackSend("Started build $currentBuild.number" + ".")
-    stages{
+
 
 
     stage('Import'){
@@ -70,7 +70,7 @@ node {
             
            
         }
-    }
+
        
     //slackSend('Deployed')
 }
