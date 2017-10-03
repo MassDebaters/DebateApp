@@ -11,13 +11,13 @@ namespace DebateAppDomainAPI.Models
     public class DBHelper
     {
         private HttpClient _client = new HttpClient();
-        private string _api = "http://localhost:54277/api/";
-        private string GetDebate = "Debate/Get/";
-        private string GetUser = "Account/Get/";
-        private string PostUser = "Account/Post/";
-        private string PostDebate = "Debate/Post/";
-        private string PutDebate = "Debate/Put/";
-        private string PutUser = "Account/Put/";
+        private string _api = "http://localhost:54625/";
+        private string GetDebate = "Debates/Get";
+        private string GetUser = "Accounts/";
+        private string PostUser = "Accounts/Post/";
+        private string PostDebate = "Debates/Post/";
+        private string PutDebate = "Debates/Put/";
+        private string PutUser = "Accounts/Put/";
 
         
         public DebateModel DBGetDebate(int? id)
