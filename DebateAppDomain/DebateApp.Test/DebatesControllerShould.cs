@@ -32,7 +32,7 @@ namespace DebateAppDomain.Test
         {
             var ccm = new CreateCasualModel()
             {
-                UserID = 1,
+                UserID = 2,
                 Category = "Grown Up Problems",
                 Opener = "Not yet...",
                 Topic = "Are we any good at this?"

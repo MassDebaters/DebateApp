@@ -16,12 +16,10 @@ namespace DebateAppDomainAPI.Models
         public string Role { get; set; }
         public int Astros { get; set; }
         //for logical operations
-        public User UserLogic;
+        public User UserLogic { get { return new User(AccountId, Username, Astros); } set { UserLogic = value; } }
 
-        public UserModel(User u)
-        {
-            UserLogic = u;
-        }
+
+
 
 
 

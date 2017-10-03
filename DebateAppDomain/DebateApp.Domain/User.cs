@@ -10,14 +10,19 @@ namespace DebateApp.Domain
 
         public int UserID { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
+        //public string Password { get; set; }
         public int Astros { get; set; }
-        public List<int> YourDebates { get; set; }
-        public List<int> Notifications { get; set; }
+        //public List<int> YourDebates { get; set; }
+        //public List<int> Notifications { get; set; }
         public bool HasVoted = false;
         public bool HasResponded = false;
-        
 
+        public User(int id, string username, int astros)
+        {
+            UserID = id;
+            Username = username;
+            Astros = astros;
+        }
 
 
         public void Post(DebatePost p, Debate d)

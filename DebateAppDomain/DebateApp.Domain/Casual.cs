@@ -19,6 +19,7 @@ namespace DebateApp.Domain
             Round = new List<RoundState>();
             NumberOfRounds = 5;
             NumberOfPlayersPerTeam = 1;
+            Teams[0].Members[0].Post(new DebatePost(OpeningPost, CreatedBy), this);
 
         }
     }
