@@ -290,5 +290,5 @@ __pycache__/
 #configfile
 config.txt
 
-#filesystem
-DebateStrings.txt
+#appsettings
+appsettings.json
