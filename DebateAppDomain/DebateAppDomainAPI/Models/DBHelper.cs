@@ -41,7 +41,7 @@ namespace DebateAppDomainAPI.Models
         {
             var res = _client.GetAsync(_api + GetUser + id).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = new UserModel(ResObject);
+            var result = JsonConvert.DeserializeObject<UserModel>(ResObject);
             return result;
         }
 
@@ -58,7 +58,7 @@ namespace DebateAppDomainAPI.Models
             var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
             var cd = _client.PostAsync(_api + PostUser, body);
             string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = new UserModel(cds);
+            var result = JsonConvert.DeserializeObject<UserModel>(cds);
             return result;
         }
 
@@ -75,7 +75,7 @@ namespace DebateAppDomainAPI.Models
             var body = new StringContent(text, Encoding.UTF8, "application/json");
             var cd = _client.PostAsync(_api + PostDebate, body);
             string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = new DebateModel(cds);
+            var result = JsonConvert.DeserializeObject<DebateModel>(cds);
             return result;
         }
 
