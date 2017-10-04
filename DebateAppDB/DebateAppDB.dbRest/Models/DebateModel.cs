@@ -10,7 +10,7 @@ namespace DebateAppDB.dbRest.Models
     public class DebateModel
     {
         public int Debate_id { get; set; }
-        public object DebateString { get; set; }
+        public string DebateString { get; set; }
         //add properties
         //private Dictionary<int, object> debates = new Dictionary<int, object>();
         private string path = Directory.GetCurrentDirectory() + @"\DebateStrings.txt";
@@ -46,6 +46,41 @@ namespace DebateAppDB.dbRest.Models
             File.WriteAllText(path, NewList);
         }
 
+
+        ///-------------------------------------------
+
+        public void AddDebate(string debate)//object debate)
+        {
+            //add and return the max id
+            string s = File.ReadAllText(path);
+            //var max = debates.Max(x => x.Key);
+
+            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
+            var debateObject = JsonConvert.DeserializeObject<DebateModel>(debate);
+
+            try
+            {
+                DebateList.Add(debateObject);
+                //debates.Add(max + 1, debate);
+
+            }
+            catch (Exception e)
+            {
+                DebateList = new List<DebateModel>//<object>
+                {
+                    debateObject
+                };
+
+                //debates.Add(max + 1, debate);
+            }
+
+            var max = DebateList.Max(x => x.Debate_id);
+            debateObject.Debate_id = max + 1;
+
+            var NewList = JsonConvert.SerializeObject(DebateList);
+            File.WriteAllText(path, NewList);
+        }
+
         public List<DebateModel> GetAllDebates()
         {
             var debates = File.ReadAllText(path);
@@ -71,7 +106,7 @@ namespace DebateAppDB.dbRest.Models
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
 
             var debate = DebateList.FindAll(x => x.Debate_id == id).SingleOrDefault();
-            debate.DebateString = newInfo;
+           // debate.DebateString = newInfo;
 
             var NewList = JsonConvert.SerializeObject(DebateList);
             File.WriteAllText(path, NewList);

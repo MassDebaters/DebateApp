@@ -39,7 +39,19 @@ namespace DebateAppDB.dbRest.Controllers
             return debate.GetDebate(index);
 
         }
-        
+
+        // POST: api/Debates
+        /*[HttpPost]
+        public void Post(string DebateString)//object deb)
+        {
+            debate.AddDebate(DebateString);
+            var index = debate.GetMaxIndex();
+
+            //return debate.GetDebate(index);
+
+        }*/
+
+
         // PUT: api/Debates/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]object value)
