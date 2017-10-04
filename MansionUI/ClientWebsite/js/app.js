@@ -6,6 +6,10 @@ app.config(function ($routeProvider) {
       controller: 'LobbyController', 
       templateUrl: 'views/lobby.html' 
     })
+    .when('/login',{
+    controller: 'LoginController',
+    templateUrl: 'views/login.html'
+  })
   	 .when('/:id',{
     	controller: 'DebateController',
 		  templateUrl: 'views/debate.html'
