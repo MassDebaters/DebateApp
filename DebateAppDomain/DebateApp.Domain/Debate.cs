@@ -9,7 +9,7 @@ namespace DebateApp.Domain
 {
     public abstract class Debate
     {
-
+        public int Debate_ID {get; set;}
         private bool _gamestage = false;
         public bool GameStage { get { return _gamestage; } }
         public string DebateTopic { get; set; }

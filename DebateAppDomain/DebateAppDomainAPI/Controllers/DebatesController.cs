@@ -22,14 +22,14 @@ namespace DebateAppDomainAPI.Controllers
         //string Topic = 
         //string Category = 
         //string Opener = 
-        public DebateModel CreateCasual([FromForm]CreateCasualModel cm)
-        {
-            var u = _dbh.DBGetUser(cm.UserID);
-            var c = new Casual(u.UserLogic, cm.Topic, cm.Category, cm.Opener);
-            var d = new DebateModel(c);
-            var res = _dbh.DBCreateDebate(d);
-            return res;
-        }
+        //public DebateModel CreateCasual([FromForm]CreateCasualModel cm)
+        //{
+        //    //var u = _dbh.DBGetUser(cm.UserID);
+        //    var c = new Casual(new TestUser(), cm.Topic, cm.Category, cm.Opener);
+        //    //var d = new DebateModel(c);
+        //    //var res = _dbh.DBCreateDebate(d);
+        //    return new DebateModel(c);
+        //}
 
         
     }

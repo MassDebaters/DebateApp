@@ -38,8 +38,7 @@ namespace DebateAppDomain.Test
                 Topic = "Are we any good at this?"
             };
             var actual = dbcut.CreateCasual(ccm);
-            _output.WriteLine(actual.ToString());
-            actual.Expose();
+                        
             Assert.True(actual.d.DebateCategory == "Grown Up Problems");
         }
     }

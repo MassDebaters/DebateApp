@@ -20,65 +20,69 @@ namespace DebateAppDomainAPI.Models
         private string PutDebate = "Debates/Put/";
         private string PutUser = "Accounts/Put/";
 
-        
+
         public DebateModel DBGetDebate(int? id)
         {
             var res = _client.GetAsync(_api + GetDebate + id).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<DebateModel>(ResObject);
+            var result = JsonConvert.DeserializeObject<DebateModel>(ResObject);
+            return result;
         }
 
         public IEnumerable<DebateModel> DBGetAllDebate()
         {
             var res = _client.GetAsync(_api + GetDebate).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<IEnumerable<DebateModel>>(ResObject);
+            var result = JsonConvert.DeserializeObject<IEnumerable<DebateModel>>(ResObject);
+            return result;
         }
 
         public UserModel DBGetUser(int? id)
         {
             var res = _client.GetAsync(_api + GetUser + id).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<UserModel>(ResObject);
+            var result = new UserModel(ResObject);
+            return result;
         }
 
         public IEnumerable<UserModel> DBGetAllUser()
         {
             var res = _client.GetAsync(_api + GetUser).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<IEnumerable<UserModel>>(ResObject);
+            var result = JsonConvert.DeserializeObject<IEnumerable<UserModel>>(ResObject);
+            return result;
         }
 
         public UserModel DBCreateUser(UserModel u)
         {
-            var cd = _client.PostAsync(_api + PostUser, new StringContent(JsonConvert.SerializeObject(u)));
+            var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
+            var cd = _client.PostAsync(_api + PostUser, body);
             string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<UserModel>(cds);
+            var result = new UserModel(cds);
+            return result;
         }
 
-        public UserModel DBSaveUserChanges(UserModel u)
+        public void DBSaveUserChanges(UserModel u)
         {
-            var cd = _client.PutAsync(_api + PutUser, new StringContent(JsonConvert.SerializeObject(u)));
-            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<UserModel>(cds);
+            var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
+            var cd = _client.PutAsync(_api + PutUser, body);
+
         }
 
         public DebateModel DBCreateDebate(DebateModel d)
         {
             var text = JsonConvert.SerializeObject(d);
-            var body = new StringContent(text,Encoding.UTF8,"application/json");
+            var body = new StringContent(text, Encoding.UTF8, "application/json");
             var cd = _client.PostAsync(_api + PostDebate, body);
             string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonConvert.DeserializeObject<DebateModel>(cds);
-            
+            var result = new DebateModel(cds);
             return result;
         }
 
-        public DebateModel DBSaveDebateChanges(DebateModel d)
+        public void DBSaveDebateChanges(DebateModel d)
         {
-            var cd = _client.PutAsync(_api + PutDebate, new StringContent(JsonConvert.SerializeObject(d)));
-            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JsonConvert.DeserializeObject<DebateModel>(cds);
+            var body = new StringContent(JsonConvert.SerializeObject(d), Encoding.UTF8, "application/json");
+            var cd = _client.PutAsync(_api + PutDebate, body);
         }
 
 
