@@ -290,5 +290,5 @@ __pycache__/
 #configfile
 config.txt
 
-#appsettings
+#ignored because of connection string
 appsettings.json
