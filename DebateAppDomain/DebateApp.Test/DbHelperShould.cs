@@ -28,7 +28,7 @@ namespace DebateAppDomain.Test
         public void BeAbleToRetrieveAUserModelByID()
         {
             var tst = dbh.DBGetUser(2);
-            _output.WriteLine(tst.ToString());
+            Assert.True(tst.Username == "Greg");
         }
     }
 }
