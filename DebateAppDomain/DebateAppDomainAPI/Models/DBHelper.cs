@@ -64,7 +64,9 @@ namespace DebateAppDomainAPI.Models
 
         public DebateModel DBCreateDebate(DebateModel d)
         {
-            var cd = _client.PostAsync(_api + PostDebate, new StringContent(JsonConvert.SerializeObject(d)));
+            var text = JsonConvert.SerializeObject(d);
+            var body = new StringContent(text);
+            var cd = _client.PostAsync(_api + PostDebate, body);
             string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
          
             return JsonConvert.DeserializeObject<DebateModel>(cds);

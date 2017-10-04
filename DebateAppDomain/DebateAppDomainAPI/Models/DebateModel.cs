@@ -11,9 +11,9 @@ namespace DebateAppDomainAPI.Models
     public class DebateModel
     {
         public int Debate_id;
+
         public string DebateString => JsonConvert.SerializeObject(d);
         public Debate d { get; set; }
-
         public DebateModel(Debate de)
         {
             d = de;
