@@ -30,6 +30,11 @@ namespace DebateAppDomainAPI.Controllers
             var res = _dbh.DBCreateDebate(d);
             return res;
         }
+        [HttpGet]
+        public string tryme(int id)
+        {
+            return id.ToString();
+        }
 
 
     }
