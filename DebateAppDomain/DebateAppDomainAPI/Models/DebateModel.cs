@@ -18,6 +18,10 @@ namespace DebateAppDomainAPI.Models
         {
             d = de;
         }
+        public void Expose()
+        {
+            d = JsonConvert.DeserializeObject<Debate>(DebateString);
+        }
 
     }
 }

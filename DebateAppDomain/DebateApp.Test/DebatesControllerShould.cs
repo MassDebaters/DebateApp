@@ -39,7 +39,8 @@ namespace DebateAppDomain.Test
             };
             var actual = dbcut.CreateCasual(ccm);
             _output.WriteLine(actual.ToString());
-            Assert.True(actual.DebateString.DebateCategory == "Grown Up Problems");
+            actual.Expose();
+            Assert.True(actual.d.DebateCategory == "Grown Up Problems");
         }
     }
 }

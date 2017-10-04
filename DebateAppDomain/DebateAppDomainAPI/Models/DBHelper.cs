@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DebateAppDomainAPI.Models
@@ -65,11 +66,12 @@ namespace DebateAppDomainAPI.Models
         public DebateModel DBCreateDebate(DebateModel d)
         {
             var text = JsonConvert.SerializeObject(d);
-            var body = new StringContent(text);
+            var body = new StringContent(text,Encoding.UTF8,"application/json");
             var cd = _client.PostAsync(_api + PostDebate, body);
             string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-         
-            return JsonConvert.DeserializeObject<DebateModel>(cds);
+            var result = JsonConvert.DeserializeObject<DebateModel>(cds);
+            
+            return result;
         }
 
         public DebateModel DBSaveDebateChanges(DebateModel d)
