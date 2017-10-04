@@ -29,7 +29,7 @@ namespace DebateAppDB.dbRest.Controllers
             return debate.GetDebate(id);
         }
         
-        // POST: api/Debates
+        // POST: api/Debates/
         [HttpPost]
         public DebateModel Post([FromBody]DebateModel deb)//object deb)
         {
@@ -63,6 +63,7 @@ namespace DebateAppDB.dbRest.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            debate.DeleteDebate(id);
         }
     }
 }
