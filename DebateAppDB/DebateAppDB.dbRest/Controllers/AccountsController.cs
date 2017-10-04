@@ -32,7 +32,17 @@ namespace DebateAppDB.dbRest.Controllers
         [HttpGet("{id}")]
         public AccountModel GetAccount(int id)
         {
-            return account.GetAccount(id);
+            try
+            {
+                return account.GetAccount(id);
+            }
+            catch(Exception)
+            {
+                return new AccountModel(this._Configuration)
+                {
+
+                };
+            }
         }
 
         //GET: api/Accounts/username/somestring
@@ -41,6 +51,10 @@ namespace DebateAppDB.dbRest.Controllers
         {
             
             return account.UniqueUsername(username);
+        }
+        public string error()
+        {
+            return "did not work boy";
         }
 
         
