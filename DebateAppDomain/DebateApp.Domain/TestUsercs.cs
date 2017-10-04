@@ -6,13 +6,8 @@ namespace DebateApp.Domain
 {
     public class TestUser : User
     {
-        public TestUser() : base()
+        public TestUser() : base(0,"Darwin",100)
         {
-            UserID = 0;
-            Username = "DarwinsBeard";
-            Password = "Fogey";
-            Astros = 100;
-            YourDebates = new List<int>();
 
         }
     }
