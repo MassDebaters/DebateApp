@@ -1,0 +1,19 @@
+<div class="panel" id="login">
+  <label>Username:
+    <input type="text" name="username" ng-model="login.username"
+            required ng-trim="false">
+  </label>
+
+
+  <label>Password:
+    <input type="password" name="password" ng-model="login.password"
+           required ng-trim="false">
+  </label>
+  
+  
+  
+ <button style="background-color:black; display:block" ng-click="signin()" >login</button>
+  
+
+  <a href="{{escape_link}}" ng-click="signout()"> {{ud.logout_string}} </a>
+</div>
