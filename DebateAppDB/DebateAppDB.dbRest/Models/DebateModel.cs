@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DebateAppDB.dbRest.Models
 {
@@ -13,7 +15,7 @@ namespace DebateAppDB.dbRest.Models
         public string DebateString { get; set; }*/
         public object D { get; set; }
 
-        private string path = Directory.GetCurrentDirectory() + @"\DebateStrings.txt";
+        private string path = @"~App_Data\DebateStrings.txt";
 
         
 
