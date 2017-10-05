@@ -24,7 +24,14 @@
             overflow: scroll;
             background-color: white;
             border: 4px solid #0393ff;
-  
+            position: absolute;
+            top: 80px;
+            right: 0;
+        }
+        .textboox {
+            position: absolute;
+            top: 385px;
+            right: 5px;
         }
 
       /* Scrollbar styles */
@@ -104,10 +111,10 @@
               });
           });
       </script>
-
-      <input type="text" id="message" />
-      <input type="button" id="sendmessage" value="Send" />
-                 
+      <div class=" textboox">
+          <input type="text" id="message" />
+          <input type="button" id="sendmessage" value="Send" />
+      </div>
     <div class="main" >
    
       <div class="container">  
