@@ -18,7 +18,7 @@ namespace DebateAppDomainAPI.Models
         //for logical operations
         public User UserLogic { get; set;}
 
-        public UserModel()
+        public void Transfer()
         {
             UserLogic = new User(AccountId, Username, Astros);
         }
