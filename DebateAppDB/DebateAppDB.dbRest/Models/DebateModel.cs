@@ -21,6 +21,15 @@ namespace DebateAppDB.dbRest.Models
         {
             //var definition = new { Name = "" };
             //add and return the max id
+            try
+            {
+                File.ReadAllText(path);
+            }
+
+            catch(Exception)
+            {
+                File.CreateText(path);
+            }
             string debates = File.ReadAllText(path);
             //var max = debates.Max(x => x.Key);
 
