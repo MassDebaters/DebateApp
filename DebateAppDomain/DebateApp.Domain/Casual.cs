@@ -11,7 +11,7 @@ namespace DebateApp.Domain
             DebateTopic = Topic;
             DebateCategory = Category;
             Teams[0].Members = new List<User>() { CreatedBy };
-            Teams[0].Opener = new DebatePost(OpeningPost, CreatedBy);
+            Teams[0].Opener = new DebatePost(OpeningPost, CreatedBy.UserID);
             Audience = new List<User>();
             TurnLength = 60;
             PostLength = 200;
