@@ -18,7 +18,7 @@ namespace DebateAppDomain.Test
         public DbHelperShould(ITestOutputHelper Output)
         {
             _output = Output;
-            uut = new TestUser();
+            
             dut = new Casual(uut, "Are we any good at this?", "Grown Up Problems", "Not yet...");
             dmut = new DebateModel(dut);
             dbh = new DBHelper();
