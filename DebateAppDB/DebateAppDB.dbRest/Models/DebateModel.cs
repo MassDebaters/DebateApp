@@ -13,19 +13,26 @@ namespace DebateAppDB.dbRest.Models
     {
         /*public int Debate_id { get; set; }
         public string DebateString { get; set; }*/
-        public object D { get; set; }
+        public object d { get; set; }
 
         private string path = @"~App_Data\DebateStrings.txt";
 
-        
+        public void Init()
+        {
+            var emptyLod = JsonConvert.SerializeObject(new List<DebateModel>());
+            if (!File.Exists(path))
+            {
+                File.WriteAllText(path, emptyLod);
+            }
+        }
 
         public void AddDebate(DebateModel debate)//object debate)
         {
             //var definition = new { Name = "" };
             //add and return the max id
-            string debates = File.ReadAllText(path);
+            Init();
             //var max = debates.Max(x => x.Key);
-
+            var debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
             
             //var DebateList = JsonConvert.DeserializeAnonymousType(s, definition);
@@ -35,7 +42,7 @@ namespace DebateAppDB.dbRest.Models
                 DebateList.Add(debate);
                 //debates.Add(max + 1, debate);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 DebateList = new List<DebateModel>//<object>
                 {
@@ -89,7 +96,10 @@ namespace DebateAppDB.dbRest.Models
 
         public List<DebateModel> GetAllDebates()
         {
+            Init();
+
             var debates = File.ReadAllText(path);
+            
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
 
             return DebateList;
@@ -97,6 +107,7 @@ namespace DebateAppDB.dbRest.Models
 
         public DebateModel GetDebate(int id)
         {
+            Init();
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
             var debate = DebateList.ElementAt(id);//DebateList.FindAll(x => x.Debate_id == id).SingleOrDefault();
@@ -107,12 +118,13 @@ namespace DebateAppDB.dbRest.Models
 
         public void UpdateDebate(int id, object newInfo)
         {
+            Init();
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
 
             var debate = DebateList.ElementAt(id);//.FindAll(x => x.Debate_id == id).SingleOrDefault();
                                                   // debate.DebateString = newInfo;
-            debate.D = newInfo;
+            debate.d = newInfo;
 
             var NewList = JsonConvert.SerializeObject(DebateList);
             File.WriteAllText(path, NewList);
@@ -120,6 +132,7 @@ namespace DebateAppDB.dbRest.Models
 
         public int GetMaxIndex()
         {
+            Init();
             string s = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
             var index = DebateList.Count - 1;
@@ -128,6 +141,7 @@ namespace DebateAppDB.dbRest.Models
         }
         public void DeleteDebate(int id)
         {
+            Init();
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
 

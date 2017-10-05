@@ -12,18 +12,18 @@ namespace DebateApp.Domain
         public string TimeStamp { get; set; }
         public int UserID { get; set; }
         public int MaxLength { get; set; }
-        public string Team { get; set; }
-        
-        
-        public Dictionary<String, String> Sources { get; set; }
+        //public string Team { get; set; }
+        //public Dictionary<String, String> Sources { get; set; }
         public int DebateID { get; set; }
-        public DebatePost(string s, User u)
+        public DebatePost(string s, int uid)
         {
             CommentText = s;
-            UserID = u.UserID;
+            UserID = uid;
             TimeStamp = DateTime.Now.ToString();
         }
-        public virtual bool Validate()
+        public DebatePost() { }
+
+        public bool Validate()
         {
             return CommentText.Length <= MaxLength;
         }
