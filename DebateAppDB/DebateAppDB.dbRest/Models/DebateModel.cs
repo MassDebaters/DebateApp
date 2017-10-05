@@ -15,7 +15,7 @@ namespace DebateAppDB.dbRest.Models
         public string DebateString { get; set; }*/
         public object d { get; set; }
 
-        private string path = @"~App_Data\DebateStrings.txt";
+        private string path = @".\App_Data\DebateStrings.txt";
 
         public void Init()
         {
