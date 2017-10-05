@@ -14,7 +14,7 @@ namespace DebateAppDomainAPI.Controllers
     public class DebatesController : Controller
     {
         private DBHelper _dbh = new DBHelper();
-        
+
 
         [HttpPost]
         //Create Casual expects an httppost with form data in the following format:
@@ -30,11 +30,20 @@ namespace DebateAppDomainAPI.Controllers
             var res = _dbh.DBCreateDebate(d);
             return res;
         }
-        [HttpGet]
-        public string tryme(int id)
+
+        [HttpGet("{id}")]
+        public IEnumerable<DebateModel> GetDebate(int? id)
         {
-            return id.ToString();
+            if (id == null)
+            {
+                return new List<DebateModel>() { _dbh.DBGetDebate(id) };
+            }
+            else
+            {
+                return _dbh.DBGetAllDebate();
+            }
         }
+
 
 
     }

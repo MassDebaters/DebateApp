@@ -15,7 +15,7 @@ namespace DebateAppDB.dbRest.Models
         public string DebateString { get; set; }*/
         public object d { get; set; }
 
-        private string path = @".\App_Data\DebateStrings.txt";//Directory.GetCurrentDirectory() + @"\App_Data\DebateStrings.txt";//
+        private string path = @".\App_Data\DebateStrings.txt";
 
         public void Init()
         {
@@ -58,6 +58,41 @@ namespace DebateAppDB.dbRest.Models
             var NewList = JsonConvert.SerializeObject(DebateList);
             File.WriteAllText(path, NewList);
         }
+
+
+        ///-------------------------------------------
+
+       /* public void AddDebate(string debate)//object debate)
+        {
+            //add and return the max id
+            string s = File.ReadAllText(path);
+            //var max = debates.Max(x => x.Key);
+
+            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
+            var debateObject = JsonConvert.DeserializeObject<DebateModel>(debate);
+
+            try
+            {
+                DebateList.Add(debateObject);
+                //debates.Add(max + 1, debate);
+
+            }
+            catch (Exception e)
+            {
+                DebateList = new List<DebateModel>//<object>
+                {
+                    debateObject
+                };
+
+                //debates.Add(max + 1, debate);
+            }
+
+            var max = DebateList.Max(x => x.Debate_id);
+            debateObject.Debate_id = max + 1;
+
+            var NewList = JsonConvert.SerializeObject(DebateList);
+            File.WriteAllText(path, NewList);
+        }*/
 
         public List<DebateModel> GetAllDebates()
         {

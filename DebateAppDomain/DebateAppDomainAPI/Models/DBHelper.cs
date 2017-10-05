@@ -12,7 +12,7 @@ namespace DebateAppDomainAPI.Models
     public class DBHelper
     {
         private HttpClient _client = new HttpClient();
-        private string _api = "http://localhost:54625/api/";
+        private string _api = "http://ec2-18-221-110-13.us-east-2.compute.amazonaws.com/DBapi/api/";
         private string GetDebate = "Debates/";
         private string GetUser = "Accounts/";
         private string PostUser = "Accounts/";
@@ -37,11 +37,12 @@ namespace DebateAppDomainAPI.Models
             return result;
         }
 
-        public UserModel DBGetUser(int? id)
+        public UserModel DBGetUser(int id)
         {
             var res = _client.GetAsync(_api + GetUser + id).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             var result = JsonConvert.DeserializeObject<UserModel>(ResObject);
+            result.Transfer();
             return result;
         }
 
@@ -50,6 +51,10 @@ namespace DebateAppDomainAPI.Models
             var res = _client.GetAsync(_api + GetUser).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             var result = JsonConvert.DeserializeObject<IEnumerable<UserModel>>(ResObject);
+            foreach(UserModel u in result)
+            {
+                u.Transfer();
+            }
             return result;
         }
 
