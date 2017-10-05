@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace DebateApp.Domain
 {
-    public abstract class Debate
+    public class Debate
     {
         public int Debate_ID {get; set;}
         private bool _gamestage = false;
