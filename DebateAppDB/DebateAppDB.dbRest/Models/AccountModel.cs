@@ -50,6 +50,18 @@ namespace DebateAppDB.dbRest.Models
             return this;
         }
 
+        public AccountModel GetAccount(string un)
+        {
+            var account = context.Accounts.Where(u => u.Username == un).SingleOrDefault();
+
+            AccountId = account.AccountId;
+            Username = account.Username;
+            Astros = account.Astros;
+            Role = account.Role;
+
+            return this;
+        }
+
         public void AddAccount(Accounts account)
         {
             context.Accounts.Add(account);
