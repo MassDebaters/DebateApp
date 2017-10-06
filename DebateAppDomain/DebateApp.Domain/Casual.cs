@@ -22,5 +22,6 @@ namespace DebateApp.Domain
             
 
         }
+        public Casual() { }
     }
 }

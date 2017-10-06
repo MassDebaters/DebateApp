@@ -21,7 +21,7 @@ namespace DebateAppDomainAPI.Models
         private string PutUser = "Accounts/";
 
 
-        public DebateModel DBGetDebate(int? id)
+        public DebateModel DBGetDebate(int id)
         {
             var res = _client.GetAsync(_api + GetDebate + id).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
