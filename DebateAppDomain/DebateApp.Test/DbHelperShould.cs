@@ -16,9 +16,9 @@ namespace DebateAppDomain.Test
         private Debate dut;
         private DBHelper dbh;
         public DbHelperShould(ITestOutputHelper Output)
-        {
+        {UserModel
             _output = Output;
-            var uut = new User(10, "Steve Harvey", 200);
+            uut = new User(10, "Steve Harvey", 200);
             dut = new Casual(uut, "Are we any good at this?", "Grown Up Problems", "Not yet...");
             dmut = new DebateModel(dut);
             dbh = new DBHelper();
@@ -38,6 +38,11 @@ namespace DebateAppDomain.Test
             var tst = dbh.DBGetDebate(0);
             Assert.NotNull(tst.d);
             Assert.IsType<Debate>(tst.d);
+        }
+        [Fact]
+        public void CreateAUser()
+        {
+            var actual = dbh.DBCreateUser(uut);
         }
     }
 }
