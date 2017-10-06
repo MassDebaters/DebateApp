@@ -28,16 +28,29 @@ namespace DebateAppDomainAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserModel> GetAllUser()
+        public List<UserModel> GetAllUser()
         {
             return _dbh.DBGetAllUser();
         }
+        
         [HttpPost]
-        public string RegisterUser([FromForm]UserModel u)
+        //expects form data with 
+        //Username
+        //Password
+        public UserModel RegisterUser([FromForm]UserModel u)
         {
             try
             {
                 u.Astros = 100;
+                u.Role = "User";
+                
+                var res = _dbh.DBCreateUser(u);
+                
+                return res;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }

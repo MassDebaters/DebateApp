@@ -71,7 +71,7 @@ namespace DebateAppDomainAPI.Models
         {
             var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
             var cd = _client.PostAsync(_api + PostUser, body);
-            var result = DBGetUser(u.AccountId);
+            var result = DBGetUser(u.Username);
             return result;
         }
 

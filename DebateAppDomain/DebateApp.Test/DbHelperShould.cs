@@ -44,5 +44,11 @@ namespace DebateAppDomain.Test
             var actual = dbh.DBCreateUser(new UserModel(uut));
             Assert.IsType<UserModel>(actual);
         }
+        [Fact]
+        public void GetAUserByName()
+        {
+            var actual = dbh.DBGetUser("Greg");
+            Assert.Equal(actual.Username, "Greg");
+        }
     }
 }
