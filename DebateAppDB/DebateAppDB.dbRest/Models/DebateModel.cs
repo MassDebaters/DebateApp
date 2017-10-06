@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,8 +12,6 @@ namespace DebateAppDB.dbRest.Models
 {
     public class DebateModel
     {
-        /*public int Debate_id { get; set; }
-        public string DebateString { get; set; }*/
         public object d { get; set; }
 
         private string path = @".\App_Data\DebateStrings.txt";
@@ -26,73 +25,40 @@ namespace DebateAppDB.dbRest.Models
             }
         }
 
-        public void AddDebate(DebateModel debate)//object debate)
+        public void AddDebate(DebateModel debate)
         {
-            //var definition = new { Name = "" };
-            //add and return the max id
             Init();
-            //var max = debates.Max(x => x.Key);
+           
             var debates = File.ReadAllText(path);
-            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
-            
-            //var DebateList = JsonConvert.DeserializeAnonymousType(s, definition);
+            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);           
+    
+            var ModelToJson = JsonConvert.SerializeObject(debate);
+            var JsonObject = JObject.Parse(ModelToJson);
+            var property = JsonObject["d"];
 
             try
             {
-                DebateList.Add(debate);
-                //debates.Add(max + 1, debate);
+                var lastDebate = DebateList.Last();
+                var ModelToJsonLast = JsonConvert.SerializeObject(lastDebate);
+                var JsonObjectLast = JObject.Parse(ModelToJsonLast);
+             
+                var id = JsonObjectLast.SelectToken(@"d.Debate_ID").Value<int>();
+
+                property["Debate_ID"] = id + 1;
             }
             catch (Exception)
             {
-                DebateList = new List<DebateModel>//<object>
-                {
-                    debate
-                };
-
-                //debates.Add(max + 1, debate);
-            }
+                DebateList = new List<DebateModel>();
             
-            /*var max = DebateList.Max(x => x.Debate_id);
-            debate.Debate_id = max + 1;*/
+                property["Debate_ID"] = 1;
+            }
+
+            var updatedDebate = JsonConvert.DeserializeObject<DebateModel>(JsonObject.ToString());
+            DebateList.Add(updatedDebate);
 
             var NewList = JsonConvert.SerializeObject(DebateList);
             File.WriteAllText(path, NewList);
         }
-
-
-        ///-------------------------------------------
-
-       /* public void AddDebate(string debate)//object debate)
-        {
-            //add and return the max id
-            string s = File.ReadAllText(path);
-            //var max = debates.Max(x => x.Key);
-
-            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
-            var debateObject = JsonConvert.DeserializeObject<DebateModel>(debate);
-
-            try
-            {
-                DebateList.Add(debateObject);
-                //debates.Add(max + 1, debate);
-
-            }
-            catch (Exception e)
-            {
-                DebateList = new List<DebateModel>//<object>
-                {
-                    debateObject
-                };
-
-                //debates.Add(max + 1, debate);
-            }
-
-            var max = DebateList.Max(x => x.Debate_id);
-            debateObject.Debate_id = max + 1;
-
-            var NewList = JsonConvert.SerializeObject(DebateList);
-            File.WriteAllText(path, NewList);
-        }*/
 
         public List<DebateModel> GetAllDebates()
         {
@@ -110,10 +76,15 @@ namespace DebateAppDB.dbRest.Models
             Init();
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
-            var debate = DebateList.ElementAt(id);//DebateList.FindAll(x => x.Debate_id == id).SingleOrDefault();
-            //var debateString = JsonConvert.SerializeObject(debate);
 
-            return debate;
+            try
+            {
+                return DebateList.ElementAt(id);
+            }
+            catch(ArgumentOutOfRangeException e)
+            {
+                throw new ArgumentOutOfRangeException("id parameter is out of range.", e);
+            }
         }
 
         public void UpdateDebate(int id, object newInfo)
@@ -122,8 +93,8 @@ namespace DebateAppDB.dbRest.Models
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
 
-            var debate = DebateList.ElementAt(id);//.FindAll(x => x.Debate_id == id).SingleOrDefault();
-                                                  // debate.DebateString = newInfo;
+            var debate = DebateList.ElementAt(id);
+                                              
             debate.d = newInfo;
 
             var NewList = JsonConvert.SerializeObject(DebateList);
@@ -147,5 +118,14 @@ namespace DebateAppDB.dbRest.Models
 
             DebateList.RemoveAt(id);
         }
+
+        public void OutOfRange(int id, int count)
+        {
+            if (id < 0 || id >= count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
     }  
+
 }
