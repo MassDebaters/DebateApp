@@ -46,7 +46,7 @@ namespace DebateAppDomain.Test
             {
                 _output.WriteLine(d.d.Debate_ID.ToString());
             }
-            
+            Assert.IsType<List<DebateModel>>(actual);
             
         }
 
