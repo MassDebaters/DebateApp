@@ -32,16 +32,15 @@ namespace DebateAppDomainAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<DebateModel> GetDebate(int? id)
+        public DebateModel GetDebate(int id)
         {
-            if (id == null)
-            {
-                return new List<DebateModel>() { _dbh.DBGetDebate(id) };
-            }
-            else
-            {
-                return _dbh.DBGetAllDebate();
-            }
+            return _dbh.DBGetDebate(id);
+        }
+
+        [HttpGet]
+        public IEnumerable<DebateModel> GetAllDebate()
+        {
+            return _dbh.DBGetAllDebate();
         }
 
 
