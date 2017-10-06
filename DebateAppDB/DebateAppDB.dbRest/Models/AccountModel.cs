@@ -93,6 +93,8 @@ namespace DebateAppDB.dbRest.Models
             var account = context.Accounts.Find(id);
 
             account.Astros = account.Astros + astros;
+
+            context.SaveChanges();
         }
 
         public bool CheckLogin(string username, string password)
