@@ -15,8 +15,7 @@ namespace DebateApp.Domain
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
         public static int NumberOfPlayersPerTeam { get; set; }
-        public List<Team> Teams = new List<Team>() { new Team(NumberOfPlayersPerTeam),
-                                                     new Team(NumberOfPlayersPerTeam) };
+        public List<Team> Teams = new List<Team>();
         public List<User> Audience { get; set; }
         public int TurnLength { get; set; }
         public int PostLength { get; set; }

@@ -12,17 +12,11 @@ namespace DebateAppDomain.Test
     public class DebatesControllerShould
     {
         private readonly ITestOutputHelper _output;
-        private DebateModel dmut;
-        private Debate dut;
-        private User uut;
         private DBHelper dbh;
         private DebatesController dbcut;
         public DebatesControllerShould(ITestOutputHelper Output)
         {
             _output = Output;
-            
-            
-            
             dbh = new DBHelper();
             dbcut = new DebatesController();
         }
@@ -38,8 +32,14 @@ namespace DebateAppDomain.Test
                 Topic = "Are we any good at this?"
             };
             var actual = dbcut.CreateCasual(ccm);
-                        
+            _output.WriteLine(actual.d.Debate_ID.ToString());
+            Assert.IsType<DebateModel>(actual);            
             Assert.True(actual.d.DebateCategory == "Grown Up Problems");
+            Assert.Equal(actual.d.Teams[0].Members[0].UserID, 2);
+            Assert.Equal(actual.d.DebateTopic, "Are we any good at this?");
         }
+        [Fact]
+
+
     }
 }
