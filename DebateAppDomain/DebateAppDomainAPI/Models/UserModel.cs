@@ -15,6 +15,7 @@ namespace DebateAppDomainAPI.Models
         public string Username { get; set; }
         public string Role { get; set; }
         public int Astros { get; set; }
+        public int Password { get; set; }
         //for logical operations
         public User UserLogic { get; set;}
         public UserModel(User u)

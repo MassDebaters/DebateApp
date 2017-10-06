@@ -21,9 +21,9 @@ namespace DebateAppDomain.Test
         }
 
         [Fact]
-        public void CreateACasualDebate()
+        public void CreateAUser()
         {
-
+            
         }
     }
 }
