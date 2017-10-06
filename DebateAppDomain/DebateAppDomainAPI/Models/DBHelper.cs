@@ -46,6 +46,15 @@ namespace DebateAppDomainAPI.Models
             return result;
         }
 
+        public UserModel DBGetUser(string username)
+        {
+            var res = _client.GetAsync(_api + GetUser + username).GetAwaiter().GetResult();
+            var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var result = JsonConvert.DeserializeObject<UserModel>(ResObject);
+            result.Transfer();
+            return result;
+        }
+
         public List<UserModel> DBGetAllUser()
         {
             var res = _client.GetAsync(_api + GetUser).GetAwaiter().GetResult();
@@ -62,8 +71,7 @@ namespace DebateAppDomainAPI.Models
         {
             var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
             var cd = _client.PostAsync(_api + PostUser, body);
-            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonConvert.DeserializeObject<UserModel>(cds);
+            var result = DBGetUser(u.AccountId);
             return result;
         }
 
