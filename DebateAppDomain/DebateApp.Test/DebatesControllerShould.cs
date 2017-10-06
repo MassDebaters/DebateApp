@@ -39,6 +39,17 @@ namespace DebateAppDomain.Test
             Assert.Equal(actual.d.DebateTopic, "Are we any good at this?");
         }
         [Fact]
+        public void ViewAllDebates()
+        {
+            var actual = dbcut.GetAllDebate();
+            foreach(DebateModel d in actual)
+            {
+                _output.WriteLine(d.d.Debate_ID.ToString());
+            }
+            
+            
+        }
+
 
 
     }

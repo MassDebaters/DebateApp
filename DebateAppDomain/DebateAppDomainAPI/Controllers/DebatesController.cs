@@ -39,7 +39,7 @@ namespace DebateAppDomainAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<DebateModel> GetAllDebate()
+        public List<DebateModel> GetAllDebate()
         {
             return _dbh.DBGetAllDebate();
         }
