@@ -35,7 +35,7 @@ namespace DebateAppDomain.Test
             _output.WriteLine(actual.d.Debate_ID.ToString());
             Assert.IsType<DebateModel>(actual);            
             Assert.True(actual.d.DebateCategory == "Grown Up Problems");
-            Assert.Equal(actual.d.Teams[0].Members[0].UserID, 2);
+            Assert.Equal(2, actual.d.Teams[0].Members[0].UserID);
             Assert.Equal(actual.d.DebateTopic, "Are we any good at this?");
         }
         [Fact]

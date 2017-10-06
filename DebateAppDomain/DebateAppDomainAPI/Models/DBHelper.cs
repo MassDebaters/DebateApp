@@ -90,6 +90,16 @@ namespace DebateAppDomainAPI.Models
             var cd = _client.PutAsync(_api + PutDebate, body);
         }
 
+        public void DBDeleteDebate(int id)
+        {
+            _client.DeleteAsync(_api + "Debates/" + id).GetAwaiter().GetResult();
+        }
+
+        public void DBDeleteUser(int id)
+        {
+            _client.DeleteAsync(_api + "Accounts/" + id).GetAwaiter().GetResult();
+        }
+
 
 
 
