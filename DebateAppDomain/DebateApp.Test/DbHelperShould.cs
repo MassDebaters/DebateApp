@@ -18,7 +18,7 @@ namespace DebateAppDomain.Test
         public DbHelperShould(ITestOutputHelper Output)
         {
             _output = Output;
-            
+
             dut = new Casual(uut, "Are we any good at this?", "Grown Up Problems", "Not yet...");
             dmut = new DebateModel(dut);
             dbh = new DBHelper();
@@ -31,6 +31,13 @@ namespace DebateAppDomain.Test
             tst.Transfer();
             Assert.True(tst.Username == "Greg");
             Assert.True(tst.UserLogic.Username == "Greg");
+        }
+        [Fact]
+        public void BeAbleToRetrieveADebateModelByID()
+        {
+            var tst = dbh.DBGetDebate(0);
+            Assert.NotNull(tst.d);
+            Assert.IsType<Debate>(tst);
         }
     }
 }
