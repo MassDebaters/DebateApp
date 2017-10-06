@@ -76,56 +76,95 @@ namespace DebateAppDB.dbRest.Models
             Init();
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
+            var debate = new DebateModel();
+            
+            foreach(var item in DebateList)
+            {
 
-            try
-            {
-                return DebateList.ElementAt(id);
+                var ModelToJson = JsonConvert.SerializeObject(item);
+                var JsonObject = JObject.Parse(ModelToJson);
+                var itemId = JsonObject.SelectToken(@"d.Debate_ID").Value<int>();
+
+                if(itemId == id)
+                {
+                    debate = JsonConvert.DeserializeObject<DebateModel>(JsonObject.ToString());
+                    return debate;
+                }
+
             }
-            catch(ArgumentOutOfRangeException e)
-            {
-                throw new ArgumentOutOfRangeException("id parameter is out of range.", e);
-            }
+            return debate;
         }
 
-        public void UpdateDebate(int id, object newInfo)
+        public void UpdateDebate(int id, DebateModel newInfo)
         {
             Init();
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
 
-            var debate = DebateList.ElementAt(id);
-                                              
-            debate.d = newInfo;
+            foreach (var item in DebateList)
+            {
+             
+                var ModelToJson = JsonConvert.SerializeObject(item);
+                var JsonObject = JObject.Parse(ModelToJson);
+                var itemId = JsonObject.SelectToken(@"d.Debate_ID").Value<int>();
+
+                if (itemId == id)
+                {
+                    item.d = newInfo.d;
+                    break;
+                }
+
+            }
 
             var NewList = JsonConvert.SerializeObject(DebateList);
             File.WriteAllText(path, NewList);
         }
 
-        public int GetMaxIndex()
+        public int GetLastId()
         {
             Init();
-            string s = File.ReadAllText(path);
-            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(s);
-            var index = DebateList.Count - 1;
+            string debates = File.ReadAllText(path);
+            var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
+            var lastDebate = DebateList.Last();
+            var ModelToJsonLast = JsonConvert.SerializeObject(lastDebate);
+            var JsonObjectLast = JObject.Parse(ModelToJsonLast);
 
-            return index;
+            var id = JsonObjectLast.SelectToken(@"d.Debate_ID").Value<int>();
+
+            return id;
         }
-        public void DeleteDebate(int id)
+
+        public void DeleteDebate(int id)//fixme
         {
             Init();
             string debates = File.ReadAllText(path);
             var DebateList = JsonConvert.DeserializeObject<List<DebateModel>>(debates);
 
-            DebateList.RemoveAt(id);
+            foreach (var item in DebateList)
+            {
+
+                var ModelToJson = JsonConvert.SerializeObject(item);
+                var JsonObject = JObject.Parse(ModelToJson);
+                var itemId = JsonObject.SelectToken(@"d.Debate_ID").Value<int>();
+
+                if (itemId == id)
+                {
+                    DebateList.Remove(item);
+                    break;
+                }
+            }
+
+            var NewList = JsonConvert.SerializeObject(DebateList);
+            File.WriteAllText(path, NewList);
         }
 
-        public void OutOfRange(int id, int count)
+        public void DeleteAllDebates()
         {
-            if (id < 0 || id >= count)
-            {
-                throw new IndexOutOfRangeException();
-            }
+            Init();
+           
+            File.WriteAllText(path, string.Empty);
         }
+
     }  
 
 }
