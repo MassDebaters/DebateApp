@@ -29,11 +29,11 @@ namespace DebateAppDomainAPI.Models
             return result;
         }
 
-        public IEnumerable<DebateModel> DBGetAllDebate()
+        public List<DebateModel> DBGetAllDebate()
         {
             var res = _client.GetAsync(_api + GetDebate).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonConvert.DeserializeObject<IEnumerable<DebateModel>>(ResObject);
+            var result = JsonConvert.DeserializeObject<List<DebateModel>>(ResObject);
             return result;
         }
 
@@ -46,11 +46,11 @@ namespace DebateAppDomainAPI.Models
             return result;
         }
 
-        public IEnumerable<UserModel> DBGetAllUser()
+        public List<UserModel> DBGetAllUser()
         {
             var res = _client.GetAsync(_api + GetUser).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonConvert.DeserializeObject<IEnumerable<UserModel>>(ResObject);
+            var result = JsonConvert.DeserializeObject<List<UserModel>>(ResObject);
             foreach(UserModel u in result)
             {
                 u.Transfer();

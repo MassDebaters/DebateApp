@@ -24,10 +24,6 @@ namespace DebateAppDomain.Test
             dmut = new DebateModel(dut);
             dbh = new DBHelper();
         }
-        [Fact]
-        public void SendOutASerializedCasualDebate()
-        {
-            
-        }
+
     }
 }
