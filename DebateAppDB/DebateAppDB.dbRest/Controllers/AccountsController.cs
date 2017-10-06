@@ -45,6 +45,23 @@ namespace DebateAppDB.dbRest.Controllers
             }
         }
 
+        // GET: api/Accounts/username
+        [HttpGet("getUser/{username}")]
+        public AccountModel GetAccount(string username)
+        {
+            try
+            {
+                return account.GetAccount(username);
+            }
+            catch (Exception)
+            {
+                return new AccountModel(this._Configuration)
+                {
+
+                };
+            }
+        }
+
         //GET: api/Accounts/username/somestring
         [HttpGet("username/{username}")]
         public bool UniqueUsername(string username)
