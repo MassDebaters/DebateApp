@@ -35,10 +35,11 @@ namespace DebateAppDomainAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            
             app.UseCors(builder =>
                 builder.WithOrigins("http://localhost:8000")
            .AllowAnyHeader().WithOrigins("http://localhost/Mansion"));
+            app.UseMvc();
         }
     }
 }
