@@ -54,7 +54,7 @@ namespace DebateAppDomain.Test
 
 
             var id = dbh.DBGetUser("steveharvey2").AccountId;
-            dbh.DBDeleteUser(actual.AccountId);
+            dbh.DBDeleteUser(id);
         }
         [Fact]
         public void GetAUserByName()
