@@ -16,7 +16,6 @@
 
     </div>
 
-    <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
         // console.log($('#debateindex').val());
 
@@ -49,7 +48,7 @@
                    
                 });
                 $("#leave").click(function () {
-                    // Call the chat method on the server
+                    // leave the chat method on the server
                     chat.server.leave($('#debateindex').val());
                     window.location = './index.html';
 
@@ -60,7 +59,7 @@
     
     <div class=" textboox">
         <input type="text" id="msg" />
-        <input type="button" id="broadcast" value="broadcast" />
+        <input type="button" id="broadcast" value="send" />
 
     </div>
     <div class= "leaveBox">
