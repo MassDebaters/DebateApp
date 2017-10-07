@@ -21,11 +21,11 @@ node {
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
             }
-			// dir('MansionUI')
-			// {
-			// bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
-   //          bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
-			// }
+			dir('MansionUI')
+			{
+			bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
+            bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
+			}
         
     }
     //slackSend('Build complete, analysis beginning')
