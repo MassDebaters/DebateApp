@@ -81,7 +81,7 @@ namespace DebateAppDomainAPI.Models
             if (CheckUsername(u.Username))
             {
                 var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
-                var cd = _client.PostAsync(_api + PostUser, body);
+                var cd = _client.PostAsync(_api + PostUser, body).GetAwaiter().GetResult();
                 var result = DBGetUser(u.Username);
                 return result;
             }

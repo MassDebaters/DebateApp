@@ -22,7 +22,7 @@ namespace DebateAppDomain.Test
             uut = new User(10, "Steve Harvey", 200);
             umut = new UserModel()
             {
-                Username = "SteveHarvey2",
+                Username = "SteveHarvey3",
                 Password = "IHateMyself6969"
             };
             dut = new Casual(uut, "Are we any good at this?", "Grown Up Problems", "Not yet...");
@@ -47,14 +47,14 @@ namespace DebateAppDomain.Test
         [Fact]
         public void CreateAUser()
         {
-            var actual = dbh.DBCreateUser(umut);
+            var id = dbh.DBGetUser("SteveHarvey3").AccountId;
+            dbh.DBDeleteUser(id);
+            dbh.DBCreateUser(umut);
+            var actual = dbh.DBGetUser("SteveHarvey3");
             _output.WriteLine(actual.ToString());
             Assert.IsType<UserModel>(actual);
-            Assert.Equal("steveharvey2", actual.Username);
+            Assert.Equal("SteveHarvey3", actual.Username);
 
-
-            var id = dbh.DBGetUser("steveharvey2").AccountId;
-            dbh.DBDeleteUser(id);
         }
         [Fact]
         public void GetAUserByName()
