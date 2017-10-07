@@ -21,11 +21,11 @@ node {
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
             }
-			dir('MansionUI')
-			{
-			bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
-            bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
-			}
+			// dir('MansionUI')
+			// {
+			// bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
+   //          bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
+			// }
         
     }
     //slackSend('Build complete, analysis beginning')
@@ -72,17 +72,17 @@ node {
                 bat '"C:\\Program Files\\dotnet\\dotnet.exe" build /p:DeployOnBuild=true /p:PublishProfile=PublishDB.pubxml'
                 bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\DebateApp\\DebateAppDB\\DebateAppDB.dbRest\\obj\\Debug\\netcoreapp2.0\\PubTmp\\Out" -dest:iisApp="Default Web Site/DBApi",computerName="https://ec2-18-221-110-13.us-east-2.compute.amazonaws.com:8172/msdeploy.axd",userName="Administrator",password=Ybwo4.HWnpLnGnH.;CFkG*@I7ZWLKQOt,authType="Basic"  -enableRule:AppOffline -allowUntrusted'   
                 }
-				dir('MansionUI/WebApplication1')
-				{
-				bat '"C:\\Program Files\\dotnet\\dotnet.exe" build /p:DeployOnBuild=true /p:PublishProfile=PublishClient.pubxml'
-                bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\DebateApp\\MansionUI\\WebApplication1\\obj\\Debug\\TempPE" -dest:iisApp="Default Web Site/Mansion",computerName="https://ec2-18-221-110-13.us-east-2.compute.amazonaws.com:8172/msdeploy.axd",userName="Administrator",password=Ybwo4.HWnpLnGnH.;CFkG*@I7ZWLKQOt,authType="Basic"  -enableRule:AppOffline -allowUntrusted'
-				}
+				// dir('MansionUI/WebApplication1')
+				// {
+				// bat '"C:\\Program Files\\dotnet\\dotnet.exe" build /p:DeployOnBuild=true /p:PublishProfile=PublishClient.pubxml'
+    //             bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\DebateApp\\MansionUI\\WebApplication1\\obj\\Debug\\TempPE" -dest:iisApp="Default Web Site/Mansion",computerName="https://ec2-18-221-110-13.us-east-2.compute.amazonaws.com:8172/msdeploy.axd",userName="Administrator",password=Ybwo4.HWnpLnGnH.;CFkG*@I7ZWLKQOt,authType="Basic"  -enableRule:AppOffline -allowUntrusted'
+				// }
             
            
         }
 
        
-    //slackSend('Deployed')
+    slackSend('Deployed')
 }
 
     
