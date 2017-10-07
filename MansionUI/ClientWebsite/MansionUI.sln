@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MansionUI.Test", "MansionUI.Test\MansionUI.Test.csproj", "{388A4684-3805-47CB-946A-9A2FD49DAF8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MansionUI.Test", "..\MansionUI.Test\MansionUI.Test.csproj", "{388A4684-3805-47CB-946A-9A2FD49DAF8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWebsite", "WebApplication1\ClientWebsite.csproj", "{5CAA39D9-00F7-416D-BFB7-17596C960432}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWebsite", "ClientWebsite.csproj", "{5CAA39D9-00F7-416D-BFB7-17596C960432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
