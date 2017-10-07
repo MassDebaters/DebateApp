@@ -46,9 +46,7 @@ app.controller('DebateController', ['$scope', '$routeParams', function($scope, $
       $scope.b_string = "undepressed";
   };
 
-  $scope.load = function () {
-      console.log("inside of scope.load");
-  }
+ 
   
 
 

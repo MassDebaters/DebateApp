@@ -1,4 +1,4 @@
-  
+
 <div class="fullpage">
     <div class="section" id="sectiontitle">
         <div class="panel" id="paneltitle">
@@ -10,7 +10,7 @@
 
     <div class="myBox">
         <input type="hidden" id="loginname" value="{{ud.user}}" />
-        <input type="hidden" id="debateindex" value="{{debate_index}}"/>
+        <input type="hidden" id="debateindex" value="{{debate_index}}" />
         <input type="hidden" id="displayname" />
         <ul id="discussion"></ul>
 
@@ -18,41 +18,44 @@
 
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
-       // console.log($('#debateindex').val());
-
+        // console.log($('#debateindex').val());
 
         $(function () {
-            // Declare a proxy to reference the hub.
             var chat = $.connection.chatHub;
-            // Create a function that the hub can call to broadcast messages.
-            chat.client.broadcastMessage = function (name, message) {
-                // Html encode display name and message.
-                var encodedName = $('<div />').text(name).html();
-                var encodedMsg = $('<div />').text(message).html();
-                // Add the message to the page.
-                $('#discussion').append('<li><strong>' + encodedName
-                    + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+           
+            // Declare a function on the chat hub so the server can invoke it          
+            chat.client.addMessage = function (message) {
+                $('#discussion').append('<li><strong>' + (message) + '</li>');
+
             };
             // Get the user name and store it to prepend to messages.
             //$('#displayname').val(prompt('Enter your name:', ''));
             // Set initial focus to message input box.
-            $('#message').focus();
+          //  $('#message').focus();
             // Start the connection.
             //$(debateindex.val())
+            $.connection.hub.start(function () {
+                chat.server.join($('#debateindex').val());
+            });
+
             $.connection.hub.start().done(function () {
-                $('#sendmessage').click(function () {
-                    // Call the Send method on the hub.
-                     chat.server.send($('#loginname').val(), $('#message').val());
-                    // Clear text box and reset focus for next comment.
-                    $('#message').val('').focus();
+
+                $("#broadcast").click(function () {
+                    // Call the chat method on the server
+                    chat.server.send($('#debateindex').val(), $('#msg').val());
+
+                    $('#msg').val('').focus();
+
+
                 });
             });
         });
     </script>
-    222{{load()}}
+    
     <div class=" textboox">
-        <input type="text" id="message" />
-        <input type="button" id="sendmessage" value="Send" />
+        <input type="text" id="msg" />
+        <input type="button" id="broadcast" value="broadcast" />
+
     </div>
 
     <div class="section" id="sectionstage">
@@ -108,4 +111,3 @@
 </div>
 
 </div> -->
- 
