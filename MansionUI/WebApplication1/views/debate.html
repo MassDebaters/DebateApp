@@ -44,9 +44,14 @@
                 $("#broadcast").click(function () {
                     // Call the chat method on the server
                     chat.server.send($('#debateindex').val(), $('#msg').val(), $('#loginname').val() );
-
+                    console.log($('#msg').val());
                     $('#msg').val('').focus();
-
+                   
+                });
+                $("#leave").click(function () {
+                    // Call the chat method on the server
+                    chat.server.leave($('#debateindex').val());
+                    window.location = './index.html';
 
                 });
             });
@@ -56,6 +61,10 @@
     <div class=" textboox">
         <input type="text" id="msg" />
         <input type="button" id="broadcast" value="broadcast" />
+
+    </div>
+    <div class= "leaveBox">
+        <input type="button" id="leave" value="EXIT" />
 
     </div>
 

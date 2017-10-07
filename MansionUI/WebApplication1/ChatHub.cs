@@ -23,7 +23,7 @@ namespace WebApplication1
             Groups.Add(Context.ConnectionId, groupName);
         }
 
-        public void LeaveRoom(string roomName)
+        public void Leave(string roomName)
         {
              Groups.Remove(Context.ConnectionId, roomName);
         }
