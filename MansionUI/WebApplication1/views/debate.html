@@ -24,16 +24,17 @@
             var chat = $.connection.chatHub;
            
             // Declare a function on the chat hub so the server can invoke it          
-            chat.client.addMessage = function (message) {
-                $('#discussion').append('<li><strong>' + (message) + '</li>');
+            chat.client.addMessage = function (name, message) {
+                var encodedName = $('<div />').text(name).html();
+                var encodedMsg = $('<div />').text(message).html();
+
+                  $('#discussion').append('<li><strong>' + encodedName
+                    + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
 
             };
-            // Get the user name and store it to prepend to messages.
-            //$('#displayname').val(prompt('Enter your name:', ''));
-            // Set initial focus to message input box.
-          //  $('#message').focus();
+   
             // Start the connection.
-            //$(debateindex.val())
+       
             $.connection.hub.start(function () {
                 chat.server.join($('#debateindex').val());
             });
@@ -42,7 +43,7 @@
 
                 $("#broadcast").click(function () {
                     // Call the chat method on the server
-                    chat.server.send($('#debateindex').val(), $('#msg').val());
+                    chat.server.send($('#debateindex').val(), $('#msg').val(), $('#loginname').val() );
 
                     $('#msg').val('').focus();
 
