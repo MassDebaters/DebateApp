@@ -12,22 +12,18 @@ namespace DebateAppDomain.Test
     public class DebateModelShould
     {
         private readonly ITestOutputHelper _output;
-        private DebateModel dmut;
-        private Debate dut;
-        private User uut;
-        private DBHelper dbh;
+        //private DebateModel dmut;
+        //private Debate dut;
+        //private User uut;
+        //private DBHelper dbh;
         public DebateModelShould(ITestOutputHelper Output)
         {
             _output = Output;
-            uut = new TestUser();
-            dut = new Casual(uut,"Are we any good at this?", "Grown Up Problems", "Not yet...");
-            dmut = new DebateModel(dut);
-            dbh = new DBHelper();
-        }
-        [Fact]
-        public void SendOutASerializedCasualDebate()
-        {
             
+            //dut = new Casual(uut,"Are we any good at this?", "Grown Up Problems", "Not yet...");
+            //dmut = new DebateModel(dut);
+            //dbh = new DBHelper();
         }
+
     }
 }

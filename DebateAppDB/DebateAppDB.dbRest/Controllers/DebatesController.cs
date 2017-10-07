@@ -17,9 +17,9 @@ namespace DebateAppDB.dbRest.Controllers
         private DebateModel debate = new DebateModel();
         // GET: api/Debates
         [HttpGet]
-        public List<DebateModel> Get()
+        public List<DebateModel> GetAll()
         {
-            return debate.GetAllDebates();//new string[] { "value1", "value2" };
+            return debate.GetAllDebates();
         }
 
         // GET: api/Debates/5
@@ -31,30 +31,18 @@ namespace DebateAppDB.dbRest.Controllers
         
         // POST: api/Debates/
         [HttpPost]
-        public DebateModel Post([FromBody]DebateModel deb)//object deb)
+        public DebateModel Post([FromBody]DebateModel deb)
         {
             debate.AddDebate(deb);
-            var index = debate.GetMaxIndex();
+            var id = debate.GetLastId();
 
-            return debate.GetDebate(index);
+            return debate.GetDebate(id);
 
         }
 
-        // POST: api/Debates
-        /*[HttpPost]
-        public void Post(string DebateString)//object deb)
-        {
-            debate.AddDebate(DebateString);
-            var index = debate.GetMaxIndex();
-
-            //return debate.GetDebate(index);
-
-        }*/
-
-
         // PUT: api/Debates/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]object value)
+        public void Put(int id, [FromBody]DebateModel value)
         {
             debate.UpdateDebate(id, value);
         }
@@ -64,6 +52,13 @@ namespace DebateAppDB.dbRest.Controllers
         public void Delete(int id)
         {
             debate.DeleteDebate(id);
+        }
+
+        // DELETE: api/ApiWithActions/
+        [HttpDelete]
+        public void DeleteAll()
+        {
+            debate.DeleteAllDebates();
         }
     }
 }

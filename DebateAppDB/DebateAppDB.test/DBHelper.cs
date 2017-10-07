@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿/*using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,8 @@ namespace DebateAppDomainAPI.Models
         private string PostDebate = "Debates/";
         private string PutDebate = "Debates/";
         private string PutUser = "Accounts/";
+        private string DeleteAllDebates = "Debates/";
+        private string DeleteDebate
 
 
         public DebateModel DBGetDebate(int id)
@@ -29,11 +31,11 @@ namespace DebateAppDomainAPI.Models
             return result;
         }
 
-        public List<DebateModel> DBGetAllDebate()
+        public IEnumerable<DebateModel> DBGetAllDebate()
         {
             var res = _client.GetAsync(_api + GetDebate).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonConvert.DeserializeObject<List<DebateModel>>(ResObject);
+            var result = JsonConvert.DeserializeObject<IEnumerable<DebateModel>>(ResObject);
             return result;
         }
 
@@ -46,21 +48,12 @@ namespace DebateAppDomainAPI.Models
             return result;
         }
 
-        public UserModel DBGetUser(string username)
-        {
-            var res = _client.GetAsync(_api + GetUser + username).GetAwaiter().GetResult();
-            var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonConvert.DeserializeObject<UserModel>(ResObject);
-            result.Transfer();
-            return result;
-        }
-
-        public List<UserModel> DBGetAllUser()
+        public IEnumerable<UserModel> DBGetAllUser()
         {
             var res = _client.GetAsync(_api + GetUser).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var result = JsonConvert.DeserializeObject<List<UserModel>>(ResObject);
-            foreach(UserModel u in result)
+            var result = JsonConvert.DeserializeObject<IEnumerable<UserModel>>(ResObject);
+            foreach (UserModel u in result)
             {
                 u.Transfer();
             }
@@ -71,7 +64,8 @@ namespace DebateAppDomainAPI.Models
         {
             var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
             var cd = _client.PostAsync(_api + PostUser, body);
-            var result = DBGetUser(u.AccountId);
+            string cds = cd.GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var result = JsonConvert.DeserializeObject<UserModel>(cds);
             return result;
         }
 
@@ -97,19 +91,6 @@ namespace DebateAppDomainAPI.Models
             var body = new StringContent(JsonConvert.SerializeObject(d), Encoding.UTF8, "application/json");
             var cd = _client.PutAsync(_api + PutDebate, body);
         }
-
-        public void DBDeleteDebate(int id)
-        {
-            _client.DeleteAsync(_api + "Debates/" + id).GetAwaiter().GetResult();
-        }
-
-        public void DBDeleteUser(int id)
-        {
-            _client.DeleteAsync(_api + "Accounts/" + id).GetAwaiter().GetResult();
-        }
-
-
-
-
     }
 }
+*/

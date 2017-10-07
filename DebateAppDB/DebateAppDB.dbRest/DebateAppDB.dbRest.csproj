@@ -20,4 +20,10 @@
     <ProjectReference Include="..\DebateApp.db\DebateApp.db.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="App_Data\DebateStrings.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

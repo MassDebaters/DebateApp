@@ -45,6 +45,23 @@ namespace DebateAppDB.dbRest.Controllers
             }
         }
 
+        // GET: api/Accounts/username
+        [HttpGet("getUser/{username}")]
+        public AccountModel GetAccount(string username)
+        {
+            try
+            {
+                return account.GetAccount(username);
+            }
+            catch (Exception)
+            {
+                return new AccountModel(this._Configuration)
+                {
+
+                };
+            }
+        }
+
         //GET: api/Accounts/username/somestring
         [HttpGet("username/{username}")]
         public bool UniqueUsername(string username)
@@ -52,18 +69,21 @@ namespace DebateAppDB.dbRest.Controllers
             
             return account.UniqueUsername(username);
         }
-        public string error()
+        /*public string error()
         {
             return "did not work boy";
+        }*/
+
+        //GET: api/Accounts/astros/id
+        [HttpGet("astros/{id}")]
+        public int GetAstros(int id)
+        {
+
+            return account.GetAstros(id);
         }
-
-        
-        /*[HttpPost("debate")]
-        public void Debate([FromBody]object dString)
-        {       
-            
-
-            //file.WriteLine(dString);
+        /*public string error()
+        {
+            return "did not work boy";
         }*/
 
         // POST: api/Accounts
@@ -73,10 +93,11 @@ namespace DebateAppDB.dbRest.Controllers
             account.AddAccount(user);
         }
         
-        // PUT: api/Accounts/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/Accounts/addAstros/id
+        [HttpPut("addAstros/{id}")]
+        public void AddAstros(int id, [FromBody]int value)
         {
+            account.AddAstros(id, value);
         }
         
         // DELETE: api/ApiWithActions/5

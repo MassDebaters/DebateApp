@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using Xunit;
 
 namespace DebateAppDB.test
 {
-    public class UnitTest1
+    public class AccountsTests
     {
         [Fact]
-        public void Test1()
+        public void GetAllAccounts()
         {
 
         }
