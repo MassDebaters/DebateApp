@@ -5,7 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using System.Threading.Tasks;
 
-namespace WebApplication1
+namespace CientWebsite
 { 
 
     public class ChatHub : Hub 

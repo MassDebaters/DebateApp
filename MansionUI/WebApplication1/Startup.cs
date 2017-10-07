@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(WebApplication1.Startup))]
+[assembly: OwinStartup(typeof(CientWebsite.Startup))]
 
-namespace WebApplication1
+namespace CientWebsite
 {
     public class Startup
     {
