@@ -15,10 +15,16 @@ namespace DebateAppDomain.Test
         private User uut;
         private Debate dut;
         private DBHelper dbh;
+        private UserModel umut;
         public DbHelperShould(ITestOutputHelper Output)
         {
             _output = Output;
             uut = new User(10, "Steve Harvey", 200);
+            umut = new UserModel()
+            {
+                Username = "SteveHarvey2",
+                Password = "IHateMyself6969"
+            };
             dut = new Casual(uut, "Are we any good at this?", "Grown Up Problems", "Not yet...");
             dmut = new DebateModel(dut);
             dbh = new DBHelper();
@@ -41,11 +47,14 @@ namespace DebateAppDomain.Test
         [Fact]
         public void CreateAUser()
         {
-            var umut = new UserModel(uut);
-            umut.Transfer();
             var actual = dbh.DBCreateUser(umut);
-            Assert.IsType<UserModel>(actual);
             _output.WriteLine(actual.ToString());
+            Assert.IsType<UserModel>(actual);
+            Assert.Equal("steveharvey2", actual.Username);
+
+
+            var id = dbh.DBGetUser("steveharvey2").AccountId;
+            dbh.DBDeleteUser(actual.AccountId);
         }
         [Fact]
         public void GetAUserByName()
@@ -53,5 +62,14 @@ namespace DebateAppDomain.Test
             var actual = dbh.DBGetUser("Greg");
             Assert.Equal(actual.Username, "Greg");
         }
+        [Fact]
+        public void CheckUsernameUnique()
+        {
+            var actual = dbh.CheckUsername("Greg");
+            var actual2 = dbh.CheckUsername("FOROASUFHOAUFHUOEHFOAUHSFAJO");
+            Assert.False(actual);
+            Assert.True(actual2);
+        }
+
     }
 }

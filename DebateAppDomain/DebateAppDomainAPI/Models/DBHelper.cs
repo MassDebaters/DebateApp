@@ -48,7 +48,7 @@ namespace DebateAppDomainAPI.Models
 
         public UserModel DBGetUser(string username)
         {
-            var res = _client.GetAsync(_api + GetUser + username).GetAwaiter().GetResult();
+            var res = _client.GetAsync(_api + GetUser + "getUser/" + username).GetAwaiter().GetResult();
             var ResObject = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             var result = JsonConvert.DeserializeObject<UserModel>(ResObject);
             result.Transfer();
@@ -66,13 +66,29 @@ namespace DebateAppDomainAPI.Models
             }
             return result;
         }
+        public bool CheckUsername(string username)
+        {
+            var cd = _client.GetAsync(_api + "Accounts/username/" + username).GetAwaiter().GetResult();
+            var cds = cd.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var result = JsonConvert.DeserializeObject<bool>(cds);
+            return result;
+        }
 
         public UserModel DBCreateUser(UserModel u)
         {
-            var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
-            var cd = _client.PostAsync(_api + PostUser, body);
-            var result = DBGetUser(u.Username);
-            return result;
+            u.Astros = 100;
+            u.Role = "User";
+            if (CheckUsername(u.Username))
+            {
+                var body = new StringContent(JsonConvert.SerializeObject(u), Encoding.UTF8, "application/json");
+                var cd = _client.PostAsync(_api + PostUser, body);
+                var result = DBGetUser(u.Username);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void DBSaveUserChanges(UserModel u)
