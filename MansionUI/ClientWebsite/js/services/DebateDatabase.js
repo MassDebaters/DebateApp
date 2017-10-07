@@ -20,5 +20,9 @@ var DebateDatabase = {
   
   rounds_won: function(debate_index, zero_or_one, dbd){
     return dbd.debates[debate_index].Teams[zero_or_one].RoundsWon;
+  },
+
+  set_debate: function (debate_index, dbd) {
+      dbd.debate_index = debate_index;
   }
 }

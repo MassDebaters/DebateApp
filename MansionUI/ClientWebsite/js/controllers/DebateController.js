@@ -4,6 +4,7 @@ app.controller('DebateController', ['$scope', '$routeParams', function($scope, $
   $scope.dbd = DebateDatabase; 
   $scope.debate_index = $routeParams.id;
   $scope.datetime = Date.now();
+  //$scope.dbd.set_index($scope.debate_index, $scope.dbd);
   
   var i = $scope.debate_index;
   
@@ -44,7 +45,8 @@ app.controller('DebateController', ['$scope', '$routeParams', function($scope, $
     else
       $scope.b_string = "undepressed";
   };
-  
+
+ 
   
 
 
