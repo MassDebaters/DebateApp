@@ -41,8 +41,11 @@ namespace DebateAppDomain.Test
         [Fact]
         public void CreateAUser()
         {
-            var actual = dbh.DBCreateUser(new UserModel(uut));
+            var umut = new UserModel(uut);
+            umut.Transfer();
+            var actual = dbh.DBCreateUser(umut);
             Assert.IsType<UserModel>(actual);
+            _output.WriteLine(actual.ToString());
         }
         [Fact]
         public void GetAUserByName()

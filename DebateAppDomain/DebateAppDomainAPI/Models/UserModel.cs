@@ -31,6 +31,11 @@ namespace DebateAppDomainAPI.Models
         {
             UserLogic = new User(AccountId, Username, Astros);
         }
+
+        public override string ToString()
+        {
+            return "Username: " + Username + "\n Role: " + Role + "\n AccountId: " + AccountId + "\n Astros: " + Astros;
+        }
         
 
 
