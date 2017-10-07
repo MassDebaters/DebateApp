@@ -45,9 +45,11 @@ namespace DebateAppDomain.Test
 
             var actual2 = UCUT.RegisterUser(umut2);
             Assert.Null(actual2);
-            
-
-            
+        }
+        [Fact]
+        public void JoinATeam()
+        {
+            UCUT.JoinTeam("Biggo", 0);
         }
     }
 }
