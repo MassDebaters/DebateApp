@@ -23,8 +23,8 @@ namespace DebateAppDomain.Test
 
             umut = new UserModel()
             {
-                Username = "SteveHarvey",
-                Password = "IHateMyself6969"
+                Username = "Biggo",
+                Password = "Titties"
             };
         }
 
@@ -32,9 +32,21 @@ namespace DebateAppDomain.Test
         public void CreateAUser()
         {
             var actual = UCUT.RegisterUser(umut);
+            UserModel umut2 = new UserModel()
+            {
+                Username = "Greg",
+                Password = "foo"
+            };
+            
             var check = UCUT.GetUser(actual.AccountId).Username;
             Assert.IsType<UserModel>(actual);
-            Assert.Equal("SteveHarvey", check);
+            Assert.Equal("Biggo", check);
+            dbh.DBDeleteUser(dbh.DBGetUser("Biggo").AccountId);
+
+            var actual2 = UCUT.RegisterUser(umut2);
+            Assert.Null(actual2);
+            
+
             
         }
     }

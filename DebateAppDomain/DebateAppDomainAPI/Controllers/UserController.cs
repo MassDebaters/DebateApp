@@ -15,6 +15,11 @@ namespace DebateAppDomainAPI.Controllers
         private DBHelper _dbh = new DBHelper();
         // GET: api/values
 
+        public string Error(Exception e)
+        {
+            return e.Message;
+        }
+
         [HttpGet("{int}")]
         public UserModel GetUser(int id)
         {
@@ -40,16 +45,13 @@ namespace DebateAppDomainAPI.Controllers
         public UserModel RegisterUser([FromForm]UserModel u)
         {
             try
-            {
-                u.Astros = 100;
-                u.Role = "User";
-                
+            {         
                 var res = _dbh.DBCreateUser(u);
-                
                 return res;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Error(e);
                 return null;
             }
         }

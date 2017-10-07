@@ -87,7 +87,7 @@ namespace DebateAppDomainAPI.Models
             }
             else
             {
-                return null;
+                throw new Exception("Username is taken.");
             }
         }
 
