@@ -12,9 +12,16 @@ namespace DebateApp.Domain
         public int VotesR = 0;
         public double SwingL = 0.5;
         public double SwingR = 0.5;
-        public int CurrentTurn = 1;
-        public bool Active = true;
-
+        public int CurrentTurn = 0;
+        public bool Active = false;
+        public RoundState(RoundState PreviousRound)
+        {
+            SwingL = PreviousRound.SwingL;
+            SwingR = PreviousRound.SwingR;
+            CurrentTurn = PreviousRound.CurrentTurn + 1;
+            Active = true;
+        }
+        public RoundState() { }
 
         internal void Vote(bool team)
         {
@@ -28,9 +35,6 @@ namespace DebateApp.Domain
             }
         }
 
-        internal void RoundEnd(Debate d)
-        {
-            
-        }
+
     }
 }

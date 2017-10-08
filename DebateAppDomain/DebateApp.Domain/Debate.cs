@@ -23,8 +23,8 @@ namespace DebateApp.Domain
         public List<RoundState> Round = new List<RoundState>();
         public RoundState ActiveRound() { return Round[Round.Count-1]; }
         public int NumberOfRounds { get; set; }
-        
-        public int Pot { get; set; }
+        public int Pot = 10;
+        public string Status { get; set; }
         public bool SetupStage
         {
             get
@@ -38,10 +38,25 @@ namespace DebateApp.Domain
             }
         }
 
-        public void UpdatePosts(DebatePost p)
+        public void StartDebate()
         {
-
-        
+            var StartingRound = new RoundState()
+            {
+                Active = true
+            };
+  
+            if(GameStage)
+            {
+                Round.Add(StartingRound);
+                foreach(User u in Audience)
+                {
+                    Pot += 4;
+                }
+            }
+            else 
+            {
+                Status = "Debate is not ready to start.";
+            }
             
         }
     }
