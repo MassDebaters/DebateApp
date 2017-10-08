@@ -13,8 +13,10 @@ namespace DebateAppDomainAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        
+
         private DBHelper _dbh = new DBHelper();
+        private static bool tempValue;
+        private static string tempComment;
         // GET: api/values
 
         public string Error(Exception e)
@@ -39,7 +41,7 @@ namespace DebateAppDomainAPI.Controllers
         {
             return _dbh.DBGetAllUser();
         }
-        
+
         [HttpPost]
         //expects form data with 
         //Username
@@ -47,7 +49,7 @@ namespace DebateAppDomainAPI.Controllers
         public UserModel RegisterUser([FromForm]UserModel u)
         {
             try
-            {         
+            {
                 var res = _dbh.DBCreateUser(u);
                 return res;
             }
@@ -77,7 +79,35 @@ namespace DebateAppDomainAPI.Controllers
                 Error(e);
                 return new DebateModel(d);
             }
-            
+
+        }
+
+        [HttpPost]
+        public void StoreBoolean([FromBody]bool value)
+        {
+            tempValue = value;
+        }
+
+        [HttpPost]
+        public void StoreComment([FromBody]string comment)
+        {
+            tempComment = comment;
+        }
+
+        [HttpPut("{id}")]
+        public DebateModel Vote(int id, [FromBody]DebateModel debate)
+        {
+            _dbh.Vote(id, debate, tempValue);
+
+            return debate;
+        }
+
+        [HttpPut("{id}")]
+        public DebateModel Post(int id, [FromBody]DebateModel debate)
+        {
+            _dbh.Post(id, tempComment, debate);
+
+            return debate;
         }
     }
 }

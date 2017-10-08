@@ -142,5 +142,23 @@ namespace DebateAppDomainAPI.Models
             return debate;
         }
 
+        public DebateModel Vote(int id, DebateModel debate, bool value)
+        {
+            var user = DBGetUser(id);
+
+            user.UserLogic.Vote(debate.d, value);
+
+            return debate;
+        }
+
+        public DebateModel Post(int id, string comment, DebateModel debate)
+        {
+            var user = DBGetUser(id);
+
+            user.UserLogic.Post(comment, debate.d);
+
+            return debate;
+        }
+
     }
 }
