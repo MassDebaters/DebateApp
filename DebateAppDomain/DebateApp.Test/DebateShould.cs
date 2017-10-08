@@ -33,5 +33,24 @@ namespace DebateApp.Test
             Assert.Equal(dut_joined.Round[0].CurrentTurn, 1);
             Assert.Equal(dut_joined.Pot, 10);
         }
+        [Fact]
+        public void GotoNextRound()
+        {
+            var dut_joined = uut2.JoinDebate(dut, new DebatePost("heeeerg", uut2.UserID), true);
+
+            dut_joined.StartDebate();
+
+            var dut_posted = uut2.Post("FUCK YOU!", dut_joined);
+            dut_posted.NextRound(true);
+            Assert.Equal(2, dut_posted.Round.Count);
+            
+            var dut_posted2 = uut1.Post("NO FUCK YOU!", dut_posted);
+            var dut_posted3 = uut2.Post("Aw shit", dut_posted2);
+            var dut_audience = uut3.ViewDebate(dut_posted3);
+            var dut_allvoted = uut3.Vote(dut_audience, true);
+
+            dut_allvoted.NextRound(false);
+            Assert.Equal(dut_allvoted.Round.Count, 3);
+        }
     }
 }

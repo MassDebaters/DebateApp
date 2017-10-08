@@ -14,8 +14,8 @@ namespace DebateApp.Domain
         public int Astros { get; set; }
         //public List<int> YourDebates { get; set; }
         //public List<int> Notifications { get; set; }
-        private bool HasVoted = false;
-        private bool HasResponded = false;
+        public bool HasVoted = false;
+        public bool HasResponded = false;
 
         public User(int id, string username, int astros)
         {
@@ -25,16 +25,24 @@ namespace DebateApp.Domain
         }
 
 
-        public void Post(DebatePost p, Debate d)
+        public Debate Post(string p, Debate d)
         {
+            d.GetStage();
+            var res = new DebatePost(p, UserID); 
             
-            if (p.Validate() && HasResponded==false)
+            if (res.Validate() && HasResponded==false && d._gamestage)
             {
-                d.ActiveRound().Responses.Add(p);
+                d.ActiveRound().Responses.Add(res);
                 HasResponded = true;
+                return d;
+            }
+            else
+            {
+                d.Status = "You cannot post at this time. Either your post is too long, or you have already responded in this round.";
+                return d;
             }
         }
-        public void Vote(Debate d, bool team)
+        public Debate Vote(Debate d, bool team)
         {
            
             if (HasVoted == false && d.Audience.Contains(this))
@@ -42,6 +50,7 @@ namespace DebateApp.Domain
                 d.ActiveRound().Vote(team);
                 HasVoted = true;
             }
+            return d;
         }
 
         public Debate JoinDebate(Debate d, DebatePost p, bool TeamR)
@@ -63,12 +72,14 @@ namespace DebateApp.Domain
                 throw new Exception("Team is full!");
             }
         }
-        public void ViewDebate(Debate d)
+        public Debate ViewDebate(Debate d)
         {
-            if(!d.Audience.Contains(this))
+            if (!d.Audience.Contains(this))
             {
                 d.Audience.Add(this);
+                return d;
             }
+            else return d;
         }
 
         public void LeaveDebate(Debate d)

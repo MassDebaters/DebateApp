@@ -70,9 +70,36 @@ namespace DebateApp.Domain
             //}
         }
 
-        public void StartRound()
+        public bool HaveAllVoted()
         {
+            return Audience.TrueForAll(u => u.HasVoted);
+        }
 
+        public bool HaveAllResponded()
+        {
+            var ans = Teams.TrueForAll(t =>
+            t.Members.TrueForAll(u =>
+            u.HasResponded));
+            return ans;
+        }
+
+        public void NextRound(bool timer)
+        {
+            var RoundCanEnd = (!timer && HaveAllResponded() && HaveAllVoted());
+            if (timer || RoundCanEnd)
+            {
+                Round.Add(new RoundState(ActiveRound()));
+                foreach(User u in Audience)
+                {
+                    Pot += 4;
+                }
+                var ar = ActiveRound();
+                Status = "Round " + ar.CurrentTurn;
+            }
+            else
+            {
+                Status = "Waiting for Votes and Responses...";
+            }
         }
     }
 }
