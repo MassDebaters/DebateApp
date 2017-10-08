@@ -122,5 +122,21 @@ namespace DebateAppDB.dbRest.Models
                 return true;
             }
         }
+
+        public void UpdateUsername(int id, string username)
+        {
+            var account = context.Accounts.Find(id);
+
+            account.Username = username;
+            context.SaveChanges();
+        }
+
+        public void UpdatePassword(int id, string password)
+        {
+            var account = context.Accounts.Find(id);
+
+            account.Password = password;
+            context.SaveChanges();
+        }
     }
 }
