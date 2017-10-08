@@ -56,7 +56,7 @@ namespace DebateAppDomain.Test
         public void DeleteADebate()
         {
             var id = dbcut.CreateCasual(ccm).d.Debate_ID;
-            dbh.DBDeleteDebate(1);
+            dbh.DBDeleteDebate(2);
         }
 
 

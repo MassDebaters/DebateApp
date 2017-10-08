@@ -16,12 +16,21 @@ namespace DebateAppDomain.Test
         private DBHelper dbh;
         private UserController UCUT;
         private UserModel umut;
+        private FormDataModels.CreateCasualModel ccm;
+        private DebatesController dbcut;
         public UserControllerShould(ITestOutputHelper Output)
         {
             _output = Output;
             dbh = new DBHelper();
             UCUT = new UserController();
-
+            dbcut = new DebatesController();
+            ccm = new FormDataModels.CreateCasualModel()
+            {
+                UserID = 2,
+                Category = "Grown Up Problems",
+                Opener = "Not yet...",
+                Topic = "Are we any good at this?"
+            };
             umut = new UserModel()
             {
                 Username = "Biggo",
@@ -52,17 +61,22 @@ namespace DebateAppDomain.Test
         public void JoinATeam()
         {
             UCUT.RegisterUser(umut);
+            var id = dbcut.CreateCasual(ccm).d.Debate_ID;
+            
             var simulatedJoinTeam = new FormDataModels.JoinDebateModel()
             {
                 username = "Biggo",
-                DebateID = 1,
+                DebateID = id,
                 Opener = "NO! NOOOOOOO"
             };
+            
             UCUT.JoinTeam(simulatedJoinTeam);
-            var actual = dbh.DBGetDebate(1).d.Teams[1];
+
+            var actual = dbh.DBGetDebate(id).d.Teams[1];
             Assert.NotEmpty(actual.Members);
             Assert.Equal("Biggo", actual.Members[0].Username);
             Assert.Equal("NO! NOOOOOOO", actual.Opener.CommentText);
+            dbh.DBDeleteDebate(id);
             _output.WriteLine(JsonConvert.SerializeObject(actual));
         }
     }

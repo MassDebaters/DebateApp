@@ -51,6 +51,7 @@ namespace DebateApp.Domain
             if (d.Teams[i].IsNotFull()&&d.SetupStage)
             {
                 d.Teams[i].Members.Add(this);
+                d.Teams[i].Opener = p;
                 return d;
             }
             else

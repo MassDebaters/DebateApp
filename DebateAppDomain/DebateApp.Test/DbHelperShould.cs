@@ -40,7 +40,8 @@ namespace DebateAppDomain.Test
         [Fact]
         public void BeAbleToRetrieveADebateModelByID()
         {
-            var tst = dbh.DBGetDebate(1);
+            var id =dbh.DBCreateDebate(dmut).d.Debate_ID;
+            var tst = dbh.DBGetDebate(id);
             Assert.NotNull(tst.d);
             Assert.IsType<Debate>(tst.d);
         }
