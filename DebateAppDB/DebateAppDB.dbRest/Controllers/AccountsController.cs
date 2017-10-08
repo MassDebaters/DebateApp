@@ -101,10 +101,18 @@ namespace DebateAppDB.dbRest.Controllers
 
         // PUT: api/Accounts/updatePassword/id
         [HttpPut("updatePassword/{id}")]
-        public void AddAstros(int id, [FromBody]string password)
+        public void UpdatePassword(int id, [FromBody]string password)
         {
             account.UpdatePassword(id, password);
         }
+
+        // PUT: api/Accounts/updateRole/id
+        [HttpPut("updateRole/{id}")]
+        public void UpdateRole(int id, [FromBody]string role)
+        {
+            account.UpdateRole(id, role);
+        }
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

@@ -138,5 +138,13 @@ namespace DebateAppDB.dbRest.Models
             account.Password = password;
             context.SaveChanges();
         }
+
+        public void UpdateRole(int id, string role)
+        {
+            var account = context.Accounts.Find(id);
+
+            account.Role = role;
+            context.SaveChanges();
+        }
     }
 }
