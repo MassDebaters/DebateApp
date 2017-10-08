@@ -1,6 +1,7 @@
 ﻿using DebateApp.Domain;
 using DebateAppDomainAPI.Controllers;
 using DebateAppDomainAPI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +32,7 @@ namespace DebateAppDomain.Test
         [Fact]
         public void CreateAUser()
         {
+            dbh.DBDeleteUser(dbh.DBGetUser("Biggo").AccountId);
             var actual = UCUT.RegisterUser(umut);
             UserModel umut2 = new UserModel()
             {
@@ -49,7 +51,19 @@ namespace DebateAppDomain.Test
         [Fact]
         public void JoinATeam()
         {
-            UCUT.JoinTeam("Biggo", 0);
+            UCUT.RegisterUser(umut);
+            var simulatedJoinTeam = new FormDataModels.JoinDebateModel()
+            {
+                username = "Biggo",
+                DebateID = 1,
+                Opener = "NO! NOOOOOOO"
+            };
+            UCUT.JoinTeam(simulatedJoinTeam);
+            var actual = dbh.DBGetDebate(1).d.Teams[1];
+            Assert.NotEmpty(actual.Members);
+            Assert.Equal("Biggo", actual.Members[0].Username);
+            Assert.Equal("NO! NOOOOOOO", actual.Opener.CommentText);
+            _output.WriteLine(JsonConvert.SerializeObject(actual));
         }
     }
 }

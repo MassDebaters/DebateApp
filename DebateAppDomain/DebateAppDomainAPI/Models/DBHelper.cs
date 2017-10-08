@@ -111,7 +111,7 @@ namespace DebateAppDomainAPI.Models
         public void DBSaveDebateChanges(DebateModel d)
         {
             var body = new StringContent(JsonConvert.SerializeObject(d), Encoding.UTF8, "application/json");
-            var cd = _client.PutAsync(_api + PutDebate, body);
+            var cd = _client.PutAsync(_api + PutDebate + d.d.Debate_ID, body).GetAwaiter().GetResult();
         }
 
         public void DBDeleteDebate(int id)

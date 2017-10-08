@@ -14,23 +14,25 @@ namespace DebateAppDomain.Test
         private readonly ITestOutputHelper _output;
         private DBHelper dbh;
         private DebatesController dbcut;
+        private FormDataModels.CreateCasualModel ccm;
         public DebatesControllerShould(ITestOutputHelper Output)
         {
             _output = Output;
             dbh = new DBHelper();
             dbcut = new DebatesController();
-        }
-
-        [Fact]
-        public void CreateACasualDebate()
-        {
-            var ccm = new CreateCasualModel()
+            ccm = new FormDataModels.CreateCasualModel()
             {
                 UserID = 2,
                 Category = "Grown Up Problems",
                 Opener = "Not yet...",
                 Topic = "Are we any good at this?"
             };
+        }
+
+        [Fact]
+        public void CreateACasualDebate()
+        {
+            
             var actual = dbcut.CreateCasual(ccm);
             _output.WriteLine(actual.d.Debate_ID.ToString());
             Assert.IsType<DebateModel>(actual);            
@@ -48,6 +50,13 @@ namespace DebateAppDomain.Test
             }
             Assert.IsType<List<DebateModel>>(actual);
             
+        }
+
+        [Fact]
+        public void DeleteADebate()
+        {
+            var id = dbcut.CreateCasual(ccm).d.Debate_ID;
+            dbh.DBDeleteDebate(1);
         }
 
 

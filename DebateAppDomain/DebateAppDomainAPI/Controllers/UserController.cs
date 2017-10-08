@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DebateAppDomainAPI.Models;
+using DebateApp.Domain;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +13,7 @@ namespace DebateAppDomainAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
+        
         private DBHelper _dbh = new DBHelper();
         // GET: api/values
 
@@ -54,6 +56,28 @@ namespace DebateAppDomainAPI.Controllers
                 Error(e);
                 return null;
             }
+        }
+
+        [HttpPost]
+        public DebateModel JoinTeam([FromBody]FormDataModels.JoinDebateModel jdm)
+        {
+            var u = _dbh.DBGetUser(jdm.username);
+            u.Transfer();
+            var ul = u.UserLogic;
+            var d = _dbh.DBGetDebate(jdm.DebateID).d;
+            try
+            {
+                var update = ul.JoinDebate(d, new DebatePost(jdm.Opener, ul.UserID), true);
+                var result = new DebateModel(update);
+                _dbh.DBSaveDebateChanges(result);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Error(e);
+                return new DebateModel(d);
+            }
+            
         }
     }
 }

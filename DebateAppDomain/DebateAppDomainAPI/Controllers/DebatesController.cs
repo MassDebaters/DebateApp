@@ -22,7 +22,7 @@ namespace DebateAppDomainAPI.Controllers
         //string Topic = 
         //string Category =
         //string Opener = 
-        public DebateModel CreateCasual([FromForm]CreateCasualModel cm)
+        public DebateModel CreateCasual([FromForm]FormDataModels.CreateCasualModel cm)
         {
             var u = _dbh.DBGetUser(cm.UserID);
             u.Transfer();

@@ -70,6 +70,18 @@ namespace DebateAppDomain.Test
             Assert.False(actual);
             Assert.True(actual2);
         }
+        [Fact]
+        public void SaveAnUpdatedDebate()
+        {
+            var get = dbh.DBGetDebate(1);
+            get.d.DebateTopic = "Can the dbapi update a debate?";
+            dbh.DBSaveDebateChanges(get);
+
+            var result = dbh.DBGetDebate(1);
+            Assert.Equal("Can the dbapi update a debate?", result.d.DebateTopic);
+            result.d.DebateTopic = "Almost there?";
+            dbh.DBSaveDebateChanges(result);
+        }
 
     }
 }
