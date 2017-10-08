@@ -30,7 +30,9 @@ namespace DebateAppDB.dbRest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddMvc();          
+            
+            services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +42,11 @@ namespace DebateAppDB.dbRest
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:8000")
+           .AllowAnyHeader().WithOrigins("http://localhost/Mansion"));
             app.UseMvc();
+
         }
     }
 }
