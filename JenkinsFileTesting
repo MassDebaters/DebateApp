@@ -21,7 +21,7 @@ node {
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
             }
-			dir('MansionUI/ClientWebsite')
+			dir('MansionUI')
 			{
 			bat '"C:\\Users\\Administrator\\Downloads\\nuget.exe" restore -PackagesDirectory'
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
