@@ -45,17 +45,16 @@ namespace DebateAppDomainAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public DebateModel StartRound(int id)
-        {
-            return _dbh.StartRound(id);
-        }
-
-        [HttpGet("{id}")]
         public DebateModel StartDebate(int id)
         {
             return _dbh.StartDebate(id);
         }
 
+        [HttpPut("{id}")]
+        public DebateModel NextRound(int id, [FromBody]bool value)
+        {
+            return _dbh.NextRound(id, value);
+        }
 
     }
 }

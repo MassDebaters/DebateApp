@@ -124,11 +124,11 @@ namespace DebateAppDomainAPI.Models
             _client.DeleteAsync(_api + "Accounts/" + id).GetAwaiter().GetResult();
         }
 
-        public DebateModel StartRound(int id)
+        public DebateModel NextRound(int id, bool value)
         {
             var debate = DBGetDebate(id);
 
-            debate.d.StartRound();
+            debate.d.NextRound(value);
 
             return debate;
         }
