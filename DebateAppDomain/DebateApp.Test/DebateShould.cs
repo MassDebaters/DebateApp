@@ -43,7 +43,8 @@ namespace DebateApp.Test
             var dut_posted = uut2.Post("FUCK YOU!", dut_joined);
             dut_posted.NextRound(true);
             Assert.Equal(2, dut_posted.Round.Count);
-            
+            Assert.Equal(dut_posted.CurrentPotShareL, 5);
+            Assert.Equal(dut_posted.CurrentPotShareR, 5);
             var dut_posted2 = uut1.Post("NO FUCK YOU!", dut_posted);
             var dut_posted3 = uut2.Post("Aw shit", dut_posted2);
             var dut_audience = uut3.ViewDebate(dut_posted3);
@@ -51,6 +52,8 @@ namespace DebateApp.Test
 
             dut_allvoted.NextRound(false);
             Assert.Equal(dut_allvoted.Round.Count, 3);
+            Assert.Equal(dut_allvoted.CurrentPotShareR, .25 * 14);
+            Assert.Equal(dut_allvoted.CurrentPotShareL, .75 * 14);
         }
     }
 }

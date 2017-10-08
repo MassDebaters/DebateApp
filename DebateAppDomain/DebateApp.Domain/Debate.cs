@@ -27,6 +27,8 @@ namespace DebateApp.Domain
         public RoundState ActiveRound() { return Round[Round.Count-1]; }
         public int NumberOfRounds { get; set; }
         public int Pot = 10;
+        public double CurrentPotShareL { get; set; }
+        public double CurrentPotShareR { get; set; }
         public string Status { get; set; }
 
         internal void GetStage()
@@ -64,10 +66,10 @@ namespace DebateApp.Domain
                 var ar = this.ActiveRound();
                 Status = "Round " + ar.CurrentTurn;
             }
-            //else 
-            //{
-            //    Status = "Debate is still in Setup Stage!";
-            //}
+            else
+            {
+                Status = "Debate is still in Setup Stage!";
+            }
         }
 
         public bool HaveAllVoted()
@@ -88,11 +90,37 @@ namespace DebateApp.Domain
             var RoundCanEnd = (!timer && HaveAllResponded() && HaveAllVoted());
             if (timer || RoundCanEnd)
             {
-                Round.Add(new RoundState(ActiveRound()));
+                //set all previous rounds to active = false
+                foreach (RoundState r in Round)
+                {
+                    r.Active = false;
+                }
+
+                //Calculate the Swings and apply to pot
+                var previous = ActiveRound();
+                previous.CalculateSwings();
+                
+                
+
+                //create the new round
+                Round.Add(new RoundState(previous));
+                
+                //reset responded & voted statuses
+                foreach(Team t in Teams)
+                {
+                   foreach(User u in t.Members)
+                    {
+                        u.HasResponded = false;
+                    }
+                }
                 foreach(User u in Audience)
                 {
                     Pot += 4;
+                    u.HasVoted = false;
                 }
+                CurrentPotShareL = previous.ShareL * Pot;
+                CurrentPotShareR = previous.ShareR * Pot;
+
                 var ar = ActiveRound();
                 Status = "Round " + ar.CurrentTurn;
             }

@@ -28,9 +28,9 @@ namespace DebateApp.Domain
         public Debate Post(string p, Debate d)
         {
             d.GetStage();
-            var res = new DebatePost(p, UserID); 
-            
-            if (res.Validate() && HasResponded==false && d._gamestage)
+            var res = new DebatePost(p, UserID);
+            var check = res.Validate() && HasResponded == false && d._gamestage;
+            if (check)
             {
                 d.ActiveRound().Responses.Add(res);
                 HasResponded = true;
