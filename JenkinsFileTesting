@@ -23,7 +23,7 @@ node {
             }
 			dir('MansionUI/ClientWebsite')
 			{
-			bat '"C:\\Users\\Administrator\\Downloads\\nuget.exe" restore'
+			bat '"C:\\Users\\Administrator\\Downloads\\nuget.exe" restore -PackagesDirectory'
             bat '"C:\\Program Files\\dotnet\\dotnet.exe" build'
 			}
         
