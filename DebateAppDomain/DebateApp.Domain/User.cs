@@ -44,13 +44,20 @@ namespace DebateApp.Domain
             }
         }
 
-        public void JoinDebate(Debate d, DebatePost p, bool TeamR)
+        public Debate JoinDebate(Debate d, DebatePost p, bool TeamR)
         {
             var i = 0;
             if(TeamR) { i += 1; }
             if (d.Teams[i].IsNotFull()&&d.SetupStage)
             {
-                d.Teams[1].Members.Add(this);
+                d.Teams[i].Members.Add(this);
+                d.Teams[i].Opener = p;
+                return d;
+            }
+            else
+            {
+                return d;
+                throw new Exception("Team is full!");
             }
         }
         public void ViewDebate(Debate d)

@@ -15,6 +15,7 @@ namespace DebateAppDomainAPI.Models
         public string Username { get; set; }
         public string Role { get; set; }
         public int Astros { get; set; }
+        public string Password { get; set; }
         //for logical operations
         public User UserLogic { get; set;}
         public UserModel(User u)
@@ -29,6 +30,11 @@ namespace DebateAppDomainAPI.Models
         public void Transfer()
         {
             UserLogic = new User(AccountId, Username, Astros);
+        }
+
+        public override string ToString()
+        {
+            return "Username: " + Username + "\n Role: " + Role + "\n AccountId: " + AccountId + "\n Astros: " + Astros;
         }
         
 
