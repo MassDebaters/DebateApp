@@ -2,9 +2,13 @@ var app = angular.module("MansionApp", ['ngRoute']);
 
 app.config(function ($routeProvider) { 
   $routeProvider 
-    .when('/', { 
+    .when('/lobby', { 
       controller: 'LobbyController', 
       templateUrl: 'views/lobby.html' 
+    })
+    .when('/', { 
+      controller: 'LobbyAliveController', 
+      templateUrl: 'views/lobbyalive.html' 
     })
     .when('/login',{
     controller: 'LoginController',

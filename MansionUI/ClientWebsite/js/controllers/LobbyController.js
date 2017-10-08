@@ -4,3 +4,4 @@ app.controller('LobbyController', ['$scope', function($scope) {
   $scope.ud = UserDatabase; 
 
   }]);
+
