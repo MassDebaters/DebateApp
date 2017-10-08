@@ -10,8 +10,11 @@ namespace DebateApp.Domain
     public class Debate
     {
         public int Debate_ID {get; set;}
-        private bool _gamestage = false;
-        public bool GameStage { get { return _gamestage; } }
+        
+        public bool _gamestage { get; set; }
+
+        public bool SetupStage { get;  set; }
+
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
         public static int NumberOfPlayersPerTeam { get; set; }
@@ -25,17 +28,22 @@ namespace DebateApp.Domain
         public int NumberOfRounds { get; set; }
         public int Pot = 10;
         public string Status { get; set; }
-        public bool SetupStage
+
+        internal void GetStage()
         {
-            get
+            if (Teams.TrueForAll(t => t.ReadyToStart))
             {
-                if (Teams.TrueForAll(t => t.ReadyToStart))
-                {
-                    _gamestage = true;
-                    return false;
-                }
-                else { return true; }
+                _gamestage = true;
+                Status = "Ready to Start!";
+                SetupStage = false;
             }
+            else
+            {
+                Status = "Setup Stage.";
+                SetupStage = true;
+                _gamestage = false;
+            }
+
         }
 
         public void StartDebate()
@@ -44,20 +52,27 @@ namespace DebateApp.Domain
             {
                 Active = true
             };
+            GetStage();
   
-            if(GameStage)
+            if(_gamestage)
             {
-                Round.Add(StartingRound);
+                Round.Add(new RoundState(StartingRound));
                 foreach(User u in Audience)
                 {
                     Pot += 4;
                 }
+                var ar = this.ActiveRound();
+                Status = "Round " + ar.CurrentTurn;
             }
-            else 
-            {
-                Status = "Debate is not ready to start.";
-            }
-            
+            //else 
+            //{
+            //    Status = "Debate is still in Setup Stage!";
+            //}
+        }
+
+        public void StartRound()
+        {
+
         }
     }
 }

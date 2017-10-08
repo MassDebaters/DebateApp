@@ -46,12 +46,15 @@ namespace DebateApp.Domain
 
         public Debate JoinDebate(Debate d, DebatePost p, bool TeamR)
         {
+            d.GetStage();
             var i = 0;
             if(TeamR) { i += 1; }
-            if (d.Teams[i].IsNotFull()&&d.SetupStage)
+            var check = d.Teams[i].IsNotFull() && d.SetupStage;
+            if (check)
             {
                 d.Teams[i].Members.Add(this);
                 d.Teams[i].Opener = p;
+                d.GetStage();
                 return d;
             }
             else
