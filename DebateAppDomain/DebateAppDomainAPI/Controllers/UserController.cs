@@ -45,7 +45,7 @@ namespace DebateAppDomainAPI.Controllers
         //expects form data with 
         //Username
         //Password
-        public UserModel RegisterUser([FromForm]UserModel u)
+        public UserModel RegisterUser([FromBody]UserModel u)
         {
             try
             {
