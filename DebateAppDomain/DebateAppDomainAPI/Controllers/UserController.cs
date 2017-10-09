@@ -13,8 +13,9 @@ namespace DebateAppDomainAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        
+
         private DBHelper _dbh = new DBHelper();
+        
         // GET: api/values
 
         public string Error(Exception e)
@@ -39,7 +40,7 @@ namespace DebateAppDomainAPI.Controllers
         {
             return _dbh.DBGetAllUser();
         }
-        
+
         [HttpPost]
         //expects form data with 
         //Username
@@ -47,7 +48,7 @@ namespace DebateAppDomainAPI.Controllers
         public UserModel RegisterUser([FromForm]UserModel u)
         {
             try
-            {         
+            {
                 var res = _dbh.DBCreateUser(u);
                 return res;
             }
@@ -77,7 +78,40 @@ namespace DebateAppDomainAPI.Controllers
                 Error(e);
                 return new DebateModel(d);
             }
-            
+
         }
+
+        [HttpPut]
+        public DebateModel Vote([FromBody]FormDataModels.VoteModel voteModel)
+        {
+            _dbh.Vote(voteModel.UserId, voteModel.Debate, voteModel.Team);
+            _dbh.DBSaveDebateChanges(voteModel.Debate);
+
+            return voteModel.Debate;
+        }
+
+        [HttpPut]
+        public DebateModel Post([FromBody]FormDataModels.PostModel postModel)
+        {
+            _dbh.Post(postModel.UserId, postModel.Comment, postModel.Debate);
+            _dbh.DBSaveDebateChanges(postModel.Debate);
+
+            return postModel.Debate;
+        }
+        [HttpPost]
+        public DebateModel JoinAudience([FromBody]FormDataModels.UserDebateModel udm)
+        {
+            var d = _dbh.DBGetDebate(udm.DebateID);
+            var u = _dbh.DBGetUser(udm.Username);
+            u.Transfer();
+            var update = u.UserLogic.ViewDebate(d.d);
+            var result = new DebateModel(update);
+            _dbh.DBSaveDebateChanges(result);
+            return result;
+        }
+
+        
+
+
     }
 }

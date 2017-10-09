@@ -22,5 +22,23 @@ namespace DebateAppDomainAPI.Models
             public string Opener { get; set; }
         }
 
+        public class VoteModel
+        {
+            public int UserId { get; set; }
+            public DebateModel Debate { get; set; }
+            public bool Team { get; set; }
+        }
+        public class PostModel
+        {
+            public int UserId { get; set; }
+            public DebateModel Debate { get; set; }
+            public string Comment { get; set; }
+        }
+
+        public class UserDebateModel
+        {
+            public int DebateID { get; set; }
+            public int Username { get; set; }
+        }
     }
 }

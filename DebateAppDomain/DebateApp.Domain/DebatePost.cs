@@ -25,7 +25,7 @@ namespace DebateApp.Domain
 
         public bool Validate()
         {
-            return CommentText.Length <= MaxLength;
+            return true;
         }
     }
 }

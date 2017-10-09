@@ -44,7 +44,17 @@ namespace DebateAppDomainAPI.Controllers
             return _dbh.DBGetAllDebate();
         }
 
+        [HttpGet("{id}")]
+        public DebateModel StartDebate(int id)
+        {
+            return _dbh.StartDebate(id);
+        }
 
+        [HttpPut("{id}")]
+        public DebateModel NextRound(int id, [FromBody]bool value)
+        {
+            return _dbh.NextRound(id, value);
+        }
 
     }
 }

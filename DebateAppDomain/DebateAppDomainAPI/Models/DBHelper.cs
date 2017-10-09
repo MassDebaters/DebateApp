@@ -124,8 +124,41 @@ namespace DebateAppDomainAPI.Models
             _client.DeleteAsync(_api + "Accounts/" + id).GetAwaiter().GetResult();
         }
 
+        public DebateModel NextRound(int id, bool value)
+        {
+            var debate = DBGetDebate(id);
 
+            debate.d.NextRound(value);
 
+            return debate;
+        }
+
+        public DebateModel StartDebate(int id)
+        {
+            var debate = DBGetDebate(id);
+
+            debate.d.StartDebate();
+
+            return debate;
+        }
+
+        public DebateModel Vote(int id, DebateModel debate, bool value)
+        {
+            var user = DBGetUser(id);
+            var updatedDebate = user.UserLogic.Vote(debate.d, value);
+            debate.d = updatedDebate;
+
+            return debate;
+        }
+
+        public DebateModel Post(int id, string comment, DebateModel debate)
+        {
+            var user = DBGetUser(id);
+            var updatedDebate = user.UserLogic.Post(comment, debate.d);
+            debate.d = updatedDebate;
+
+            return debate;
+        }
 
     }
 }
