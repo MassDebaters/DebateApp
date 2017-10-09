@@ -145,8 +145,8 @@ namespace DebateAppDomainAPI.Models
         public DebateModel Vote(int id, DebateModel debate, bool value)
         {
             var user = DBGetUser(id);
-
-            user.UserLogic.Vote(debate.d, value);
+            var updatedDebate = user.UserLogic.Vote(debate.d, value);
+            debate.d = updatedDebate;
 
             return debate;
         }
@@ -154,8 +154,8 @@ namespace DebateAppDomainAPI.Models
         public DebateModel Post(int id, string comment, DebateModel debate)
         {
             var user = DBGetUser(id);
-
-            user.UserLogic.Post(comment, debate.d);
+            var updatedDebate = user.UserLogic.Post(comment, debate.d);
+            debate.d = updatedDebate;
 
             return debate;
         }
