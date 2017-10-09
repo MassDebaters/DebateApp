@@ -29,7 +29,7 @@ namespace DebateAppDomainAPI
                 options.AddPolicy("AllowAllOrigins",
                 builder =>
                 {
-                builder.AllowAnyOrigin();
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
         }
