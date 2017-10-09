@@ -85,6 +85,7 @@ namespace DebateAppDomainAPI.Controllers
         public DebateModel Vote([FromBody]FormDataModels.VoteModel voteModel)
         {
             _dbh.Vote(voteModel.UserId, voteModel.Debate, voteModel.Team);
+            _dbh.DBSaveDebateChanges(voteModel.Debate);
 
             return voteModel.Debate;
         }
@@ -93,6 +94,7 @@ namespace DebateAppDomainAPI.Controllers
         public DebateModel Post([FromBody]FormDataModels.PostModel postModel)
         {
             _dbh.Post(postModel.UserId, postModel.Comment, postModel.Debate);
+            _dbh.DBSaveDebateChanges(postModel.Debate);
 
             return postModel.Debate;
         }
