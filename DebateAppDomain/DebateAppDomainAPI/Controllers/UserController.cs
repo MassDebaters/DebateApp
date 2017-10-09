@@ -15,8 +15,7 @@ namespace DebateAppDomainAPI.Controllers
     {
 
         private DBHelper _dbh = new DBHelper();
-        private static bool tempValue;
-        private static string tempComment;
+        
         // GET: api/values
 
         public string Error(Exception e)
@@ -82,32 +81,20 @@ namespace DebateAppDomainAPI.Controllers
 
         }
 
-        [HttpPost]
-        public void StoreBoolean([FromBody]bool value)
+        [HttpPut]
+        public DebateModel Vote([FromBody]FormDataModels.VoteModel voteModel)
         {
-            tempValue = value;
+            _dbh.Vote(voteModel.UserId, voteModel.Debate, voteModel.Team);
+
+            return voteModel.Debate;
         }
 
-        [HttpPost]
-        public void StoreComment([FromBody]string comment)
+        [HttpPut]
+        public DebateModel Post([FromBody]FormDataModels.PostModel postModel)
         {
-            tempComment = comment;
-        }
+            _dbh.Post(postModel.UserId, postModel.Comment, postModel.Debate);
 
-        [HttpPut("{id}")]
-        public DebateModel Vote(int id, [FromBody]DebateModel debate)
-        {
-            _dbh.Vote(id, debate, tempValue);
-
-            return debate;
-        }
-
-        [HttpPut("{id}")]
-        public DebateModel Post(int id, [FromBody]DebateModel debate)
-        {
-            _dbh.Post(id, tempComment, debate);
-
-            return debate;
+            return postModel.Debate;
         }
     }
 }
