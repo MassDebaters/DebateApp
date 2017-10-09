@@ -31,7 +31,7 @@ namespace DebateApp.Domain
         public double CurrentPotShareR { get; set; }
         public string Status { get; set; }
 
-        internal void GetStage()
+        public void GetStage()
         {
             if (Teams.TrueForAll(t => t.ReadyToStart))
             {

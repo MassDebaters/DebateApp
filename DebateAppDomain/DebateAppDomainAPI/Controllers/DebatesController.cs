@@ -27,6 +27,7 @@ namespace DebateAppDomainAPI.Controllers
             var u = _dbh.DBGetUser(cm.UserID);
             u.Transfer();
             var c = new Casual(u.UserLogic, cm.Topic, cm.Category, cm.Opener);
+            c.GetStage();
             var d = new DebateModel(c);
             var res = _dbh.DBCreateDebate(d);
             return res;
