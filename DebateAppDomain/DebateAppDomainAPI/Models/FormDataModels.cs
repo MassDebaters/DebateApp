@@ -34,5 +34,11 @@ namespace DebateAppDomainAPI.Models
             public DebateModel Debate { get; set; }
             public string Comment { get; set; }
         }
+
+        public class UserDebateModel
+        {
+            public int DebateID { get; set; }
+            public int Username { get; set; }
+        }
     }
 }

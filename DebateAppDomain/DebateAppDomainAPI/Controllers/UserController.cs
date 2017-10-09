@@ -98,5 +98,20 @@ namespace DebateAppDomainAPI.Controllers
 
             return postModel.Debate;
         }
+        [HttpPost]
+        public DebateModel JoinAudience([FromBody]FormDataModels.UserDebateModel udm)
+        {
+            var d = _dbh.DBGetDebate(udm.DebateID);
+            var u = _dbh.DBGetUser(udm.Username);
+            u.Transfer();
+            var update = u.UserLogic.ViewDebate(d.d);
+            var result = new DebateModel(update);
+            _dbh.DBSaveDebateChanges(result);
+            return result;
+        }
+
+        
+
+
     }
 }
