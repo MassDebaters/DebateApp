@@ -74,7 +74,7 @@ node {
                 }
 				dir('MansionUI/ClientWebsite')
 				{
-				bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PublishProfile=FolderProfile.pubxml'
+				bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" /p:DeployOnBuild=true /p:PublishProfile=FolderProfile.pubxml'
                 bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:iisApp="C:\\Program Files (x86)\\Jenkins\\workspace\\DebateApp\\MansionUI\\ClientWebsite\\bin\\Release\\PublishOutput" -dest:iisApp="Default Web Site/Mansion",computerName="https://ec2-18-221-110-13.us-east-2.compute.amazonaws.com:8172/msdeploy.axd",userName="Administrator",password=Ybwo4.HWnpLnGnH.;CFkG*@I7ZWLKQOt,authType="Basic"  -enableRule:AppOffline -allowUntrusted'
 				}
             
