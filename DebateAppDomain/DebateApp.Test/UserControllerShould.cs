@@ -129,7 +129,7 @@ namespace DebateAppDomain.Test
         [Fact]
         public void GetUserString()
         {
-            var result = UCUT.GetUser("testgirl2");
+            var result = UCUT.GetUserName("testgirl2");
             Assert.Equal("testgirl2", result.Username);
         }
 
