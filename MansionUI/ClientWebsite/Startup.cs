@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
+using Microsoft.AspNet.SignalR;
+using System.Web.Routing;
 
 [assembly: OwinStartup(typeof(CientWebsite.Startup))]
 
@@ -11,7 +13,13 @@ namespace CientWebsite
     {
         public void Configuration(IAppBuilder app)
         {
-            app.MapSignalR();
+            var hubConfiguration = new HubConfiguration();
+            hubConfiguration.EnableDetailedErrors = true;
+            hubConfiguration.EnableJavaScriptProxies = true;
+
+            app.MapSignalR("/signalr", hubConfiguration);
+
+            //app.MapSignalR();
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
         }
     }
