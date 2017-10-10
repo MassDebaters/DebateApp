@@ -45,7 +45,7 @@ namespace DebateAppDB.dbRest.Controllers
             }
         }
 
-        // GET: api/Accounts/username
+        // GET: api/Accounts/getUser/username
         [HttpGet("getUser/{username}")]
         public AccountModel GetAccount(string username)
         {

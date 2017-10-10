@@ -24,7 +24,14 @@ namespace DebateAppDomainAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                builder =>
+                {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,9 +43,7 @@ namespace DebateAppDomainAPI
             }
 
             
-            app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:8000")
-           .AllowAnyHeader().WithOrigins("http://localhost/Mansion").WithOrigins("http://localhost:5000"));
+            app.UseCors("AllowAllOrigins");
             app.UseMvc();
         }
     }
