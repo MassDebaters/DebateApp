@@ -119,5 +119,6 @@ namespace DebateAppDB.dbRest.Controllers
         {
             account.DeleteAccount(id);
         }
+
     }
 }
