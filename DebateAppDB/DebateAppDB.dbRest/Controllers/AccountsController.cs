@@ -120,5 +120,10 @@ namespace DebateAppDB.dbRest.Controllers
             account.DeleteAccount(id);
         }
 
+        [HttpPost]
+        public bool CheckLogin([FromBody]UserLoginModel u)
+        {
+            return account.CheckLogin(u.Username, u.Password);
+        }
     }
 }
