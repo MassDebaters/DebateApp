@@ -146,19 +146,22 @@ namespace DebateAppDomainAPI.Models
         public DebateModel Vote(int id, DebateModel debate, bool value)
         {
             var user = DBGetUser(id);
+            user.Transfer();
             var updatedDebate = user.UserLogic.Vote(debate.d, value);
             debate.d = updatedDebate;
 
             return debate;
         }
 
-        public DebateModel Post(int id, string comment, DebateModel debate)
+        public DebateModel Post(int id, string comment, int debateid)
         {
             var user = DBGetUser(id);
-            var updatedDebate = user.UserLogic.Post(comment, debate.d);
-            debate.d = updatedDebate;
+            user.Transfer();
+            var d = DBGetDebate(debateid);
+            var updatedDebate = user.UserLogic.Post(comment, d.d);
+            d.d = updatedDebate;
 
-            return debate;
+            return d;
         }
 
     }
