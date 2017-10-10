@@ -46,6 +46,11 @@ namespace DebateAppDomainAPI.Models
             return result;
         }
 
+        public bool VerifyUser(string username, string password)
+        {
+            return true;
+        }
+
         public UserModel DBGetUser(string username)
         {
             var res = _client.GetAsync(_api + GetUser + "getUser/" + username).GetAwaiter().GetResult();
