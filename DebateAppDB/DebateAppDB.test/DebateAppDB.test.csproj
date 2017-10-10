@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DebateApp.db\DebateApp.db.csproj" />
     <ProjectReference Include="..\DebateAppDB.dbRest\DebateAppDB.dbRest.csproj" />
   </ItemGroup>
 

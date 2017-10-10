@@ -69,10 +69,6 @@ namespace DebateAppDB.dbRest.Controllers
             
             return account.UniqueUsername(username);
         }
-        /*public string error()
-        {
-            return "did not work boy";
-        }*/
 
         //GET: api/Accounts/astros/id
         [HttpGet("astros/{id}")]
@@ -81,10 +77,6 @@ namespace DebateAppDB.dbRest.Controllers
 
             return account.GetAstros(id);
         }
-        /*public string error()
-        {
-            return "did not work boy";
-        }*/
 
         // POST: api/Accounts
         [HttpPost]
@@ -99,12 +91,40 @@ namespace DebateAppDB.dbRest.Controllers
         {
             account.AddAstros(id, value);
         }
-        
+
+        // PUT: api/Accounts/updateUsername/id
+        [HttpPut("updateUsername/{id}")]
+        public void UpdateUsername(int id, [FromBody]string username)
+        {
+            account.UpdateUsername(id, username);
+        }
+
+        // PUT: api/Accounts/updatePassword/id
+        [HttpPut("updatePassword/{id}")]
+        public void UpdatePassword(int id, [FromBody]string password)
+        {
+            account.UpdatePassword(id, password);
+        }
+
+        // PUT: api/Accounts/updateRole/id
+        [HttpPut("updateRole/{id}")]
+        public void UpdateRole(int id, [FromBody]string role)
+        {
+            account.UpdateRole(id, role);
+        }
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             account.DeleteAccount(id);
+        }
+
+        //POST: api/auth/
+        [HttpPost("auth/")]
+        public bool CheckLogin([FromBody]UserLoginModel u)
+        {
+            return account.CheckLogin(u.Username, u.Password);
         }
     }
 }
