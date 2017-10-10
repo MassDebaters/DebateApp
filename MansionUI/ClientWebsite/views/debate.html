@@ -1,4 +1,3 @@
-
 <div class="fullpage">
     <div class="section" id="sectiontitle">
         <div class="panel" id="paneltitle">
@@ -7,33 +6,30 @@
         <h4> Round {{ud.find_user("Justin","123", ud).name}} </h4>
         {{debate_index}}
     </div>
-
     <div class="myBox">
         <input type="hidden" id="loginname" value="{{ud.user}}" />
         <input type="hidden" id="debateindex" value="{{debate_index}}" />
         <input type="hidden" id="displayname" />
         <ul id="discussion"></ul>
-
     </div>
-
     <script>
         // console.log($('#debateindex').val());
 
         $(function () {
             var chat = $.connection.chatHub;
-           
-            // Declare a function on the chat hub so the server can invoke it          
+
+            // Declare a function on the chat hub so the server can invoke it
             chat.client.addMessage = function (name, message) {
                 var encodedName = $('<div />').text(name).html();
                 var encodedMsg = $('<div />').text(message).html();
 
-                  $('#discussion').append('<li><strong>' + encodedName
+                $('#discussion').append('<li><strong>' + encodedName
                     + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
 
             };
-   
+
             // Start the connection.
-       
+
             $.connection.hub.start(function () {
                 chat.server.join($('#debateindex').val());
             });
@@ -42,10 +38,10 @@
 
                 $("#broadcast").click(function () {
                     // Call the chat method on the server
-                    chat.server.send($('#debateindex').val(), $('#msg').val(), $('#loginname').val() );
+                    chat.server.send($('#debateindex').val(), $('#msg').val(), $('#loginname').val());
                     console.log($('#msg').val());
                     $('#msg').val('').focus();
-                   
+
                 });
                 $("#leave").click(function () {
                     // leave the chat method on the server
@@ -56,17 +52,14 @@
             });
         });
     </script>
-    
+
     <div class=" textboox">
         <input type="text" id="msg" />
         <input type="button" id="broadcast" value="send" />
-
     </div>
-    <div class= "leaveBox">
+    <div class="leaveBox">
         <input type="button" id="leave" value="EXIT" />
-
     </div>
-
     <div class="section" id="sectionstage">
         <div class="panel portrait" id="playerone">
             <p> {{score_one}}</p>
@@ -85,7 +78,6 @@
         <div class="button vote" id="voteone"></div>
         <div class="button vote" id="votetwo"></div>
     </div> -->
-
     <div class="section" id="sectionchat">
         <div class="panel" id="chatcontainer">
             <div class="panel" id="chatuser">{{ud.user}}</div>
@@ -97,7 +89,6 @@
         <div class="panel" id="audience" ng-click="depressed('c')"></div>
     </div>
 </div>
-
 
 <!-- <div class="container">
 

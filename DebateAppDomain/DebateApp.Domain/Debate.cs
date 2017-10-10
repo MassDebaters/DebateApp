@@ -15,6 +15,9 @@ namespace DebateApp.Domain
 
         public bool SetupStage { get;  set; }
 
+        public bool Completed { get; set; }
+        public bool AwardsDisbursed { get; set; }
+
         public string DebateTopic { get; set; }
         public string DebateCategory { get; set; }
         public static int NumberOfPlayersPerTeam { get; set; }
@@ -32,6 +35,8 @@ namespace DebateApp.Domain
         public string Status { get; set; }
         public long RoundStart { get; set; }
         public long LastGet { get; set; }
+        public string winner { get; set; }
+        public string loser { get; set; }
 
         public void UpdateLastGet()
         {
@@ -106,8 +111,10 @@ namespace DebateApp.Domain
 
         public void NextRound(bool timer)
         {
+            bool LastRound = ActiveRound().CurrentTurn >= NumberOfRounds;
+
             var RoundCanEnd = (HaveAllResponded() && HaveAllVoted());
-            if (timer || RoundCanEnd)
+            if ((timer || RoundCanEnd) && !LastRound)
             {
                 //restart RoundStart
                 RoundStart = DateTime.Now.Ticks;
@@ -146,10 +153,52 @@ namespace DebateApp.Domain
                 var ar = ActiveRound();
                 Status = "Round " + ar.CurrentTurn;
             }
+            if ((timer || RoundCanEnd && LastRound))
+            {
+                CompleteDebate();
+            }
             else
             {
                 Status = "Waiting for Votes and Responses...";
             }
+        }
+
+        public void CompleteDebate()
+        {
+            _gamestage = false;
+            Completed = true;
+            var final = ActiveRound();
+            final.CalculateSwings();
+            CurrentPotShareL = final.ShareL * Pot;
+            CurrentPotShareR = final.ShareR * Pot;
+
+            if(CurrentPotShareL>CurrentPotShareR)
+            {
+                winner = "Team A is the Winner!";
+                loser = "Team B is the Loser.";
+            }
+            if(CurrentPotShareL==CurrentPotShareR)
+            {
+                winner = "A perfect Tie!";
+                loser = "A perfect Tie!";
+            }
+            if(CurrentPotShareL<CurrentPotShareR)
+            {
+                winner = "Team B is the Winner!";
+                loser = "Team A is the Loser.";
+            }
+
+            foreach(User u in Teams[0].Members)
+            {
+                u.Astros += (int)CurrentPotShareL;
+            }
+
+            foreach(User u in Teams[1].Members)
+            {
+                u.Astros += (int)CurrentPotShareR;
+            }
+
+            Status = "The Debate has finished! " + winner;
         }
     }
 }

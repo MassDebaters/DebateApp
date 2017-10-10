@@ -126,6 +126,12 @@ namespace DebateAppDomain.Test
             Assert.Equal(1, dmut.d.ActiveRound().Responses.Count);
             Assert.Equal("Fuck alla yas", dmut.d.ActiveRound().Responses[0].CommentText);
         }
+        [Fact]
+        public void GetUserString()
+        {
+            var result = UCUT.GetUserName("testgirl2");
+            Assert.Equal("testgirl2", result.Username);
+        }
 
 
     }

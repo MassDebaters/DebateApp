@@ -120,6 +120,13 @@ namespace DebateAppDomainAPI.Models
             _client.DeleteAsync(_api + "Debates/" + id).GetAwaiter().GetResult();
         }
 
+        public void DBAddAstros(int id, int add)
+        {
+            var text = JsonConvert.SerializeObject(add);
+            var body = new StringContent(text, Encoding.UTF8, "application/json");
+            _client.PutAsync(_api + "Accounts/" + "AddAstros/" + id, body).GetAwaiter().GetResult();
+        }
+
         public void DBDeleteUser(int id)
         {
             _client.DeleteAsync(_api + "Accounts/" + id).GetAwaiter().GetResult();

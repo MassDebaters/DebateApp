@@ -42,7 +42,21 @@ namespace DebateAppDomainAPI.Controllers
                 get.d.CheckNextRound();
                 _dbh.DBSaveDebateChanges(get);
             }
-            return get;
+            if (get.d.Completed && get.d.AwardsDisbursed == false)
+            {
+                var teaml = get.d.Teams[0].Members[0].UserID;
+                var teamr = get.d.Teams[1].Members[0].UserID;
+                _dbh.DBAddAstros(teaml, (int)get.d.CurrentPotShareL);
+                _dbh.DBAddAstros(teamr, (int)get.d.CurrentPotShareR);
+                get.d.AwardsDisbursed = true;
+                _dbh.DBSaveDebateChanges(get);
+                return get;
+            }
+            else
+            {
+                return get;
+            }
+            
         }
 
         [HttpGet]
@@ -58,6 +72,8 @@ namespace DebateAppDomainAPI.Controllers
             _dbh.DBSaveDebateChanges(result);
             return result;
         }
+
+        
 
         //[HttpPut("{id}")]
         //public DebateModel NextRound(int id, [FromBody]bool value)

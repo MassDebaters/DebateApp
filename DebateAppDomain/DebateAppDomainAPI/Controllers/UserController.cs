@@ -10,7 +10,10 @@ using DebateApp.Domain;
 
 namespace DebateAppDomainAPI.Controllers
 {
-    [Route("api/[controller]/[action]")]
+
+    [Produces("application/json")]
+    [Route("api/User/[action]")]
+
     public class UserController : Controller
     {
 
@@ -23,14 +26,14 @@ namespace DebateAppDomainAPI.Controllers
             return e.Message;
         }
 
-        [HttpGet("{int}")]
+        [HttpGet("{id}")]
         public UserModel GetUser(int id)
         {
             return _dbh.DBGetUser(id);
         }
 
-        [HttpGet("{string}")]
-        public UserModel GetUser(string username)
+        [HttpGet("{username}")]
+        public UserModel GetUserName(string username)
         {
             return _dbh.DBGetUser(username);
         }
