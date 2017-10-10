@@ -37,8 +37,11 @@ namespace DebateAppDomainAPI.Controllers
         public DebateModel GetDebate(int id)
         {
             var get = _dbh.DBGetDebate(id);
-            get.d.CheckNextRound();
-            _dbh.DBSaveDebateChanges(get);
+            if (get.d._gamestage)
+            {
+                get.d.CheckNextRound();
+                _dbh.DBSaveDebateChanges(get);
+            }
             return get;
         }
 
