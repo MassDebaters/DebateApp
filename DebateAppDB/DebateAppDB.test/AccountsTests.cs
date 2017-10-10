@@ -120,5 +120,104 @@ namespace DebateAppDB.test
             Assert.False(valueFalse);
         }
 
+        [Fact]
+        public void GetAstros()
+        {
+            var user = account.GetAccount(1);
+            var actualAstros = account.GetAstros(user.AccountId);
+            var expectedAstros = 5;
+
+            Assert.IsType<int>(actualAstros);
+            Assert.Equal(actualAstros, expectedAstros);
+        }
+
+        [Fact]
+        public void AddAstros()
+        {
+            var newUser = new Accounts() { Username = "UnitTest", Password = "test", Role = "User", Astros = 1 };
+
+            account.AddAccount(newUser);
+
+            var user = account.GetAccount("UnitTest");
+
+            account.AddAstros(user.AccountId, 5);
+
+            var actualAstros = account.GetAstros(user.AccountId);
+            var expectedAstros = 6;
+
+            Assert.IsType<int>(actualAstros);
+            Assert.True(actualAstros == expectedAstros);
+
+            account.DeleteAccount(user.AccountId);
+        }
+
+        [Fact]
+        public void CheckLogin()
+        {
+            var user = account.GetAccount(1);
+            var actualUsername = user.Username;
+            var actualPassword = "123";
+            var goodLogin = account.CheckLogin(actualUsername, actualPassword);
+            var badLogin = account.CheckLogin(actualUsername, "1234");
+
+            Assert.IsType<bool>(goodLogin);
+            Assert.IsType<bool>(badLogin);
+            Assert.True(goodLogin);
+            Assert.False(badLogin);
+        }
+
+        [Fact]
+        public void UpdateUsername()
+        {
+            var newUser = new Accounts() { Username = "UnitTest", Password = "test", Role = "User", Astros = 1 };
+
+            account.AddAccount(newUser);
+
+            account.UpdateUsername(newUser.AccountId, "NewUnitTest");
+
+            var actual = newUser.Username;
+            var expected = "NewUnitTest";
+
+            Assert.IsType<string>(actual);
+            Assert.True(string.Equals(actual, expected));
+
+            account.DeleteAccount(newUser.AccountId);
+        }
+
+        [Fact]
+        public void UpdatePassword()
+        {
+            var newUser = new Accounts() { Username = "UnitTest", Password = "test", Role = "User", Astros = 1 };
+
+            account.AddAccount(newUser);
+
+            account.UpdatePassword(newUser.AccountId, "newTest");
+
+            var actual = newUser.Password;
+            var expected = "newTest";
+
+            Assert.IsType<string>(actual);
+            Assert.True(string.Equals(actual, expected));
+
+            account.DeleteAccount(newUser.AccountId);
+        }
+
+        [Fact]
+        public void UpdateRole()
+        {
+            var newUser = new Accounts() { Username = "UnitTest", Password = "test", Role = "User", Astros = 1 };
+
+            account.AddAccount(newUser);
+
+            account.UpdateRole(newUser.AccountId, "Admin");
+
+            var actual = newUser.Role;
+            var expected = "Admin";
+
+            Assert.IsType<string>(actual);
+            Assert.True(string.Equals(actual, expected));
+
+            account.DeleteAccount(newUser.AccountId);
+        }
     }
 }
