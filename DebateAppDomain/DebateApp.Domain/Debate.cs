@@ -127,7 +127,7 @@ namespace DebateApp.Domain
 
                 //Calculate the Swings and apply to pot
                 var previous = ActiveRound();
-                previous.CalculateSwings();
+                previous.CalculateSwings(NumberOfRounds);
                 
                 
 
@@ -153,7 +153,7 @@ namespace DebateApp.Domain
                 var ar = ActiveRound();
                 Status = "Round " + ar.CurrentTurn;
             }
-            if ((timer || RoundCanEnd && LastRound))
+            if ((timer || RoundCanEnd) && LastRound)
             {
                 CompleteDebate();
             }
@@ -168,7 +168,7 @@ namespace DebateApp.Domain
             _gamestage = false;
             Completed = true;
             var final = ActiveRound();
-            final.CalculateSwings();
+            final.CalculateSwings(NumberOfRounds);
             CurrentPotShareL = final.ShareL * Pot;
             CurrentPotShareR = final.ShareR * Pot;
 

@@ -1,5 +1,5 @@
 using DebateApp.Domain;
-
+using Newtonsoft.Json;
 using System;
 using System.Threading;
 using Xunit;
@@ -60,6 +60,43 @@ namespace DebateApp.Test
             Assert.Equal(dut_allvoted.Round.Count, 3);
             Assert.Equal(dut_allvoted.CurrentPotShareR, .25 * 14);
             Assert.Equal(dut_allvoted.CurrentPotShareL, .75 * 14);
+
+        }
+        [Fact]
+        public void Complete()
+        {
+            var dut_joined = uut2.JoinDebate(dut, new DebatePost("heeeerg", uut2.UserID), true);
+
+            dut_joined.StartDebate();
+
+            var dut_posted = uut2.Post("FUCK YOU!", dut_joined);
+            dut_posted.CheckNextRound();
+            Thread.Sleep(10000);
+            dut_posted.CheckNextRound();
+            Assert.Equal(1, dut_posted.Round.Count);
+            Thread.Sleep(51000);
+            dut_posted.CheckNextRound();
+            _output.WriteLine(JsonConvert.SerializeObject(dut_joined));
+            Assert.Equal(2, dut_posted.Round.Count);
+            Assert.Equal(dut_posted.CurrentPotShareL, 5);
+            Assert.Equal(dut_posted.CurrentPotShareR, 5);
+            var dut_posted2 = uut1.Post("NO FUCK YOU!", dut_posted);
+            var dut_posted3 = uut2.Post("Aw shit", dut_posted2);
+            var dut_audience = uut3.ViewDebate(dut_posted3);
+            var dut_allvoted = uut3.Vote(dut_audience, true);
+            Thread.Sleep(61000);
+            dut_allvoted.CheckNextRound();
+            _output.WriteLine(JsonConvert.SerializeObject(dut_allvoted));
+            Thread.Sleep(61000);
+            dut_allvoted.CheckNextRound();
+            _output.WriteLine(JsonConvert.SerializeObject(dut_allvoted));
+            Thread.Sleep(61000);
+            dut_allvoted.CheckNextRound();
+            _output.WriteLine(JsonConvert.SerializeObject(dut_allvoted));
+
+            Thread.Sleep(61000);
+            dut_allvoted.CheckNextRound();
+            _output.WriteLine(JsonConvert.SerializeObject(dut_allvoted));
 
         }
     }

@@ -10,8 +10,8 @@ namespace DebateApp.Domain
         public List<DebatePost> Responses = new List<DebatePost>();
         public int VotesL = 0;
         public int VotesR = 0;
-        public double ShareL = 0.5;
-        public double ShareR = 0.5;
+        public double ShareL = 0;
+        public double ShareR = 0;
         public int CurrentTurn = 0;
         public bool Active = false;
         public RoundState(RoundState PreviousRound)
@@ -23,20 +23,20 @@ namespace DebateApp.Domain
         }
         public RoundState() { }
 
-        internal void CalculateSwings()
+        internal void CalculateSwings(int totalrounds)
         {
             try
             {
+                var weight = 1 / totalrounds;
                 var totalVotes = VotesL + VotesR;
                 var SwingL = VotesL / totalVotes;
-                ShareL = ShareL + (ShareL * (SwingL * ShareL));
-                ShareR = 1 - ShareL;
+                var SwingR = VotesR / totalVotes;
+                ShareL += weight * SwingL;
+                ShareR = weight * SwingR;
             }
             catch (Exception)
             {
-                var SwingL = 0;
-                ShareL = ShareL + (SwingL * ShareL);
-                ShareR = 1 - ShareL;
+
             }
 
         }
