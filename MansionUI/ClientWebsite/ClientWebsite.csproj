@@ -97,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="js\controllers\DebateControllerOld.js" />
+    <Content Include="js\controllers\LobbyControllerOld.js" />
+    <Content Include="js\controllers\LoginControllerOld.js" />
+    <Content Include="js\services\debateservice.js" />
+    <Content Include="js\services\logicservice.js" />
+    <Content Include="js\services\userservice.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="PublishClient.pubxml" />
