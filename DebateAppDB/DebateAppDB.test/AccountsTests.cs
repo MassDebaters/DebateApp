@@ -43,7 +43,7 @@ namespace DebateAppDB.test
         }
 
         [Fact]
-        public void GetAccount()
+        public void GetAccountWithId()
         {
             var user = account.GetAccount(4);
             var expectedUsername = "Lenny";
@@ -51,6 +51,30 @@ namespace DebateAppDB.test
             Assert.NotNull(user);
             Assert.IsType<AccountModel>(user);
             Assert.True(string.Equals(user.Username, expectedUsername));
+        }
+
+        [Fact]
+        public void GetAccountWithUsername()
+        {
+            var user = account.GetAccount("Lenny");
+            var expectedUsername = "Lenny";
+            var wrongUsername = "lenny";
+
+            Assert.NotNull(user);
+            Assert.IsType<AccountModel>(user);
+            Assert.True(string.Equals(user.Username, expectedUsername));
+            Assert.False(string.Equals(user.Username, wrongUsername));
+        }
+
+        [Fact]
+        public void AddAccount()
+        {
+            
+
+            /*Assert.NotNull(user);
+            Assert.IsType<AccountModel>(user);
+            Assert.True(string.Equals(user.Username, expectedUsername));
+            Assert.False(string.Equals(user.Username, wrongUsername));*/
         }
 
     }
