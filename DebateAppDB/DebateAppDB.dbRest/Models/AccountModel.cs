@@ -52,7 +52,7 @@ namespace DebateAppDB.dbRest.Models
 
         public AccountModel GetAccount(string un)
         {
-            var account = context.Accounts.Where(u => u.Username == un).SingleOrDefault();
+            var account = context.Accounts.Where(u => string.Equals(u.Username, un)).SingleOrDefault();
 
             AccountId = account.AccountId;
             Username = account.Username;
@@ -81,7 +81,7 @@ namespace DebateAppDB.dbRest.Models
 
         public bool UniqueUsername(string uName)
         {
-            var userName = context.Accounts.Where(un => un.Username == uName);
+            var userName = context.Accounts.Where(un => string.Equals(un.Username, uName));
 
             if (userName.Count() == 0 && uName.Length > 0)
             {
@@ -111,7 +111,7 @@ namespace DebateAppDB.dbRest.Models
 
         public bool CheckLogin(string username, string password)
         {
-            var account = context.Accounts.Where(a => a.Username == username && a.Password == password);
+            var account = context.Accounts.Where(a => string.Equals(a.Username, username) && string.Equals(a.Password, password));
 
             if(account.Count() == 0)
             {
@@ -121,6 +121,30 @@ namespace DebateAppDB.dbRest.Models
             {
                 return true;
             }
+        }
+
+        public void UpdateUsername(int id, string username)
+        {
+            var account = context.Accounts.Find(id);
+
+            account.Username = username;
+            context.SaveChanges();
+        }
+
+        public void UpdatePassword(int id, string password)
+        {
+            var account = context.Accounts.Find(id);
+
+            account.Password = password;
+            context.SaveChanges();
+        }
+
+        public void UpdateRole(int id, string role)
+        {
+            var account = context.Accounts.Find(id);
+
+            account.Role = role;
+            context.SaveChanges();
         }
     }
 }

@@ -134,7 +134,7 @@ namespace DebateAppDB.dbRest.Models
             return id;
         }
 
-        public void DeleteDebate(int id)//fixme
+        public void DeleteDebate(int id)
         {
             Init();
             string debates = File.ReadAllText(path);
