@@ -79,5 +79,24 @@ namespace DebateAppDomain.Test
             dbh.DBDeleteDebate(id);
             _output.WriteLine(JsonConvert.SerializeObject(actual));
         }
+        [Fact]
+        public void CastAVote()
+        {
+            var dmut = dbcut.CreateCasual(ccm);
+            var id = dmut.d.Debate_ID;
+            var biggo = UCUT.RegisterUser(umut);
+            dmut = UCUT.JoinAudience(new FormDataModels.UserDebateModel(id, "SteveHarvey2"));
+            var simulatedJoinTeam = new FormDataModels.JoinDebateModel()
+            {
+                username = "Biggo",
+                DebateID = id,
+                Opener = "NO! NOOOOOOO"
+            };
+            dmut = UCUT.JoinTeam(simulatedJoinTeam);
+            dmut = dbcut.StartDebate(dmut.d.Debate_ID);
+            dmut = UCUT.Vote(new FormDataModels.VoteModel(20, id, true));
+
+            Assert.True(dmut.d.ActiveRound().VotesR == 1);
+        }
     }
 }

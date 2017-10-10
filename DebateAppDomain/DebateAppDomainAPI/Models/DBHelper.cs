@@ -110,6 +110,7 @@ namespace DebateAppDomainAPI.Models
 
         public void DBSaveDebateChanges(DebateModel d)
         {
+            d.d.UpdateLastGet();
             var body = new StringContent(JsonConvert.SerializeObject(d), Encoding.UTF8, "application/json");
             var cd = _client.PutAsync(_api + PutDebate + d.d.Debate_ID, body).GetAwaiter().GetResult();
         }
@@ -124,14 +125,14 @@ namespace DebateAppDomainAPI.Models
             _client.DeleteAsync(_api + "Accounts/" + id).GetAwaiter().GetResult();
         }
 
-        public DebateModel NextRound(int id, bool value)
-        {
-            var debate = DBGetDebate(id);
+        //public DebateModel NextRound(int id, bool value)
+        //{
+        //    var debate = DBGetDebate(id);
 
-            debate.d.NextRound(value);
+        //    debate.d.NextRound(value);
 
-            return debate;
-        }
+        //    return debate;
+        //}
 
         public DebateModel StartDebate(int id)
         {

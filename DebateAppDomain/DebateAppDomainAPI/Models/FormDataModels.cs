@@ -25,20 +25,31 @@ namespace DebateAppDomainAPI.Models
         public class VoteModel
         {
             public int UserId { get; set; }
-            public DebateModel Debate { get; set; }
+            public int DebateId { get; set; }
             public bool Team { get; set; }
+            public VoteModel(int userid, int debateid, bool team)
+            {
+                UserId = userid;
+                DebateId = debateid;
+                Team = team;
+            }
         }
         public class PostModel
         {
             public int UserId { get; set; }
-            public DebateModel Debate { get; set; }
+            public int DebateId { get; set; }
             public string Comment { get; set; }
         }
 
         public class UserDebateModel
         {
             public int DebateID { get; set; }
-            public int Username { get; set; }
+            public string Username { get; set; }
+            public UserDebateModel(int did, string username)
+            {
+                DebateID = did;
+                Username = username;
+            }
         }
     }
 }
