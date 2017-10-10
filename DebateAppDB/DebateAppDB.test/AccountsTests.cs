@@ -1,4 +1,5 @@
-﻿using DebateAppDB.dbRest;
+﻿using DebateApp.db;
+using DebateAppDB.dbRest;
 using DebateAppDB.dbRest.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -69,12 +70,54 @@ namespace DebateAppDB.test
         [Fact]
         public void AddAccount()
         {
-            
+            var newUser = new Accounts() { Username = "UnitTest", Password = "test", Role = "User", Astros = 0 };
 
-            /*Assert.NotNull(user);
+            account.AddAccount(newUser);
+
+            var user = account.GetAccount("UnitTest");
+            var expectedUsername = "UnitTest";
+            var wrongUsername = "unitTest";
+
+            Assert.NotNull(user);
             Assert.IsType<AccountModel>(user);
             Assert.True(string.Equals(user.Username, expectedUsername));
-            Assert.False(string.Equals(user.Username, wrongUsername));*/
+            Assert.False(string.Equals(user.Username, wrongUsername));
+
+            account.DeleteAccount(user.AccountId);
+        }
+
+        [Fact]
+        public void DeleteAccount()
+        {
+            var newUser = new Accounts() { Username = "UnitTest", Password = "test", Role = "User", Astros = 0 };
+
+            account.AddAccount(newUser);
+            
+            AccountModel user = account.GetAccount("UnitTest");
+
+            account.DeleteAccount(user.AccountId);
+
+            var user2 = account.GetAccount("UnitTest");
+
+            var wrongUsername = "UnitTest";
+
+            Assert.Null(user2.Username);
+            Assert.IsType<AccountModel>(user2);
+            Assert.False(string.Equals(user2.Username, wrongUsername));
+        }
+
+        [Fact]
+        public void UniqueUsername()
+        {
+            var NotUniqueUsername = "Lenny";
+            var UniqueUsername = "lenny";
+            var valueTrue = account.UniqueUsername(UniqueUsername);
+            var valueFalse = account.UniqueUsername(NotUniqueUsername);
+
+            Assert.IsType<bool>(valueTrue);
+            Assert.IsType<bool>(valueFalse);
+            Assert.True(valueTrue);
+            Assert.False(valueFalse);
         }
 
     }
