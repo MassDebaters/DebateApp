@@ -12,18 +12,65 @@
         <input type="hidden" id="displayname" />
         <ul id="discussion"></ul>
     </div>
+
+    <!--                -->
+    <div class="section" id="sectionstage">
+        <div class="panel portrait" id="playerone">
+            <p> {{score_one}}</p>
+        </div>
+        <div class="panel stage {{a_string}}" id="stageone" ng-click="depressed('a')">
+            {{player_one}}
+        </div>
+        <div class="panel stage {{b_string}}" id="stagetwo" ng-click="depressed('b')">
+            {{player_two}}
+        </div>
+        <div class="panel portrait" id="playertwo">
+            <p> {{score_two}} </p>
+        </div>
+    </div>
+    <!-- <div class="section" id="sectionvote">
+        <div class="button vote" id="voteone"></div>
+        <div class="button vote" id="votetwo"></div>
+    </div> -->
+    <div class="section" id="sectionchat">
+        <div class="panel" id="chatcontainer">
+            <div class="panel" id="chatuser">{{ud.user}}</div>
+            <input type="text" id="msg"
+                    name="messenger" >
+            <input type="button" id="broadcast" style="width:40px; height:30px" value="send"/>
+            <div id="chatmode"></div>
+            <div id="send"></div>
+        </div>
+        <div class="panel" id="audience" ng-click="depressed('c')">
+            <ul id="audience_discussion">
+            </ul>
+        </div>
+    </div>
+</div>
+<!--                 -->
+
+
+
+
+
+
+
+
+
+
     <script>
         // console.log($('#debateindex').val());
+
 
         $(function () {
             var chat = $.connection.chatHub;
 
             // Declare a function on the chat hub so the server can invoke it
             chat.client.addMessage = function (name, message) {
-                var encodedName = $('<div />').text(name).html();
-                var encodedMsg = $('<div />').text(message).html();
+                var encodedName = $('<div/>').text(name).html();
+                var encodedMsg = $('<div/>').text(message).html();
 
-                $('#discussion').append('<li><strong>' + encodedName
+                $('#audience_discussion').append('<li><strong>' + encodedName
                     + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
 
             };
@@ -53,43 +100,14 @@
         });
     </script>
 
-    <div class=" textboox">
-        <input type="text" id="msg" />
-        <input type="button" id="broadcast" value="send" />
+    <div class=" textboox" style="display:none">
+        <input type="text" id="msgx" />
+        <input type="button" id="broadcastx" value="send" />
     </div>
     <div class="leaveBox">
         <input type="button" id="leave" value="EXIT" />
     </div>
-    <div class="section" id="sectionstage">
-        <div class="panel portrait" id="playerone">
-            <p> {{score_one}}</p>
-        </div>
-        <div class="panel stage {{a_string}}" id="stageone" ng-click="depressed('a')">
-            {{player_one}}
-        </div>
-        <div class="panel stage {{b_string}}" id="stagetwo" ng-click="depressed('b')">
-            {{player_two}}
-        </div>
-        <div class="panel portrait" id="playertwo">
-            <p> {{score_two}} </p>
-        </div>
-    </div>
-    <!-- <div class="section" id="sectionvote">
-        <div class="button vote" id="voteone"></div>
-        <div class="button vote" id="votetwo"></div>
-    </div> -->
-    <div class="section" id="sectionchat">
-        <div class="panel" id="chatcontainer">
-            <div class="panel" id="chatuser">{{ud.user}}</div>
-            <input type="text" id="messenger"
-                   value="" name="messenger">
-            <div id="chatmode"></div>
-            <div id="send"></div>
-        </div>
-        <div class="panel" id="audience" ng-click="depressed('c')"></div>
-    </div>
-</div>
-
+    
 <!-- <div class="container">
 
 <div>
