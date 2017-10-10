@@ -15,8 +15,7 @@ namespace DebateAppDB.test
     {
         private readonly IConfiguration _Configuration;
         private readonly ITestOutputHelper output;
-        private AccountModel account; 
-        private Startup startUp;
+        private AccountModel account;
 
         public AccountsTests(ITestOutputHelper outp)
         {

@@ -83,7 +83,7 @@ namespace DebateAppDB.dbRest.Models
 
                 var ModelToJson = JsonConvert.SerializeObject(item);
                 var JsonObject = JObject.Parse(ModelToJson);
-                var itemId = JsonObject.SelectToken(@"d.Debate_ID").Value<int>();
+                var itemId = JsonObject.SelectToken(@"d.debate_ID").Value<int>();
 
                 if(itemId == id)
                 {
