@@ -106,7 +106,7 @@ namespace DebateApp.Domain
 
         public void NextRound(bool timer)
         {
-            var RoundCanEnd = (!timer && HaveAllResponded() && HaveAllVoted());
+            var RoundCanEnd = (HaveAllResponded() && HaveAllVoted());
             if (timer || RoundCanEnd)
             {
                 //restart RoundStart
