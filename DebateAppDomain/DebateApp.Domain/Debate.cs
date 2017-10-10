@@ -30,7 +30,13 @@ namespace DebateApp.Domain
         public double CurrentPotShareL { get; set; }
         public double CurrentPotShareR { get; set; }
         public string Status { get; set; }
+        public long RoundStart { get; set; }
+        public long LastGet { get; set; }
 
+        public void UpdateLastGet()
+        {
+            LastGet = DateTime.Now.Ticks;
+        }
         public void GetStage()
         {
             if (Teams.TrueForAll(t => t.ReadyToStart))
@@ -55,21 +61,34 @@ namespace DebateApp.Domain
                 Active = true
             };
             GetStage();
-  
+            
             if(_gamestage)
             {
+                RoundStart = DateTime.Now.Ticks;
                 Round.Add(new RoundState(StartingRound));
                 foreach(User u in Audience)
                 {
                     Pot += 4;
                 }
                 var ar = this.ActiveRound();
-                Status = "Round " + ar.CurrentTurn;
+                Status = "Round " + ar.CurrentTurn + "has started!";
             }
             else
             {
                 Status = "Debate is still in Setup Stage!";
             }
+        }
+
+        public void CheckNextRound()
+        {
+            UpdateLastGet();
+            var seconds = (LastGet - RoundStart)/(10000*1000);
+            if (seconds >= TurnLength)
+            {
+                NextRound(true);
+            }
+            else { NextRound(false); }
+            
         }
 
         public bool HaveAllVoted()
@@ -87,9 +106,12 @@ namespace DebateApp.Domain
 
         public void NextRound(bool timer)
         {
-            var RoundCanEnd = (!timer && HaveAllResponded() && HaveAllVoted());
+            var RoundCanEnd = (HaveAllResponded() && HaveAllVoted());
             if (timer || RoundCanEnd)
             {
+                //restart RoundStart
+                RoundStart = DateTime.Now.Ticks;
+                
                 //set all previous rounds to active = false
                 foreach (RoundState r in Round)
                 {

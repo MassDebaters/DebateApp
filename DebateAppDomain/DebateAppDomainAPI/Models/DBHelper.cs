@@ -110,6 +110,7 @@ namespace DebateAppDomainAPI.Models
 
         public void DBSaveDebateChanges(DebateModel d)
         {
+            d.d.UpdateLastGet();
             var body = new StringContent(JsonConvert.SerializeObject(d), Encoding.UTF8, "application/json");
             var cd = _client.PutAsync(_api + PutDebate + d.d.Debate_ID, body).GetAwaiter().GetResult();
         }
@@ -124,14 +125,14 @@ namespace DebateAppDomainAPI.Models
             _client.DeleteAsync(_api + "Accounts/" + id).GetAwaiter().GetResult();
         }
 
-        public DebateModel NextRound(int id, bool value)
-        {
-            var debate = DBGetDebate(id);
+        //public DebateModel NextRound(int id, bool value)
+        //{
+        //    var debate = DBGetDebate(id);
 
-            debate.d.NextRound(value);
+        //    debate.d.NextRound(value);
 
-            return debate;
-        }
+        //    return debate;
+        //}
 
         public DebateModel StartDebate(int id)
         {
@@ -145,19 +146,21 @@ namespace DebateAppDomainAPI.Models
         public DebateModel Vote(int id, DebateModel debate, bool value)
         {
             var user = DBGetUser(id);
+            user.Transfer();
             var updatedDebate = user.UserLogic.Vote(debate.d, value);
             debate.d = updatedDebate;
 
             return debate;
         }
 
-        public DebateModel Post(int id, string comment, DebateModel debate)
+        public DebateModel Post(int id, string comment, int debateid)
         {
             var user = DBGetUser(id);
-            var updatedDebate = user.UserLogic.Post(comment, debate.d);
-            debate.d = updatedDebate;
-
-            return debate;
+            user.Transfer();
+            var d = DBGetDebate(debateid);
+            var updatedDebate = user.UserLogic.Post(comment, d.d);
+            d.d = updatedDebate;
+            return d;
         }
 
     }

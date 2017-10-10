@@ -10,7 +10,7 @@ using DebateApp.Domain;
 
 namespace DebateAppDomainAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class UserController : Controller
     {
 
@@ -84,19 +84,20 @@ namespace DebateAppDomainAPI.Controllers
         [HttpPut]
         public DebateModel Vote([FromBody]FormDataModels.VoteModel voteModel)
         {
-            _dbh.Vote(voteModel.UserId, voteModel.Debate, voteModel.Team);
-            _dbh.DBSaveDebateChanges(voteModel.Debate);
+            var d = _dbh.DBGetDebate(voteModel.DebateId);
+            var res = _dbh.Vote(voteModel.UserId, d, voteModel.Team);
+            _dbh.DBSaveDebateChanges(res);
 
-            return voteModel.Debate;
+            return res;
         }
 
         [HttpPut]
         public DebateModel Post([FromBody]FormDataModels.PostModel postModel)
         {
-            _dbh.Post(postModel.UserId, postModel.Comment, postModel.Debate);
-            _dbh.DBSaveDebateChanges(postModel.Debate);
+            var result = _dbh.Post(postModel.UserId, postModel.Comment, postModel.DebateId);
+            _dbh.DBSaveDebateChanges(result);
 
-            return postModel.Debate;
+            return result;
         }
         [HttpPost]
         public DebateModel JoinAudience([FromBody]FormDataModels.UserDebateModel udm)
