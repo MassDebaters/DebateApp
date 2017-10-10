@@ -44,8 +44,9 @@ namespace DebateApp.Domain
         }
         public Debate Vote(Debate d, bool team)
         {
-           
-            if (HasVoted == false && d.Audience.Contains(this))
+
+            var check = HasVoted == false && d.Audience.Exists(u => u.UserID == this.UserID);
+            if (check)
             {
                 d.ActiveRound().Vote(team);
                 HasVoted = true;

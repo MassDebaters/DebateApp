@@ -98,5 +98,35 @@ namespace DebateAppDomain.Test
 
             Assert.True(dmut.d.ActiveRound().VotesR == 1);
         }
+        [Fact]
+        public void MakeAPost()
+        {
+
+            var dmut = dbcut.CreateCasual(ccm);
+            var id = dmut.d.Debate_ID;
+            var biggo = UCUT.RegisterUser(umut);
+            dmut = UCUT.JoinAudience(new FormDataModels.UserDebateModel(id, "SteveHarvey2"));
+            var simulatedJoinTeam = new FormDataModels.JoinDebateModel()
+            {
+                username = "Biggo",
+                DebateID = id,
+                Opener = "NO! NOOOOOOO"
+            };
+            dmut = UCUT.JoinTeam(simulatedJoinTeam);
+            dmut = dbcut.StartDebate(dmut.d.Debate_ID);
+            var pm = new FormDataModels.PostModel()
+            {
+                DebateId = id,
+                Comment = "Fuck alla yas",
+                UserId = 2
+            };
+
+            dmut = UCUT.Post(pm);
+
+            Assert.Equal(1, dmut.d.ActiveRound().Responses.Count);
+            Assert.Equal("Fuck alla yas", dmut.d.ActiveRound().Responses[0].CommentText);
+        }
+
+
     }
 }

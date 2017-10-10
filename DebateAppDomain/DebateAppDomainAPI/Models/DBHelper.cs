@@ -160,7 +160,6 @@ namespace DebateAppDomainAPI.Models
             var d = DBGetDebate(debateid);
             var updatedDebate = user.UserLogic.Post(comment, d.d);
             d.d = updatedDebate;
-
             return d;
         }
 

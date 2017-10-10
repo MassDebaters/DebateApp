@@ -54,7 +54,9 @@ namespace DebateAppDomainAPI.Controllers
         [HttpGet("{id}")]
         public DebateModel StartDebate(int id)
         {
-            return _dbh.StartDebate(id);
+            var result = _dbh.StartDebate(id);
+            _dbh.DBSaveDebateChanges(result);
+            return result;
         }
 
         //[HttpPut("{id}")]

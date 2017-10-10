@@ -45,12 +45,12 @@ namespace DebateApp.Domain
         {
             if(team)
             {
-                VotesL += 1;
+                VotesR += 1;
                
             }
             if(!team)
             {
-                VotesR += 1;
+                VotesL += 1;
                 
             }
         }
