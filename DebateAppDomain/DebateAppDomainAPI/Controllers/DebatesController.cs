@@ -20,7 +20,7 @@ namespace DebateAppDomainAPI.Controllers
         //Create Casual expects an httppost with form data in the following format:
         //int UserID =
         //string Topic = 
-        //string Category =
+        //string Category = 
         //string Opener = 
         public DebateModel CreateCasual([FromBody]FormDataModels.CreateCasualModel cm)
         {
@@ -36,7 +36,13 @@ namespace DebateAppDomainAPI.Controllers
         [HttpGet("{id}")]
         public DebateModel GetDebate(int id)
         {
-            return _dbh.DBGetDebate(id);
+            var get = _dbh.DBGetDebate(id);
+            if (get.d._gamestage)
+            {
+                get.d.CheckNextRound();
+                _dbh.DBSaveDebateChanges(get);
+            }
+            return get;
         }
 
         [HttpGet]
@@ -48,14 +54,16 @@ namespace DebateAppDomainAPI.Controllers
         [HttpGet("{id}")]
         public DebateModel StartDebate(int id)
         {
-            return _dbh.StartDebate(id);
+            var result = _dbh.StartDebate(id);
+            _dbh.DBSaveDebateChanges(result);
+            return result;
         }
 
-        [HttpPut("{id}")]
-        public DebateModel NextRound(int id, [FromBody]bool value)
-        {
-            return _dbh.NextRound(id, value);
-        }
+        //[HttpPut("{id}")]
+        //public DebateModel NextRound(int id, [FromBody]bool value)
+        //{
+        //    return _dbh.NextRound(id, value);
+        //}
 
     }
 }

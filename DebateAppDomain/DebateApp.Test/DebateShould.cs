@@ -1,6 +1,7 @@
 using DebateApp.Domain;
 
 using System;
+using System.Threading;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -41,7 +42,12 @@ namespace DebateApp.Test
             dut_joined.StartDebate();
 
             var dut_posted = uut2.Post("FUCK YOU!", dut_joined);
-            dut_posted.NextRound(true);
+            dut_posted.CheckNextRound();
+            Thread.Sleep(10000);
+            dut_posted.CheckNextRound();
+            Assert.Equal(1, dut_posted.Round.Count);
+            Thread.Sleep(51000);
+            dut_posted.CheckNextRound();
             Assert.Equal(2, dut_posted.Round.Count);
             Assert.Equal(dut_posted.CurrentPotShareL, 5);
             Assert.Equal(dut_posted.CurrentPotShareR, 5);
@@ -50,10 +56,11 @@ namespace DebateApp.Test
             var dut_audience = uut3.ViewDebate(dut_posted3);
             var dut_allvoted = uut3.Vote(dut_audience, true);
 
-            dut_allvoted.NextRound(false);
+            dut_allvoted.CheckNextRound();
             Assert.Equal(dut_allvoted.Round.Count, 3);
             Assert.Equal(dut_allvoted.CurrentPotShareR, .25 * 14);
             Assert.Equal(dut_allvoted.CurrentPotShareL, .75 * 14);
+
         }
     }
 }
