@@ -10,8 +10,10 @@ using DebateApp.Domain;
 
 namespace DebateAppDomainAPI.Controllers
 {
+
     [Produces("application/json")]
     [Route("api/User/[action]")]
+
     public class UserController : Controller
     {
 
