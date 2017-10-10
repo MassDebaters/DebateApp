@@ -54,10 +54,17 @@ namespace DebateAppDB.dbRest.Models
         {
             var account = context.Accounts.Where(u => string.Equals(u.Username, un)).SingleOrDefault();
 
-            AccountId = account.AccountId;
-            Username = account.Username;
-            Astros = account.Astros;
-            Role = account.Role;
+            if(account != null)
+            {
+                AccountId = account.AccountId;
+                Username = account.Username;
+                Astros = account.Astros;
+                Role = account.Role;
+            }
+            else
+            {
+                Username = null;
+            }
 
             return this;
         }
