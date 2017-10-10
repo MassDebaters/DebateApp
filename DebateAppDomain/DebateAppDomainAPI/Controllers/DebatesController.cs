@@ -20,7 +20,7 @@ namespace DebateAppDomainAPI.Controllers
         //Create Casual expects an httppost with form data in the following format:
         //int UserID =
         //string Topic = 
-        //string Category =
+        //string Category = 
         //string Opener = 
         public DebateModel CreateCasual([FromBody]FormDataModels.CreateCasualModel cm)
         {
@@ -36,7 +36,9 @@ namespace DebateAppDomainAPI.Controllers
         [HttpGet("{id}")]
         public DebateModel GetDebate(int id)
         {
-            return _dbh.DBGetDebate(id);
+            var get = _dbh.DBGetDebate(id);
+            get.d.CheckNextRound();
+            return get;
         }
 
         [HttpGet]
