@@ -23,13 +23,13 @@ namespace DebateAppDomainAPI.Controllers
             return e.Message;
         }
 
-        [HttpGet("{int}")]
+        [HttpGet("{id}")]
         public UserModel GetUser(int id)
         {
             return _dbh.DBGetUser(id);
         }
 
-        [HttpGet("{string}")]
+        [HttpGet("{username}")]
         public UserModel GetUser(string username)
         {
             return _dbh.DBGetUser(username);
