@@ -1,26 +1,38 @@
-﻿using DebateAppDB.dbRest.Models;
+﻿using DebateAppDB.dbRest;
+using DebateAppDB.dbRest.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace DebateAppDB.test
 {
     public class AccountsTests
     {
         private readonly IConfiguration _Configuration;
-        private AccountModel account;
+        private readonly ITestOutputHelper output;
+        private AccountModel account; 
+        private Startup startUp;
 
-        public AccountsTests(IConfiguration configuration)
+        public AccountsTests(ITestOutputHelper outp)
         {
+            output = outp;
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
 
-            _Configuration = configuration;
+            _Configuration = builder.Build();
+
             account = new AccountModel(_Configuration);
         }
 
         [Fact]
         public void GetAllAccounts()
         {
+            output.WriteLine("in get all");
             var accounts = account.GetAllAccounts();
 
             var user = accounts.FindAll(u => string.Equals(u.Username, "Lenny"));
