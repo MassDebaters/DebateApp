@@ -58,11 +58,6 @@ namespace DebateAppDomainAPI.Controllers
                 return null;
             }
         }
-        [HttpPost]
-        public bool SignIn([FromBody]UserModel u)
-        {
-            return _dbh.VerifyUser(u.Username, u.Password);
-        }
 
         [HttpPost]
         public DebateModel JoinTeam([FromBody]FormDataModels.JoinDebateModel jdm)
