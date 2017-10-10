@@ -1,8 +1,24 @@
-<div class="content" ng-repeat="debate in dbd.debates">
+<div class="content" ng-repeat="debate in debates">
   
 <div class="row">
-<a href="#/{{$index}}">
+<a href="#/{{chosen.debateId}}" ng-click="enterDebate($index)">
 <debate-summary debate="debate"> </debate-summary>
 </a>
 </div>
 </div>
+
+<div class="content lobbycolumn" >
+    <section>
+        
+
+            <label >Topic:</label>
+            <input type="text" ng-model="new.debateTopic" required>
+            <label >Category:</label>
+            <input type="text" ng-model="new.debateCategory" required>
+            <label for="opener">Opener:</label>
+            <textarea ng-model="new.debateOpener" required></textarea>
+            <button ng-click="createCasualDebateClick()">Create Debate </button>
+        
+        </section>
+
+  </div>

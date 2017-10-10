@@ -1,14 +1,14 @@
 <div class="fullpage">
     <div class="section" id="sectiontitle">
         <div class="panel" id="paneltitle">
-            <h2>{{dbd.debates[debate_index].DebateTopic}}</h2>
+            <h2>{{debate._debateTopic}}</h2>
         </div>
         <h4> Round {{ud.find_user("Justin","123", ud).name}} </h4>
         {{debate_index}}
     </div>
     <div class="myBox">
-        <input type="hidden" id="loginname" value="{{ud.user}}" />
-        <input type="hidden" id="debateindex" value="{{debate_index}}" />
+        <input type="hidden" id="loginname" value="{{user.getUsername()}}" />
+        <input type="hidden" id="debateindex" value="{{debate.getDebate()}}" />
         <input type="hidden" id="displayname" />
         <ul id="discussion"></ul>
     </div>

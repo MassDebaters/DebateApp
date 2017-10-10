@@ -1,34 +1,33 @@
-app.controller('LoginController', ['$scope', function($scope) {
-  
-  $scope.ud = UserDatabase;
-  $scope.success = false;
-  $scope.escape_link = "";
- 
-	$scope.login ={
-    username: "",
-    password: ""
-  };
-  
-  $scope.signin = function(){
-    var name = $scope.login.username;
-    var pass = $scope.login.password;
-    
-    $scope.success = $scope.ud.session_start(name, pass, $scope.ud);
-    if(!$scope.success){
-     	$scope.login.username = "";
-      $scope.login.password = "";
-      $scope.escape_link = "#/";
-    }
-    
-  };
-  
-  $scope.signout = function(){
-    if($scope.ud.user != "Robot")
-      $scope.escape_link = "#/login";
-   	else
-      $scope.escape_link = "#/";
-    $scope.ud.session_stop($scope.ud);
+app.controller('LoginController', ['$scope', 'userservice', function($scope, userservice) {
+
+  $scope.username = "";
+  $scope.password = "";
+
+  $scope.login = function(){
+    userservice.setUserToSend($scope.username);
+    userservice.setPassToSend($scope.password);
+    userservice.login().then(function(data){
+      console.log("LoginController: login is "+userservice.loggedIn()); // would be undefined
+      console.log(data);
+    });
   }
-  
-  
-} ] );
+
+  $scope.register = function(){
+    userservice.setUserToSend($scope.username);
+    userservice.setPassToSend($scope.password);
+    userservice.register().then(function(data){
+      console.log("LoginController: registered is "+userservice.loggedIn());
+      console.log(data);
+    });
+  }
+
+  $scope.logout = function(){
+    userservice.logout();
+  }
+  // console.log("registering...");
+  // $scope.username = "testgirl2";
+  // $scope.password = "testpass2";
+  // $scope.login();
+
+
+}]);
