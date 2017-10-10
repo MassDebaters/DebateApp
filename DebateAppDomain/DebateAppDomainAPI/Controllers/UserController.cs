@@ -10,7 +10,7 @@ using DebateApp.Domain;
 
 namespace DebateAppDomainAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class UserController : Controller
     {
 
