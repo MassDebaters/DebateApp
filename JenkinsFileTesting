@@ -38,14 +38,14 @@ node {
         bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
         }
     }
-    stage('Analyze DB'){
-        dir('DebateAppDB/DebateAppDB.dbRest'){
-        bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
-        bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateAppDB.dbRest.csproj /t:rebuild'
-        bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
-        }
-    }
+    // stage('Analyze DB'){
+    //     dir('DebateAppDB/DebateAppDB.dbRest'){
+    //     bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
+    //     bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
+    //     bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateAppDB.dbRest.csproj /t:rebuild'
+    //     bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe end'
+    //     }
+    // }
             stage('Analyze DB2'){
         dir('DebateAppDB/DebateApp.db'){
         bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
