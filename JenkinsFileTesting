@@ -39,7 +39,7 @@ node {
         }
     }
     stage('Analyze DB'){
-        dir('DebateApp.db'){
+        dir('DebateAppDB/DebateAppDB.dbRest'){
         bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
         bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
         bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateApp.db.csproj /t:rebuild'
@@ -47,7 +47,7 @@ node {
         }
     }
     stage('Analyze Domain'){
-        dir('DebateApp.Domain'){
+        dir('DebateAppDomain/DebateAppDomainAPI'){
         bat '"C:\\Program Files\\dotnet\\dotnet.exe" restore'
         bat 'C:\\Tools\\SonarQube\\Scanner\\sonar-scanner-msbuild-3.0.2.656\\sonarqube.scanner.msbuild.exe begin /n:"DebateApp" /k:"dapp"'
         bat '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\msbuild.exe" DebateApp.Domain.csproj /t:rebuild'
