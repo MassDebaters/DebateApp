@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="favicon.ico" />
     <Content Include="js\controllers\DebateControllerOld.js" />
     <Content Include="js\controllers\LobbyControllerOld.js" />
     <Content Include="js\controllers\LoginControllerOld.js" />
