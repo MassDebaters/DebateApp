@@ -14,19 +14,32 @@
     </div>
 
     <!--                -->
-    <div class="section" id="sectionstage">
+    <div class="section" id="sectionstage"> 
         <div class="panel portrait" id="playerone">
-            <p> {{score_one}}</p>
+          <p> {{teamOne.roundsWon}}</p>
         </div>
         <div class="panel stage {{a_string}}" id="stageone" ng-click="depressed('a')">
-            {{player_one}}
+          <div>{{playerOne}}</div> 
+          <div style="overflow-y:scroll; height:140px; word-wrap:break-word"> 
+            {{teamOne.opener.commentText}} <br>
+            {{stage.panelOne}}<br>
+            {{stage.toSendOne}}
+            
+          </div>
         </div>
         <div class="panel stage {{b_string}}" id="stagetwo" ng-click="depressed('b')">
-            {{player_two}}
+          <div>{{playerTwo}}</div> 
+          <div style="overflow-y:scroll; height:140px">
+              {{teamTwo.opener.commentText}}<br>
+              {{stage.panelTwo}}<br>
+              {{stage.toSendTwo}}
+          </div>
+          
         </div>
         <div class="panel portrait" id="playertwo">
-            <p> {{score_two}} </p>
+          <p> {{teamTwo.roundsWon}} </p>
         </div>
+        
     </div>
     <!-- <div class="section" id="sectionvote">
         <div class="button vote" id="voteone"></div>
@@ -34,9 +47,10 @@
     </div> -->
     <div class="section" id="sectionchat">
         <div class="panel" id="chatcontainer">
-            <div class="panel" id="chatuser">{{ud.user}}</div>
+            <div class="panel" id="chatuser">{{user.username}}</div>
             <input type="text" id="msg"
                     name="messenger" >
+
             <input type="button" id="broadcast" style="width:40px; height:30px" value="send"/>
             <div id="chatmode"></div>
             <div id="send"></div>
