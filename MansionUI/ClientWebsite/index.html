@@ -3,7 +3,6 @@
 <style>
     /* Box styles */
     .myBox {
-        border: none;
         padding: 5px;
         width: 420px;
         height: 200px;
@@ -13,6 +12,17 @@
         position: absolute;
         top: 400px;
         right: 700px;
+        display:none;
+    }
+
+    #audience {
+        overflow: scroll;
+        text-align: left;
+        height: 200px;
+        width: 420px;
+    }
+    #audience_discussion{
+        border:none;
     }
 
     .textboox {
@@ -50,7 +60,9 @@
 
 <html>
 <head>
+    <title>Mansion</title>
 
+    <link  rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Oxygen:300,400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
